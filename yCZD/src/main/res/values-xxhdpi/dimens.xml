@@ -1,0 +1,28 @@
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="historyscore_tb">10dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="tv_nox_top">17dp</dimen>
+    <dimen name="tv_nox_left">5dp</dimen>
+    <dimen name="tv_so2_top">6dp</dimen>
+    <dimen name="tv_so2_left">5dp</dimen>
+    <dimen name="tv_pywd_top">163dp</dimen>
+    <dimen name="tv_pywd_left">43dp</dimen>
+    <dimen name="tv_gsll_left">61dp</dimen>
+    <dimen name="tv_gsll_top">25dp</dimen>
+    <dimen name="tv_njswd_bottom">20dp</dimen>
+    <dimen name="tv_njswd_right">80dp</dimen>
+    <dimen name="tv_djckwd_right">90dp</dimen>
+    <dimen name="tv_gjckwd_left">85dp</dimen>
+    <dimen name="tv_gjrkwd_left">95dp</dimen>
+    <dimen name="tv_dypqwd1_right">10dp</dimen>
+    <dimen name="tv_zqyl_left">160dp</dimen>
+    <dimen name="tv_zryl_top">6dp</dimen>
+    <dimen name="tv_zrqw_left">30dp</dimen>
+    <dimen name="tv_zqwd_top">15dp</dimen>
+    <dimen name="tv_dypqwd2_right">93dp</dimen>
+    <dimen name="tv_dypqwd2_top">130dp</dimen>
+
+</resources>

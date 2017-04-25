@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1sp"
+        android:background="#000" >
+    </LinearLayout>
+
+    <zz.zept.yczd.view.MyLazyViewpager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="10" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#369"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp" >
+
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_main_bg"
+            android:drawablePadding="5dp"
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:text="首页"
+            android:textSize="12dp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/qq2"
+            android:gravity="center"
+            android:text="实时监测"
+            android:textSize="12dp" />
+
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/qq1"
+            android:gravity="center"
+            android:text="生产日报"
+            android:textSize="12dp" />
+
+
+    </RadioGroup>
+
+</LinearLayout>

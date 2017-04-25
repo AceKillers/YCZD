@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        applicationId "zz.zept.yczd"
+        minSdkVersion 8
+        targetSdkVersion 21
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':indicator_library')
+    compile project(':libraryList')
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile files('libs/mpandroidchartlibrary-2-1-4.jar')
+    compile files('libs/nohttp1.0.6-include-source.jar')
+    compile files('libs/uk-co-senab-photoview-source.jar')
+    compile files('libs/xcl-charts.jar')
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+}

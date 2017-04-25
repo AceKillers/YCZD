@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nohttp1.0.6-include-source">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/yCZD/libs/nohttp1.0.6-include-source.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

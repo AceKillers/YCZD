@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="zz.zept.yczd"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_OWNER_DATA" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+
+    <application
+        android:name="zz.zept.yczd.utils.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity android:name="zz.zept.yczd.activity.MainTabActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="zz.zept.yczd.activity.MainInfoActivity" />
+        <activity android:name="zz.zept.yczd.activity.DailyActiviyt" >
+        </activity>
+        <activity android:name="zz.zept.yczd.activity.DiagnoseActivity" >
+        </activity>
+        <activity
+            android:name="zz.zept.yczd.trend_activity.TrendActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity android:name="zz.zept.yczd.activity.PicActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name="zz.zept.yczd.message.acrtivity.MessageActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/StyledIndicators" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageContentActivity" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.SendMessageActivity" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity1" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity2" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity3" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity4" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity5" >
+        </activity>
+        <activity
+            android:name="zz.zept.yczd.warn_activity.WarnActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="zz.zept.yczd.trend_activity.BoXingTuActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="zz.zept.yczd.warn_activity.WarnOneActivity"
+            android:theme="@style/StyledIndicators" >
+        </activity>
+        <activity
+            android:name="zz.zept.yczd.warn_activity.WarnTwoActivity"
+            android:theme="@style/StyledIndicators" >
+        </activity>
+        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity" >
+        </activity>
+        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity2" >
+        </activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.ZDBGActivity" >
+        </activity>
+    </application>
+
+</manifest>
