@@ -7,7 +7,7 @@
 
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="android:Theme.NoTitleBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
         <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
         <item name="android:fitsSystemWindows">true</item>
