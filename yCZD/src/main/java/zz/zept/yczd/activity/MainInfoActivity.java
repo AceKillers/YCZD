@@ -38,7 +38,8 @@ public class MainInfoActivity extends Activity {
             R.drawable.icon_huanbao,
             R.drawable.icon_anquan,
             R.drawable.icon_xinnengyuan,
-            R.drawable.icon_baojing};
+            R.drawable.icon_baojing,
+            R.drawable.icon_zhuxiao};
     private String[] name = {"实时信息",
             "综合信息",
             "生产信息",
@@ -46,7 +47,8 @@ public class MainInfoActivity extends Activity {
             "环保信息",
             "安全信息",
             "新能源信息",
-            "报警查询"};
+            "报警查询",
+            "注销"};
     private List<Map<String, Object>> data_list;
     private SimpleAdapter sim_adapter;
 

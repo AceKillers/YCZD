@@ -2,137 +2,135 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:background="@drawable/nva_bg">
 
-        <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="发送消息"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <ImageView
             android:id="@+id/bt_newsactivity"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="#fff"
-            android:text="返回列表"
-            android:textColor="#369"
-            android:textSize="18dp" />
-
-        <EditText
-            android:id="@+id/et1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/bt1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="查询"
-            android:textSize="12dp"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:src="@drawable/ic_back"
+            android:layout_alignParentLeft="true"
+            android:padding="15dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:text="标题"
-            android:textColor="#369"
-            android:textSize="16dp" />
+            android:gravity="center_vertical"
+            android:textColor="#6d7091"
+            android:textSize="14dp"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
             android:id="@+id/et_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:textColor="#000" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"
+            android:layout_marginRight="20dp"
+            android:textColor="#212339"
+            android:hint="请输入标题"
+            android:textSize="14sp"
+            android:textColorHint="#b3bbc6"/>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/list_line" />
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:text="收件人"
-            android:textColor="#369"
-            android:textSize="16dp" />
+            android:textColor="#6d7091"
+            android:gravity="center_vertical"
+            android:textSize="14dp"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
             android:id="@+id/et_people"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:focusableInTouchMode="false"
-            android:gravity="center"
-            android:textColor="#000" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"
+            android:layout_marginRight="20dp"
+            android:textColor="#212339"
+            android:hint="请输入收件人"
+            android:textSize="14sp"
+            android:textColorHint="#b3bbc6" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="#e6e6e6" />
 
         <EditText
             android:id="@+id/et_content"
-            android:layout_width="0dp"
-            android:layout_height="240dp"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:hint="温馨提示:发送内容不能为空"
-            android:textColor="#000" />
-    </LinearLayout>
-
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:ellipsize="start"
+            android:gravity="start"
+            android:layout_margin="15dp"
+            android:textSize="14sp"
+            android:hint="请输入内容"
+            android:textColorHint="#b3bbc6"
+            android:textColor="#212339" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#e6e6e6" />
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/bt_send_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="发送消息"
-            android:background="#fff"
-            android:textColor="#369"
-            android:textSize="16dp" />
-
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="发送消息"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
+       <Button
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:visibility="invisible"/>
         <Button
             android:id="@+id/bt_cancel_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#fff"
-            android:text="取消发送"
-            android:textColor="#369"
-            android:textSize="16dp" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#b3bbc6"
+            android:text="取消"
+            android:textSize="14sp"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/bt_send_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_send"
+            android:text="发送"
+            android:textSize="14sp"
+            android:textColor="#ffffff"/>
     </LinearLayout>
 
 </LinearLayout>

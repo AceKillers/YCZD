@@ -1,24 +1,25 @@
 package zz.zept.yczd.activity;
 
-import java.util.Date;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import java.util.Date;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.HttpResponseListener.HttpListener;
-import zz.zept.yczd.utils.ToastUtils;
+import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.Utils;
+import zz.zept.yczd.view.TipsToast;
 
 public class LoginActivity extends BaseActicity {
 	ProgressBar pb;
@@ -38,7 +39,7 @@ public class LoginActivity extends BaseActicity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_login:
-			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+			Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
 			Date date = new Date();
 			long time = date.getTime();
 			sp.edit().putLong("time", time).commit();
@@ -51,7 +52,7 @@ public class LoginActivity extends BaseActicity {
 			//	startActivity(intent);
 			//	finish();
 			if(et_login_name.getText().toString().trim().length()<=0||et_login_password.getText().toString().trim().length()<=0){
-				Toast.makeText(LoginActivity.this, "请输入用户名和密码", 1).show();
+				TipsToast.show(LoginActivity.this, "请输入用户名和密码");
 				return;
 			}
 			CallServer callServer = CallServer.getRequestInstance();
@@ -70,14 +71,14 @@ public class LoginActivity extends BaseActicity {
 						login_password = et_login_password.getText().toString().trim();
 						sp.edit().putString(MyRes.LOGIN_NAME, login_name).commit();
 						sp.edit().putString(MyRes.LOGIN_PSW, login_password).commit();
-						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+						Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
 						Date date = new Date();
 						long time = date.getTime();
 						sp.edit().putLong("time", time).commit();
 						startActivity(intent);
 						finish();
 					} else {
-						ToastUtils.showToast(LoginActivity.this, "请检查帐号密码");
+						TipsToast.show(LoginActivity.this, "请检查帐号密码");
 					}
 				}
 
@@ -85,7 +86,7 @@ public class LoginActivity extends BaseActicity {
 				public void onFailed(int what, Response<String> response) {
 					// TODO Auto-generated method stub
 					Utils.closeWaiting();
-					ToastUtils.showToast(LoginActivity.this, "服务器繁忙,稍后再试");
+					TipsToast.show(LoginActivity.this, "服务器繁忙,稍后再试");
 				}
 			};
 			Utils.showWaiting(LoginActivity.this);
@@ -98,7 +99,7 @@ public class LoginActivity extends BaseActicity {
 
 	void init() {
 		setContentView(R.layout.activity_login);
-
+		StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
 	}
 
 	void initListener() {

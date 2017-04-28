@@ -2,17 +2,15 @@ package zz.zept.yczd.activity;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import zz.zept.yczd.R;
+import zz.zept.yczd.utils.StatusBarCompat;
 
 /**
  * Created by HanChenxi on 2017/4/24.
@@ -41,10 +39,7 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
         setContentView(R.layout.main_actvity);
         ButterKnife.bind(this);
 
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
-        tintManager.setTintColor(Color.parseColor("#3471ee"));
+        StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         initTab();
     }
 

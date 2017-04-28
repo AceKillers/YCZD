@@ -299,4 +299,5 @@
     <!-- 选择机组浅蓝色 -->
     <color name ="light_blue">#c7e0f0</color>
     <color name="list_line">#dcdcdc</color>
+    <color name="theme_blue">#3471ee</color>
 </resources>
