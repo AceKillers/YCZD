@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActicity {
 			finish();
 //			Date date = new Date();
 //			long time = date.getTime();
-			sp.edit().putLong("time", time).commit();
+//			sp.edit().putLong("time", time).commit();
 			//	Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 			//	startActivity(intent);
 			//	finish();

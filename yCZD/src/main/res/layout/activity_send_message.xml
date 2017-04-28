@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,102 +17,109 @@
             android:text="发送消息"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/bt_newsactivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:padding="15dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/ic_back" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="标题"
+            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
+            android:text="标题"
             android:textColor="#6d7091"
-            android:textSize="14dp"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="14dp" />
 
         <EditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
             android:layout_marginRight="20dp"
-            android:textColor="#212339"
+            android:gravity="right|center_vertical"
             android:hint="请输入标题"
-            android:textSize="14sp"
-            android:textColorHint="#b3bbc6"/>
+            android:textColor="#212339"
+            android:textColorHint="#b3bbc6"
+            android:textSize="14sp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/list_line" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
             android:text="收件人"
             android:textColor="#6d7091"
-            android:gravity="center_vertical"
-            android:textSize="14dp"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="14dp" />
 
         <EditText
             android:id="@+id/et_people"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
             android:layout_marginRight="20dp"
-            android:textColor="#212339"
+            android:gravity="right|center_vertical"
             android:hint="请输入收件人"
-            android:textSize="14sp"
-            android:textColorHint="#b3bbc6" />
+            android:textColor="#212339"
+            android:textColorHint="#b3bbc6"
+            android:textSize="14sp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="12dp"
         android:background="#e6e6e6" />
 
-        <EditText
-            android:id="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:ellipsize="start"
-            android:gravity="start"
-            android:layout_margin="15dp"
-            android:textSize="14sp"
-            android:hint="请输入内容"
-            android:textColorHint="#b3bbc6"
-            android:textColor="#212339" />
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="15dp"
+        android:ellipsize="start"
+        android:gravity="start"
+        android:hint="请输入内容"
+        android:textColor="#212339"
+        android:textColorHint="#b3bbc6"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#e6e6e6" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
-       <Button
-           android:layout_width="0dp"
-           android:layout_height="match_parent"
-           android:layout_weight="1"
-           android:visibility="invisible"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
         <Button
             android:id="@+id/bt_cancel_message"
             android:layout_width="0dp"
@@ -120,8 +127,9 @@
             android:layout_weight="1"
             android:background="#b3bbc6"
             android:text="取消"
-            android:textSize="14sp"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
         <Button
             android:id="@+id/bt_send_message"
             android:layout_width="0dp"
@@ -129,8 +137,8 @@
             android:layout_weight="1"
             android:background="@drawable/btn_send"
             android:text="发送"
-            android:textSize="14sp"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

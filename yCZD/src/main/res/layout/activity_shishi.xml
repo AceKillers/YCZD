@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nva_bg">
+
+        <TextView
+            android:id="@+id/company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/arrow_down"
+            android:text="河南分公司"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="负荷率"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="实时功率"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="发电量"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="供电煤耗"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="发电厂用电率"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="综合厂用电率"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="二氧化硫"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="氮氧化物"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rb_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="烟尘含量"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+</LinearLayout>
