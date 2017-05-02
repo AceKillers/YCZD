@@ -44,15 +44,29 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
     }
 
     private void initTab() {
+        rg.setOnCheckedChangeListener(this);
         mTabHost = getTabHost();
         mTabHost.addTab(mTabHost.newTabSpec(TAB_NEWS).setIndicator(TAB_NEWS).setContent(new Intent(this, MainInfoActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec(TAB_BBS).setIndicator(TAB_BBS).setContent(new Intent(this, MainInfoActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_DISCOVER).setIndicator(TAB_DISCOVER).setContent(new Intent(this, MainInfoActivity.class)));
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_DISCOVER).setIndicator(TAB_DISCOVER).setContent(new Intent(this, DiagnoseActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec(TAB_MINE).setIndicator(TAB_MINE).setContent(new Intent(this, MainInfoActivity.class)));
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
+        switch (i) {
+            case R.id.rb_main:
+                mTabHost.setCurrentTabByTag(TAB_NEWS);
+                break;
+            case R.id.rb_time:
+                mTabHost.setCurrentTabByTag(TAB_BBS);
+                break;
+            case R.id.rb_doc:
+                mTabHost.setCurrentTabByTag(TAB_DISCOVER);
+                break;
+            case R.id.rb_analy:
+                mTabHost.setCurrentTabByTag(TAB_MINE);
+                break;
+        }
     }
 }

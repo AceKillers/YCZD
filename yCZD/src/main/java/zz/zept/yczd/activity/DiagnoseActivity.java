@@ -1,21 +1,5 @@
 package zz.zept.yczd.activity;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.yolanda.nohttp.Headers;
-import com.yolanda.nohttp.Logger;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.download.DownloadListener;
-import com.yolanda.nohttp.download.DownloadRequest;
-import com.yolanda.nohttp.rest.OnResponseListener;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.Response;
-
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
@@ -31,12 +15,28 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.yolanda.nohttp.Headers;
+import com.yolanda.nohttp.Logger;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.download.DownloadListener;
+import com.yolanda.nohttp.download.DownloadRequest;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import config.AppConfig;
 import zz.zept.tree.FileBean;
 import zz.zept.tree.Node;
@@ -47,26 +47,28 @@ import zz.zept.yczd.adapter.SimpleTreeAdapter;
 import zz.zept.yczd.bean.DiaMachineContenBean.DataBean;
 import zz.zept.yczd.bean.YCZDMachineBean;
 import zz.zept.yczd.utils.FileUtil;
+import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.TimeUtil;
 import zz.zept.yczd.utils.ToastUtils;
+import zz.zept.yczd.view.ListViewForScrollView;
 import zz.zept.yczd.view.MyCalendarView;
 import zz.zept.yczd.view.MyCalendarView.OnCalendarClickListener;
 import zz.zept.yczd.view.MyCalendarView.OnCalendarDateChangedListener;
 
 public class DiagnoseActivity extends BaseActicity {
-	private Button btn_home, btn_no;
+	private Button btn_no;
 	private Button btn_query;
 	private Button btn_more;
 	int unitid;
 	private Button btn_clean;
-	private EditText et_start_time, et_end_time, et_machine;
+	private TextView et_start_time, et_end_time, et_machine;
 	String date = null;// 设置默认选中的日期 格式为 “2014-04-05” 标准DATE格式
 	int tag;
 	private List<FileBean> mDatas = new ArrayList<FileBean>();
 	String machineID;
 	LinearLayout ll;
 	String url;
-	ListView lv_diagonse;
+	ListViewForScrollView lv_diagonse;
 	private List<DataBean> list;
 	private Intent intent;
 	private int height;
@@ -79,7 +81,6 @@ public class DiagnoseActivity extends BaseActicity {
 	void initListener() {
 		et_end_time.setOnClickListener(this);
 		btn_no.setOnClickListener(this);
-		btn_home.setOnClickListener(this);
 		btn_query.setOnClickListener(this);
 		btn_more.setOnClickListener(this);
 		btn_clean.setOnClickListener(this);
@@ -98,17 +99,15 @@ public class DiagnoseActivity extends BaseActicity {
 
 	@Override
 	void initView() {
-		et_end_time = (EditText) findViewById(R.id.et_end_time);
+		et_end_time = (TextView) findViewById(R.id.et_end_time);
 		btn_no = (Button) findViewById(R.id.btn_no);
-		btn_home = (Button) findViewById(R.id.btn_home);
 		btn_query = (Button) findViewById(R.id.btn_query);
 		btn_more = (Button) findViewById(R.id.btn_more);
 		btn_clean = (Button) findViewById(R.id.btn_clean);
-		et_start_time = (EditText) findViewById(R.id.et_start_time);
-		et_machine = (EditText) findViewById(R.id.et_machine);
-		lv_diagonse = (ListView) findViewById(R.id.lv_diagonse);
+		et_start_time = (TextView) findViewById(R.id.et_start_time);
+		et_machine = (TextView) findViewById(R.id.et_machine);
+		lv_diagonse = (ListViewForScrollView) findViewById(R.id.lv_diagonse);
 
-		ll = (LinearLayout) findViewById(R.id.ll);
 	}
 
 	@Override
@@ -130,17 +129,12 @@ public class DiagnoseActivity extends BaseActicity {
 		WindowManager wm = this.getWindowManager();
 		width = wm.getDefaultDisplay().getWidth();
 		height = wm.getDefaultDisplay().getHeight();
+		StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-
-		case R.id.btn_home:
-			intent = new Intent(DiagnoseActivity.this, MainActivity.class);
-			startActivity(intent);
-			finish();
-			break;
 		case R.id.btn_query:
 			queryData();
 			break;
@@ -264,9 +258,9 @@ public class DiagnoseActivity extends BaseActicity {
 								} else {
 									view = convertView;
 								}
-								tv1 = (TextView) view.findViewById(R.id.tv1);
-								tv2 = (TextView) view.findViewById(R.id.tv2);
-								tv3 = (TextView) view.findViewById(R.id.tv3);
+								tv1 = (TextView) view.findViewById(R.id.type);
+								tv2 = (TextView) view.findViewById(R.id.time);
+								tv3 = (TextView) view.findViewById(R.id.tittle);
 
 								tv1.setText(list.get(position).getDRIT_NAME());
 								tv2.setText(list.get(position).getDRI_ENTERTIME());

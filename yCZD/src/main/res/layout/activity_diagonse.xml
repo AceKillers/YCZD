@@ -2,418 +2,220 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:gravity="center"
-        android:orientation="horizontal" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nva_bg">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/btn_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/fanhui" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:gravity="center"
+            android:layout_centerInParent="true"
             android:text="即时报告"
-            android:textColor="#369"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text="即时报告"
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#ddd" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="4dp" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="4dp" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1.4"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="起始时间"
-            android:textColor="#000"
-            android:textSize="14dp" />
-
-        <EditText
-            android:id="@+id/et_start_time"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:drawableRight="@drawable/xiala"
-            android:focusableInTouchMode="false"
-            android:gravity="center"
-            android:hint="点击选择时间"
-            android:textSize="10dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="4dp" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1.4"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="结束时间"
-            android:textColor="#000"
-            android:textSize="14dp" />
-
-        <EditText
-            android:id="@+id/et_end_time"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:drawableRight="@drawable/xiala"
-            android:focusableInTouchMode="false"
-            android:gravity="center"
-            android:hint="点击选择时间"
-            android:textSize="10dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1.4"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="机组名称"
-            android:textColor="#000"
-            android:textSize="14dp" />
-
-        <EditText
-            android:id="@+id/et_machine"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:drawableRight="@drawable/xiala"
-            android:focusableInTouchMode="false"
-            android:gravity="center"
-            android:hint="点击选择机组"
-            android:textSize="10dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="2dp" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#ddd" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.3"
-        android:background="#fff"
-        android:orientation="horizontal" >
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/btn_clean"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2.5"
-            android:background="#369"
-            android:text="重置"
-            android:textColor="#fff"
-            android:textSize="14dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/btn_query"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2.5"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="14dp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#368"
-            android:text="查询"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#ddd" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#fff" >
-    </LinearLayout>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1.2"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="报告类型"
-            android:textColor="#333"
-            android:textSize="14dp" />
-
+        android:layout_weight="1"
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="#888" >
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="起始时间"
+                android:textColor="#6d7091"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/et_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/xiajiantou_icon"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="2016-12-01"
+                android:layout_marginRight="15dp"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="时间"
-            android:textColor="#333"
-            android:textSize="14dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/list_line" />
 
         <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="#888" >
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="结束时间"
+                android:textColor="#6d7091"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/et_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/xiajiantou_icon"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="2016-12-01"
+                android:layout_marginRight="15dp"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/list_line" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="名称"
-            android:textColor="#333"
-            android:textSize="14dp" />
-    </LinearLayout>
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#ddd" >
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="机组名称"
+                android:textColor="#6d7091"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/et_machine"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/xiajiantou_icon"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="2016-12-01"
+                android:layout_marginRight="15dp"/>
 
-    <ListView
-        android:id="@+id/lv_diagonse"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:divider="@null" >
-    </ListView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/list_line" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="49dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_clean"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/blu_but"
+                android:text="重置"
+                android:textColor="#75797c"
+                android:layout_marginRight="15dp"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_query"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/blu_but"
+                android:text="查询"
+                android:layout_marginRight="15dp"
+                android:textColor="#2187c7"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:background="#e6e6e6"
+            android:text="查询结果"
+            android:textSize="12sp"/>
+
+        <zz.zept.yczd.view.ListViewForScrollView
+            android:id="@+id/lv_diagonse"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </zz.zept.yczd.view.ListViewForScrollView>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.4"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="12312"
-            android:visibility="invisible" />
+        android:visibility="gone">
 
         <Button
-            android:id="@+id/btn_more"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:background="#369"
-            android:text="下载文档"
-            android:textColor="#fff" >
-        </Button>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="12312"
             android:visibility="invisible" />
 
         <Button
             android:id="@+id/btn_no"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="2.5"
-            android:background="#369"
-            android:text="取消"
-            android:textColor="#fff" >
-        </Button>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="12312"
-            android:visibility="invisible" />
+            android:background="#b3bbc6"
+            android:text="取消"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_send"
+            android:text="下载文档"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

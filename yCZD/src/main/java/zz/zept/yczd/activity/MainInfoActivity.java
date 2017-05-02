@@ -1,8 +1,10 @@
 package zz.zept.yczd.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
@@ -17,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
+import zz.zept.yczd.message.acrtivity.MessageActivity;
 
 /**
  * Created by HanChenxi on 2017/4/24.
@@ -69,7 +72,42 @@ public class MainInfoActivity extends Activity {
         int [] to = {R.id.img,R.id.text};
         sim_adapter = new SimpleAdapter(this, data_list, R.layout.item_main_grid, from, to);
         grid.setAdapter(sim_adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent();
+                switch (i){
+                    case 0:
+                        intent.setClass(MainInfoActivity.this,ShishiActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        intent.setClass(MainInfoActivity.this,ZongheActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        intent.setClass(MainInfoActivity.this,ShishiActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        intent.setClass(MainInfoActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
 
+            }
+        });
     }
 
     private List<Map<String, Object>> getData(){
@@ -89,6 +127,8 @@ public class MainInfoActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.daiban:
+                Intent intent = new Intent(this, MessageActivity.class);
+                startActivity(intent);
                 break;
             case R.id.menhu:
                 break;

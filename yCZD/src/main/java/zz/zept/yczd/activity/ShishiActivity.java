@@ -13,6 +13,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
+import zz.zept.yczd.utils.StatusBarCompat;
+import zz.zept.yczd.view.LineChartView;
 
 /**
  * Created by HanChenxi on 2017/4/28.
@@ -45,6 +47,8 @@ public class ShishiActivity extends Activity {
     RadioGroup radiogroup;
     @BindView(R.id.layout)
     LinearLayout layout;
+    private LineChartView lineChartView;
+    private LinearLayout.LayoutParams layoutParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,11 @@ public class ShishiActivity extends Activity {
         setContentView(R.layout.activity_shishi);
         ButterKnife.bind(this);
 
+        StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
+        lineChartView = new LineChartView(this);
+        layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        layout.addView(lineChartView,layoutParams);
         initListener();
     }
 

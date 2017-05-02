@@ -1,24 +1,8 @@
 package zz.zept.yczd.message.acrtivity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.viewpagerindicator.TabPageIndicator;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.RequestMethod;
-import com.yolanda.nohttp.rest.OnResponseListener;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.RequestQueue;
-import com.yolanda.nohttp.rest.Response;
-import com.yolanda.nohttp.rest.SimpleResponseListener;
-
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -34,14 +18,34 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.viewpagerindicator.TabPageIndicator;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
+import com.yolanda.nohttp.rest.SimpleResponseListener;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import zz.zept.yczd.R;
-import zz.zept.yczd.activity.MainActivity;
+import zz.zept.yczd.activity.MainTabActivity;
 import zz.zept.yczd.bean.No_Read_Message_Bean;
 import zz.zept.yczd.bean.No_Read_Message_Bean.DataBean;
 import zz.zept.yczd.bean.Yes_Read_Message_Bean;
 import zz.zept.yczd.bean.Yes_Send_Message_Bean;
 import zz.zept.yczd.bean.Yes_Send_Message_Bean.DataBean.MsgcenteraoBean;
 import zz.zept.yczd.res.MyRes;
+import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 
 public class MessageActivity extends BaseActicity {
@@ -50,7 +54,7 @@ public class MessageActivity extends BaseActicity {
 	private MyNoReadAdapter myNoReadAdapter;
 	private PullToRefreshListView lv_yes_read;
 	private PullToRefreshListView lv_yes_send;
-	private Button btn_home;
+	private ImageView btn_home;
 
 	LinearLayout ll_chang_read;
 	// 未读信息的bean对象
@@ -107,7 +111,7 @@ public class MessageActivity extends BaseActicity {
 	View view_no_read;
 	View view_yes_read;
 	View view_yes_send;
-	Button bt_send;
+	TextView bt_send;
 	private List<String> indicatorDatas;
 	private List<View> pagerDatas;
 	private MyPagerAdapter adapter;
@@ -141,6 +145,8 @@ public class MessageActivity extends BaseActicity {
 	void init() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.activity_news);
+
+		StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
 		queue = NoHttp.newRequestQueue();
 		no_reda_alldatas = new ArrayList<No_Read_Message_Bean.DataBean>();
 		yes_reda_alldatas = new ArrayList<Yes_Read_Message_Bean.DataBean>();
@@ -167,8 +173,8 @@ public class MessageActivity extends BaseActicity {
 	@Override
 	void initView() {
 		// TODO Auto-generated method stub
-		btn_home = (Button) findViewById(R.id.btn_home);
-		bt_send = (Button) findViewById(R.id.bt_send);
+		btn_home = (ImageView) findViewById(R.id.btn_home);
+		bt_send = (TextView) findViewById(R.id.bt_send);
 		view_no_read = View.inflate(MessageActivity.this, R.layout.pager_no_read, null);
 		view_yes_read = View.inflate(MessageActivity.this, R.layout.pager_yes_read, null);
 		view_yes_send = View.inflate(MessageActivity.this, R.layout.pager_yes_send, null);
@@ -220,7 +226,7 @@ public class MessageActivity extends BaseActicity {
 		switch (v.getId()) {
 		case R.id.btn_home:
 			// finish();
-			Intent intent = new Intent(MessageActivity.this, MainActivity.class);
+			Intent intent = new Intent(MessageActivity.this, MainTabActivity.class);
 			startActivity(intent);
 			finish();
 			break;
@@ -535,13 +541,12 @@ public class MessageActivity extends BaseActicity {
 			if (convertView == null) {
 				view = View.inflate(MessageActivity.this, R.layout.item_no_read_list, null);
 				holder = new NoReadMessageViewHolder();
-				holder.ima_check = (ImageView) view.findViewById(R.id.ima_check);
-				holder.tv1 = (TextView) view.findViewById(R.id.tv1);
-				holder.tv2 = (TextView) view.findViewById(R.id.tv2);
-				holder.tv3 = (TextView) view.findViewById(R.id.tv3);
-				holder.tv4 = (TextView) view.findViewById(R.id.tv4);
-				holder.tv5 = (TextView) view.findViewById(R.id.tv5);
-				holder.tv6 = (TextView) view.findViewById(R.id.tv6);
+				holder.type = (TextView) view.findViewById(R.id.type);
+				holder.time = (TextView) view.findViewById(R.id.time);
+				holder.content = (TextView) view.findViewById(R.id.content);
+				holder.system = (TextView) view.findViewById(R.id.system);
+				holder.sender = (TextView) view.findViewById(R.id.sender);
+				holder.level = (TextView) view.findViewById(R.id.level);
 				view.setTag(holder);
 			} else {
 				view = convertView;
@@ -561,16 +566,16 @@ public class MessageActivity extends BaseActicity {
 				system_Name = "通流诊断系统";
 			}
 
-			if (no_read_check_show) {
-				holder.ima_check.setVisibility(View.VISIBLE);
-			} else {
-				holder.ima_check.setVisibility(View.INVISIBLE);
-			}
-			if (no_reda_alldatas.get(position).ischeck) {
-				holder.ima_check.setBackgroundResource(R.drawable.check2);
-			} else {
-				holder.ima_check.setBackgroundResource(R.drawable.check1);
-			}
+//			if (no_read_check_show) {
+//				holder.ima_check.setVisibility(View.VISIBLE);
+//			} else {
+//				holder.ima_check.setVisibility(View.INVISIBLE);
+//			}
+//			if (no_reda_alldatas.get(position).ischeck) {
+//				holder.ima_check.setBackgroundResource(R.drawable.check2);
+//			} else {
+//				holder.ima_check.setBackgroundResource(R.drawable.check1);
+//			}
 
 			// holder.ima_check.setOnClickListener(new OnClickListener() {
 			//
@@ -590,14 +595,26 @@ public class MessageActivity extends BaseActicity {
 			// }
 			// }
 			// });
-
-			holder.tv1.setText(system_Name);
+			Drawable shiwu= getResources().getDrawable(R.drawable.ic_shiwu);
+			Drawable tongzhi= getResources().getDrawable(R.drawable.ic_tongzhi);
+			shiwu.setBounds(0, 0, shiwu.getMinimumWidth(), shiwu.getMinimumHeight());
+			tongzhi.setBounds(0, 0, tongzhi.getMinimumWidth(), tongzhi.getMinimumHeight());
+			if (0==no_reda_alldatas.get(position).getMsgtype()){
+				holder.type.setText("事务");
+				holder.type.setTextColor(Color.parseColor("#48cfae"));
+				holder.type.setCompoundDrawables(null,shiwu,null,null);
+			}else {
+				holder.type.setText("通知");
+				holder.type.setTextColor(Color.parseColor("#2187e7"));
+				holder.type.setCompoundDrawables(null,tongzhi,null,null);
+			}
+			holder.system.setText(system_Name);
 			// holder.tv2.setText((CharSequence)
 			// no_reda_alldatas.get(position).getFactoryName());
-			holder.tv3.setText(no_reda_alldatas.get(position).getSubject());
-			holder.tv4.setText(no_reda_alldatas.get(position).getMsglevel() + "");
-			holder.tv5.setText(no_reda_alldatas.get(position).getSendTime());
-			holder.tv6.setText(no_reda_alldatas.get(position).getSender());
+			holder.content.setText(no_reda_alldatas.get(position).getSubject());
+			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
+			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
+			holder.sender.setText(no_reda_alldatas.get(position).getSender());
 			if (position == 0) {
 				view.setBackgroundResource(R.drawable.item2);
 			} else {
@@ -667,14 +684,21 @@ public class MessageActivity extends BaseActicity {
 			View view = null;
 			NoReadMessageViewHolder holder;
 			if (convertView == null) {
-				view = View.inflate(MessageActivity.this, R.layout.item_yes_send_list, null);
+//				view = View.inflate(MessageActivity.this, R.layout.item_yes_send_list, null);
+//				holder = new NoReadMessageViewHolder();
+//
+//				holder.system = (TextView) view.findViewById(R.id.tv1);
+//				holder.content = (TextView) view.findViewById(R.id.tv3);
+//				holder.level = (TextView) view.findViewById(R.id.tv4);
+//				holder.tv5 = (TextView) view.findViewById(R.id.tv5);
+				view = View.inflate(MessageActivity.this, R.layout.item_no_read_list, null);
 				holder = new NoReadMessageViewHolder();
-
-				holder.tv1 = (TextView) view.findViewById(R.id.tv1);
-				holder.tv3 = (TextView) view.findViewById(R.id.tv3);
-				holder.tv4 = (TextView) view.findViewById(R.id.tv4);
-				holder.tv5 = (TextView) view.findViewById(R.id.tv5);
-
+				holder.type = (TextView) view.findViewById(R.id.type);
+				holder.time = (TextView) view.findViewById(R.id.time);
+				holder.content = (TextView) view.findViewById(R.id.content);
+				holder.system = (TextView) view.findViewById(R.id.system);
+				holder.sender = (TextView) view.findViewById(R.id.sender);
+				holder.level = (TextView) view.findViewById(R.id.level);
 				view.setTag(holder);
 			} else {
 				view = convertView;
@@ -704,10 +728,30 @@ public class MessageActivity extends BaseActicity {
 				yes_No_Messager = "已读";
 			}
 
-			holder.tv1.setText(system_Name);
-			holder.tv3.setText(yes_send_alldatas.get(position).getSubject());
-			holder.tv4.setText(yes_send_alldatas.get(position).getMsglevel() + "");
-			holder.tv5.setText(yes_No_Messager);
+//			holder.tv1.setText(system_Name);
+//			holder.tv3.setText(yes_send_alldatas.get(position).getSubject());
+//			holder.tv4.setText(yes_send_alldatas.get(position).getMsglevel() + "");
+//			holder.tv5.setText(yes_No_Messager);
+			Drawable shiwu= getResources().getDrawable(R.drawable.ic_shiwu);
+			Drawable tongzhi= getResources().getDrawable(R.drawable.ic_tongzhi);
+			shiwu.setBounds(0, 0, shiwu.getMinimumWidth(), shiwu.getMinimumHeight());
+			tongzhi.setBounds(0, 0, tongzhi.getMinimumWidth(), tongzhi.getMinimumHeight());
+			if (0==no_reda_alldatas.get(position).getMsgtype()){
+				holder.type.setText("事务");
+				holder.type.setTextColor(Color.parseColor("#48cfae"));
+				holder.type.setCompoundDrawables(null,shiwu,null,null);
+			}else {
+				holder.type.setText("通知");
+				holder.type.setTextColor(Color.parseColor("#2187e7"));
+				holder.type.setCompoundDrawables(null,tongzhi,null,null);
+			}
+			holder.system.setText(system_Name);
+			// holder.tv2.setText((CharSequence)
+			// no_reda_alldatas.get(position).getFactoryName());
+			holder.content.setText(no_reda_alldatas.get(position).getSubject());
+			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
+			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
+			holder.sender.setText(no_reda_alldatas.get(position).getSender());
 			if (position == 0) {
 				view.setBackgroundResource(R.drawable.item2);
 			} else {
@@ -747,13 +791,21 @@ public class MessageActivity extends BaseActicity {
 			View view;
 			NoReadMessageViewHolder holder;
 			if (convertView == null) {
-				view = View.inflate(MessageActivity.this, R.layout.item_yes_read_list, null);
+//				view = View.inflate(MessageActivity.this, R.layout.item_yes_read_list, null);
+//				holder = new NoReadMessageViewHolder();
+//				holder.tv1 = (TextView) view.findViewById(R.id.tv1);
+//				holder.tv3 = (TextView) view.findViewById(R.id.tv3);
+//				holder.tv4 = (TextView) view.findViewById(R.id.tv4);
+//				holder.tv5 = (TextView) view.findViewById(R.id.tv5);
+//				holder.tv6 = (TextView) view.findViewById(R.id.tv6);
+				view = View.inflate(MessageActivity.this, R.layout.item_no_read_list, null);
 				holder = new NoReadMessageViewHolder();
-				holder.tv1 = (TextView) view.findViewById(R.id.tv1);
-				holder.tv3 = (TextView) view.findViewById(R.id.tv3);
-				holder.tv4 = (TextView) view.findViewById(R.id.tv4);
-				holder.tv5 = (TextView) view.findViewById(R.id.tv5);
-				holder.tv6 = (TextView) view.findViewById(R.id.tv6);
+				holder.type = (TextView) view.findViewById(R.id.type);
+				holder.time = (TextView) view.findViewById(R.id.time);
+				holder.content = (TextView) view.findViewById(R.id.content);
+				holder.system = (TextView) view.findViewById(R.id.system);
+				holder.sender = (TextView) view.findViewById(R.id.sender);
+				holder.level = (TextView) view.findViewById(R.id.level);
 				view.setTag(holder);
 			} else {
 				view = convertView;
@@ -771,12 +823,26 @@ public class MessageActivity extends BaseActicity {
 			if (yes_reda_alldatas.get(position).getMesOrigin().equals("3")) {
 				system_Name = "通流诊断系统";
 			}
-
-			holder.tv1.setText(system_Name);
-			holder.tv3.setText(yes_reda_alldatas.get(position).getSubject());
-			holder.tv4.setText(yes_reda_alldatas.get(position).getMsglevel() + "");
-			holder.tv5.setText(yes_reda_alldatas.get(position).getSendTime());
-			holder.tv6.setText(yes_reda_alldatas.get(position).getSender());
+			Drawable shiwu= getResources().getDrawable(R.drawable.ic_shiwu);
+			Drawable tongzhi= getResources().getDrawable(R.drawable.ic_tongzhi);
+			shiwu.setBounds(0, 0, shiwu.getMinimumWidth(), shiwu.getMinimumHeight());
+			tongzhi.setBounds(0, 0, tongzhi.getMinimumWidth(), tongzhi.getMinimumHeight());
+			if (0==no_reda_alldatas.get(position).getMsgtype()){
+				holder.type.setText("事务");
+				holder.type.setTextColor(Color.parseColor("#48cfae"));
+				holder.type.setCompoundDrawables(null,shiwu,null,null);
+			}else {
+				holder.type.setText("通知");
+				holder.type.setTextColor(Color.parseColor("#2187e7"));
+				holder.type.setCompoundDrawables(null,tongzhi,null,null);
+			}
+			holder.system.setText(system_Name);
+			// holder.tv2.setText((CharSequence)
+			// no_reda_alldatas.get(position).getFactoryName());
+			holder.content.setText(no_reda_alldatas.get(position).getSubject());
+			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
+			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
+			holder.sender.setText(no_reda_alldatas.get(position).getSender());
 			if (position == 0) {
 				view.setBackgroundResource(R.drawable.item2);
 			} else {
@@ -952,14 +1018,12 @@ public class MessageActivity extends BaseActicity {
 	}
 
 	class NoReadMessageViewHolder {
-
-		public ImageView ima_check;
-		public TextView tv6;
-		public TextView tv5;
-		public TextView tv4;
-		public TextView tv3;
-		public TextView tv2;
-		public TextView tv1;
+		public TextView type;
+		public TextView time;
+		public TextView content;
+		public TextView system;
+		public TextView sender;
+		public TextView level;
 	}
 
 	void read(String MsgId) {

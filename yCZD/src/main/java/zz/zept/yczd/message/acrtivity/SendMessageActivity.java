@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import zz.zept.yczd.R;
 import zz.zept.yczd.res.MyRes;
+import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 
 public class SendMessageActivity extends BaseActicity {
@@ -114,7 +115,7 @@ public class SendMessageActivity extends BaseActicity {
 	void init() {
 		setContentView(R.layout.activity_send_message);
 		username = getIntent().getStringExtra(MyRes.USERNAME);
-
+		StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
 	}
 
 	@Override
