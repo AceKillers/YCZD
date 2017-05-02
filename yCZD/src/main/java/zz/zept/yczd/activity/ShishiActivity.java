@@ -60,7 +60,7 @@ public class ShishiActivity extends Activity {
         lineChartView = new LineChartView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        layout.addView(lineChartView,layoutParams);
+        layout.addView(lineChartView, layoutParams);
         initListener();
     }
 
@@ -75,11 +75,11 @@ public class ShishiActivity extends Activity {
         }
     }
 
-    private void initListener(){
+    private void initListener() {
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
+                switch (i) {
                     case R.id.rb1:
                         break;
                     case R.id.rb2:
