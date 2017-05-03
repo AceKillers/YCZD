@@ -53,7 +53,8 @@ public class WarnOneActivity extends BaseActicity {
 	ViewPager pager;
 	ArrayList<String> indicatorDatas;
 	ArrayList<View> pagerDatas;
-	Button btn_back, btn_all, btn_read;
+	Button  btn_all, btn_read;
+	ImageView btn_back;
 	PullToRefreshListView lv1, lv2;
 	private MyOneAdapter myOneAdapter;
 	private MyTwoAdapter myTwoAdapter;
@@ -133,7 +134,7 @@ public class WarnOneActivity extends BaseActicity {
 		// TODO Auto-generated method stub
 		indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		pager = (ViewPager) findViewById(R.id.pager);
-		btn_back = (Button) findViewById(R.id.btn_back);
+		btn_back = (ImageView) findViewById(R.id.btn_back);
 	}
 
 	@Override
@@ -368,10 +369,6 @@ public class WarnOneActivity extends BaseActicity {
 				});
 			} else if (position == 1) {
 				lv2 = (PullToRefreshListView) view.findViewById(R.id.lv);
-				ImageView iv_ll1 = (ImageView) view.findViewById(R.id.iv_ll1);
-				ImageView iv_ll2 = (ImageView) view.findViewById(R.id.iv_ll2);
-				iv_ll1.setVisibility(View.GONE);
-				iv_ll2.setVisibility(View.GONE);
 				lv2.setOnItemClickListener(new OnItemClickListener() {
 
 					private long firstTime;

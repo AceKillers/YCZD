@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -52,7 +53,8 @@ public class WarnTwoActivity extends BaseActicity {
 	ViewPager pager;
 	ArrayList<String> indicatorDatas;
 	ArrayList<View> pagerDatas;
-	Button btn_back, btn_all, btn_read;
+	Button btn_all, btn_read;
+	ImageView btn_back;
 	PullToRefreshListView lv1, lv2;
 	private MyOneAdapter myOneAdapter;
 	private MyTwoAdapter myTwoAdapter;
@@ -132,7 +134,7 @@ public class WarnTwoActivity extends BaseActicity {
 		// TODO Auto-generated method stub
 		indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		pager = (ViewPager) findViewById(R.id.pager);
-		btn_back = (Button) findViewById(R.id.btn_back);
+		btn_back = (ImageView) findViewById(R.id.btn_back);
 		tv = (TextView) findViewById(R.id.tv);
 	}
 
@@ -350,10 +352,6 @@ public class WarnTwoActivity extends BaseActicity {
 				});
 			} else if (position == 1) {
 				lv2 = (PullToRefreshListView) view.findViewById(R.id.lv);
-				ImageView iv_ll1 = (ImageView) view.findViewById(R.id.iv_ll1);
-				ImageView iv_ll2 = (ImageView) view.findViewById(R.id.iv_ll2);
-				iv_ll1.setVisibility(View.GONE);
-				iv_ll2.setVisibility(View.GONE);
 				lv2.setOnItemClickListener(new OnItemClickListener() {
 
 					private long firstTime;
@@ -437,7 +435,7 @@ public class WarnTwoActivity extends BaseActicity {
 			if (convertView == null) {
 				convertView = View.inflate(WarnTwoActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
-				vh.iv = (ImageView) convertView.findViewById(R.id.iv_check);
+				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
 				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
 				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
 				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
@@ -529,7 +527,7 @@ public class WarnTwoActivity extends BaseActicity {
 	}
 
 	class ViewHolder {
-		ImageView iv;
+		CheckBox iv;
 		TextView tv1;
 		TextView tv2;
 		TextView tv3;

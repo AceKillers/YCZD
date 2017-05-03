@@ -34,8 +34,6 @@ public class HuanbaoActivity extends Activity {
     RadioButton rb3;
     @BindView(R.id.radiogroup)
     RadioGroup radiogroup;
-    @BindView(R.id.layout)
-    LinearLayout layout;
     @BindView(R.id.list)
     ListView list;
     private LineChartView lineChartView;

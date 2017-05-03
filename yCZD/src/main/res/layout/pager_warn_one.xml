@@ -11,6 +11,14 @@
         android:gravity="center_horizontal"
         android:orientation="vertical" >
 
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#eee"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

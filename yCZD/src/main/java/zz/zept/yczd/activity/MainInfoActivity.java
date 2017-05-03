@@ -86,18 +86,28 @@ public class MainInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 2:
-                        intent.setClass(MainInfoActivity.this,ShishiActivity.class);
+                        intent.setClass(MainInfoActivity.this,ShengchanActivity.class);
                         startActivity(intent);
                         break;
                     case 3:
+                        intent.setClass(MainInfoActivity.this,RanliaoActivity.class);
+                        startActivity(intent);
                         break;
                     case 4:
+                        intent.setClass(MainInfoActivity.this,HuanbaoActivity.class);
+                        startActivity(intent);
                         break;
                     case 5:
+                        intent.setClass(MainInfoActivity.this,AnquanActivity.class);
+                        startActivity(intent);
                         break;
                     case 6:
+                        intent.setClass(MainInfoActivity.this,XinnengyuanActivity.class);
+                        startActivity(intent);
                         break;
                     case 7:
+                        intent.setClass(MainInfoActivity.this,BaojingActivity.class);
+                        startActivity(intent);
                         break;
                     case 8:
                         intent.setClass(MainInfoActivity.this,LoginActivity.class);
