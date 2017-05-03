@@ -5,44 +5,30 @@
     android:background="#fff"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nva_bg">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.2"
+            android:id="@+id/company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
             android:text="趋势分析"
-            android:visibility="invisible" />
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/fanhui" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="趋势分析"
-            android:textColor="#369"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="趋势分析"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -70,7 +56,7 @@
             android:layout_weight="1" >
 
             <TextView
-                android:layout_width="0dp "
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="当前点的坐标为:"
@@ -78,21 +64,21 @@
 
             <TextView
                 android:id="@+id/tv_xy"
-                android:layout_width="0dp "
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="4"
                 android:text="当前点的坐标为:"
                 android:textColor="#000" />
 
             <TextView
-                android:layout_width="0dp "
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="当前点的坐标为:"
                 android:visibility="invisible" />
 
             <TextView
-                android:layout_width="0dp "
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="当前点的坐标为:"

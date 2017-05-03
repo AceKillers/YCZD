@@ -87,6 +87,7 @@ public class ShishiActivity extends Activity {
                     case R.id.rb3:
                         break;
                     case R.id.rb4:
+
                         break;
                     case R.id.rb5:
                         break;

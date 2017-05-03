@@ -1,20 +1,5 @@
 package zz.zept.yczd.warn_activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.viewpagerindicator.TabPageIndicator;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.rest.OnResponseListener;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.RequestQueue;
-import com.yolanda.nohttp.rest.Response;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -32,6 +17,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.viewpagerindicator.TabPageIndicator;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.WarnMessageBean;
 import zz.zept.yczd.bean.WarnMessageBean.DataBean;
@@ -70,8 +71,6 @@ public class WarnTwoActivity extends BaseActicity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_back:
-			Intent intent = new Intent(this, WarnActivity.class);
-			startActivity(intent);
 			finish();
 			break;
 

@@ -1,94 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="#fff"
-    android:gravity="center"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f5f5f5" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.4"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-             
-                android:background="@drawable/check1"
-                android:visibility="invisible" />
-
-            <ImageView
-                  android:layout_marginBottom="10dp"
-                android:id="@+id/iv_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/check1" />
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/checkbox_bg"
+            android:button="@null" />
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/company"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="开停状态"
-            android:textColor="#333"
-            android:textSize="14dp" />
+            android:drawableLeft="@drawable/ic_company"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="啊啊啊啊"
+            android:textColor="#6d7091"
+            android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/tv2"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:drawableLeft="@drawable/ic_dengji"
+            android:drawablePadding="5dp"
             android:gravity="center"
-            android:text="时间"
-            android:textColor="#333"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="总运行时间"
-            android:textColor="#333"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/tv4"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="总运行时间"
-            android:textColor="#333"
-            android:textSize="14dp" />
+            android:text="门户系统"
+            android:textColor="#6d7091"
+            android:textSize="12sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#eee" >
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/list_line" />
 
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#6d7091"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#b3bbc6"
+        android:textSize="10sp" />
 </LinearLayout>

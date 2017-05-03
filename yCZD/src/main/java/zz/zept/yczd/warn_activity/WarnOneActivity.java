@@ -1,20 +1,5 @@
 package zz.zept.yczd.warn_activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.viewpagerindicator.TabPageIndicator;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.rest.OnResponseListener;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.RequestQueue;
-import com.yolanda.nohttp.rest.Response;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -28,15 +13,31 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.viewpagerindicator.TabPageIndicator;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.WarnMessageBean;
 import zz.zept.yczd.bean.WarnMessageBean.DataBean;
 import zz.zept.yczd.res.MyRes;
-import zz.zept.yczd.utils.LogUtils;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
 
@@ -71,8 +72,6 @@ public class WarnOneActivity extends BaseActicity {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_back:
-			Intent intent = new Intent(this, WarnActivity.class);
-			startActivity(intent);
 			finish();
 			break;
 
@@ -456,23 +455,23 @@ public class WarnOneActivity extends BaseActicity {
 			if (convertView == null) {
 				convertView = View.inflate(WarnOneActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
-				vh.iv = (ImageView) convertView.findViewById(R.id.iv_check);
-				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
-				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
-				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
-				vh.tv4 = (TextView) convertView.findViewById(R.id.tv4);
+				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
+				vh.tv1 = (TextView) convertView.findViewById(R.id.company);
+				vh.tv2 = (TextView) convertView.findViewById(R.id.level);
+				vh.tv3 = (TextView) convertView.findViewById(R.id.content);
+				vh.tv4 = (TextView) convertView.findViewById(R.id.time);
 				convertView.setTag(vh);
 			} else {
 				vh = (ViewHolder) convertView.getTag();
 			}
 			if (AlldatasOne.get(position).check) {
-				vh.iv.setBackgroundResource(R.drawable.check2);
+				vh.iv.setChecked(true);
 			} else {
-				vh.iv.setBackgroundResource(R.drawable.check1);
+				vh.iv.setChecked(false);
 			}
 			vh.tv1.setText(AlldatasOne.get(position).getFactoryName());
-			vh.tv2.setText(AlldatasOne.get(position).getMacName());
-			vh.tv3.setText(AlldatasOne.get(position).getMsglevel() + "");
+			vh.tv3.setText(AlldatasOne.get(position).getMacName());
+			vh.tv2.setText(AlldatasOne.get(position).getMsglevel() + "级");
 			vh.tv4.setText(AlldatasOne.get(position).getSendTime());
 
 			return convertView;
@@ -504,9 +503,9 @@ public class WarnOneActivity extends BaseActicity {
 			// TODO Auto-generated method stub
 			ViewHolder vh = null;
 			if (convertView == null) {
-				convertView = View.inflate(WarnOneActivity.this, R.layout.item_list_warn2, null);
+				convertView = View.inflate(WarnOneActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
-
+				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
 				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
 				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
 				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
@@ -515,10 +514,10 @@ public class WarnOneActivity extends BaseActicity {
 			} else {
 				vh = (ViewHolder) convertView.getTag();
 			}
-
+			vh.iv.setVisibility(View.GONE);
 			vh.tv1.setText(AlldatasTwo.get(position).getFactoryName());
-			vh.tv2.setText(AlldatasTwo.get(position).getMacName());
-			vh.tv3.setText(AlldatasTwo.get(position).getMsglevel() + "");
+			vh.tv3.setText(AlldatasTwo.get(position).getMacName());
+			vh.tv2.setText(AlldatasTwo.get(position).getMsglevel() + "级");
 			vh.tv4.setText(AlldatasTwo.get(position).getSendTime());
 
 			return convertView;
@@ -548,7 +547,7 @@ public class WarnOneActivity extends BaseActicity {
 	}
 
 	class ViewHolder {
-		ImageView iv;
+		CheckBox iv;
 		TextView tv1;
 		TextView tv2;
 		TextView tv3;

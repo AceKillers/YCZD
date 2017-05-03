@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="zz.zept.yczd"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -22,13 +22,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask" >
-        </activity>
-        <activity android:name="zz.zept.yczd.activity.LoginActivity" >
+            android:launchMode="singleTask"></activity>
+        <activity android:name="zz.zept.yczd.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,60 +36,59 @@
         </activity>
         <activity android:name="zz.zept.yczd.activity.MainTabActivity" />
         <activity android:name="zz.zept.yczd.activity.MainInfoActivity" />
-        <activity android:name="zz.zept.yczd.activity.DailyActiviyt" >
-        </activity>
-        <activity android:name="zz.zept.yczd.activity.DiagnoseActivity" >
-        </activity>
+        <activity android:name="zz.zept.yczd.activity.DailyActiviyt"></activity>
+        <activity android:name="zz.zept.yczd.activity.DiagnoseActivity"></activity>
         <activity
             android:name="zz.zept.yczd.trend_activity.TrendActivity"
-            android:launchMode="singleTask" >
-        </activity>
-        <activity android:name="zz.zept.yczd.activity.PicActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name="zz.zept.yczd.activity.PicActivity"
             android:screenOrientation="landscape"></activity>
         <activity
             android:name="zz.zept.yczd.message.acrtivity.MessageActivity"
             android:launchMode="singleTask"
-            android:theme="@style/StyleIndicators" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageContentActivity" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.SendMessageActivity" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity1" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity2" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity3" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity4" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity5" >
-        </activity>
+            android:theme="@style/StyleIndicators"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageContentActivity"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.SendMessageActivity"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity1"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity2"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity3"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity4"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.MessageReciverActivity5"></activity>
         <activity
             android:name="zz.zept.yczd.warn_activity.WarnActivity"
-            android:launchMode="singleTask" >
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name="zz.zept.yczd.trend_activity.BoXingTuActivity"
-            android:launchMode="singleTask" >
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name="zz.zept.yczd.warn_activity.WarnOneActivity"
-            android:theme="@style/StyledIndicators" >
-        </activity>
+            android:theme="@style/StyleIndicators"></activity>
         <activity
             android:name="zz.zept.yczd.warn_activity.WarnTwoActivity"
-            android:theme="@style/StyledIndicators" >
-        </activity>
-        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity" >
-        </activity>
-        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity2" >
-        </activity>
-        <activity android:name="zz.zept.yczd.message.acrtivity.ZDBGActivity" >
-        </activity>
-        <activity android:name="zz.zept.yczd.activity.ShishiActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name="zz.zept.yczd.activity.ZongheActivity" />
+            android:theme="@style/StyleIndicators"></activity>
+        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity"></activity>
+        <activity android:name="zz.zept.yczd.warn_activity.WarnContentActivity2"></activity>
+        <activity android:name="zz.zept.yczd.message.acrtivity.ZDBGActivity"></activity>
+        <activity
+            android:name="zz.zept.yczd.activity.ShishiActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="zz.zept.yczd.activity.ZongheActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="zz.zept.yczd.activity.ShengchanActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="zz.zept.yczd.activity.RanliaoActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name="zz.zept.yczd.activity.HuanbaoActivity" />
+        <activity android:name="zz.zept.yczd.activity.AnquanActivity" />
+        <activity
+            android:name="zz.zept.yczd.activity.XinnengyuanActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name="zz.zept.yczd.activity.BaojingActivity" />
+
     </application>
 
 </manifest>

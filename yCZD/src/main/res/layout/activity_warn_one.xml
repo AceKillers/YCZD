@@ -4,69 +4,30 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="0.7"
-            android:gravity="center"
-            android:text="消息中心"
-            android:textColor="#336699"
-            android:textSize="18dp"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/fanhui"
-            android:gravity="center" />
-
-        <Button
-            android:id="@+id/bt_send"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="#fff"
-            android:text="发送消息"
-            android:textColor="#336699"
-            android:textSize="14dp"
-            android:visibility="invisible" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nva_bg">
 
         <TextView
             android:id="@+id/tv"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="振动报警"
-            android:textColor="#336699"
-            android:textSize="20dp" />
-
-        <Button
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:text="发送消息"
-            android:textColor="#336699"
-            android:textSize="14dp"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
+            android:text="报警查询"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#eee"
-        android:orientation="horizontal" >
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
 
     <com.viewpagerindicator.TabPageIndicator
         android:id="@+id/indicator"
