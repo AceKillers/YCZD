@@ -34,6 +34,7 @@ import butterknife.OnClick;
 import zz.zept.yczd.R;
 import zz.zept.yczd.adapter.ShengchanAdapter;
 import zz.zept.yczd.bean.ShengchanInfo1;
+import zz.zept.yczd.bean.ShengchanInfo2;
 import zz.zept.yczd.bean.ShengchanList;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
@@ -74,8 +75,9 @@ public class ShengchanActivity extends Activity {
     private LineChartView lineChartView;
     private LinearLayout.LayoutParams layoutParams;
     private ListView listView;
-    private String url = MyRes.BASE_URL + "zdpt/sts/adFindForSCValue.action", date = "";
+    private String date = "";
     private ArrayList<ShengchanInfo1> listRecods;
+    private ArrayList<ShengchanInfo2> listRecods2;
     private List<ShengchanList> shengchanLists = new ArrayList<>();
     private PopWindow popWindow;
     private List<String> timeList = new ArrayList<>();
@@ -246,7 +248,6 @@ public class ShengchanActivity extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
         listView = new ListView(this);
-        lineChartView = new LineChartView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         timeList.add("当日");
@@ -330,13 +331,19 @@ public class ShengchanActivity extends Activity {
                         layout.addView(listView,layoutParams);
                         break;
                     case R.id.rb5:
-                        company.setVisibility(View.GONE);
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         break;
                     case R.id.rb6:
-                        company.setVisibility(View.GONE);
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         break;
                     case R.id.rb7:
-                        company.setVisibility(View.GONE);
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         break;
                 }
             }
@@ -345,7 +352,7 @@ public class ShengchanActivity extends Activity {
 
     private void getData1() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForSCValue.action", RequestMethod.POST);
         request.add("date", date);
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
@@ -527,5 +534,40 @@ public class ShengchanActivity extends Activity {
             shengchanAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    private void getData2() {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
+        String start = sDateFormat.format(new Date())+"-01";
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForEveryDayValue.action", RequestMethod.POST);
+        request.add("timeStart", start);
+        request.add("timeEnd", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if ("success".equals(jsonObject.get("code"))) {
+                        listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
+                        }.getType());
+                        if (listRecods2 != null && listRecods2.size() > 0) {
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(ShengchanActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(ShengchanActivity.this);
+        callServer.add(12312, request, callback);
     }
 }

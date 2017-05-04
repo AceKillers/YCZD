@@ -62,9 +62,18 @@ public class LineChartView extends DemoView implements Runnable {
 	private List<CustomLineData> mCustomLineDataset = new LinkedList<CustomLineData>();
 	private Paint mPaintTooltips = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-	public LineChartView(Context context) {
+	private double max;
+	private List<String> label;
+	private List<Double> data;
+	private String name;
+
+	public LineChartView(Context context,double max,List<String> label,List<Double> data,String name) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		this.max = max;
+		this.label = label;
+		this.data = data;
+		this.name = name;
 		initView();
 	}
 
@@ -107,9 +116,9 @@ public class LineChartView extends DemoView implements Runnable {
 //			chart.setDesireLines(mCustomLineDataset);
 
 			//数据轴最大值
-			chart.getDataAxis().setAxisMax(1000);
+			chart.getDataAxis().setAxisMax(max);
 			//数据轴刻度间隔
-			chart.getDataAxis().setAxisSteps(100);
+			chart.getDataAxis().setAxisSteps(max/10);
 			//指隔多少个轴刻度(即细刻度)后为主刻度
 			chart.getDataAxis().setDetailModeSteps(1);
 
@@ -215,16 +224,19 @@ public class LineChartView extends DemoView implements Runnable {
 	private void chartDataSet() {
 		//Line 1
 		LinkedList<Double> dataSeries1= new LinkedList<Double>();
-		dataSeries1.add(200d);
-		dataSeries1.add(480d);
-		dataSeries1.add(500d);
-		dataSeries1.add(560d);
-		dataSeries1.add(760d);
-		dataSeries1.add(380d);
-		dataSeries1.add(660d);
-		dataSeries1.add(570d);
-		dataSeries1.add(920d);
-		LineData lineData1 = new LineData("指标",dataSeries1, Color.parseColor("#00baff"));
+		for (int i = 0;i<data.size();i++){
+			dataSeries1.add(data.get(i));
+		}
+//		dataSeries1.add(200d);
+//		dataSeries1.add(480d);
+//		dataSeries1.add(500d);
+//		dataSeries1.add(560d);
+//		dataSeries1.add(760d);
+//		dataSeries1.add(380d);
+//		dataSeries1.add(660d);
+//		dataSeries1.add(570d);
+//		dataSeries1.add(920d);
+		LineData lineData1 = new LineData(name,dataSeries1, Color.parseColor("#00baff"));
 		lineData1.setDotStyle(XEnum.DotStyle.DOT);
 
 		//Line 2
@@ -291,15 +303,18 @@ public class LineChartView extends DemoView implements Runnable {
 	}
 
 	private void chartLabels() {
-		labels.add("2006");
-		labels.add("2007");
-		labels.add("2008");
-		labels.add("2009");
-		labels.add("2010");
-		labels.add("2011");
-		labels.add("2012");
-		labels.add("2013");
-		labels.add("2014");
+		for (int i = 0;i<label.size();i++){
+			labels.add(label.get(i));
+		}
+//		labels.add("2006");
+//		labels.add("2007");
+//		labels.add("2008");
+//		labels.add("2009");
+//		labels.add("2010");
+//		labels.add("2011");
+//		labels.add("2012");
+//		labels.add("2013");
+//		labels.add("2014");
 	}
 
 	/**

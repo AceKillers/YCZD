@@ -77,7 +77,8 @@
             android:name="zz.zept.yczd.activity.ZongheActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name="zz.zept.yczd.activity.ShengchanActivity" />
+            android:name="zz.zept.yczd.activity.ShengchanActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.RanliaoActivity"
             android:screenOrientation="landscape" />
