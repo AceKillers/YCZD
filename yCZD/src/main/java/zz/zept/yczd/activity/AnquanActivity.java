@@ -128,6 +128,8 @@ public class AnquanActivity extends Activity {
     }
 
     private void showData1() {
+        if (listRecods!=null){
 
+        }
     }
 }
