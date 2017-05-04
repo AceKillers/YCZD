@@ -41,6 +41,7 @@ import org.xclcharts.event.click.PointPosition;
 import org.xclcharts.renderer.XEnum;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class LineChartView extends DemoView implements Runnable {
 	private List<Double> data;
 	private String name;
 
-	public LineChartView(Context context,double max,List<String> label,List<Double> data,String name) {
+	public LineChartView(Context context, double max, List<String> label, ArrayList<Double> data, String name) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		this.max = max;

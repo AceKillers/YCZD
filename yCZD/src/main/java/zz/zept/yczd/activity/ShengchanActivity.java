@@ -38,6 +38,7 @@ import zz.zept.yczd.bean.ShengchanInfo2;
 import zz.zept.yczd.bean.ShengchanList;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
+import zz.zept.yczd.utils.ChartUtil;
 import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
@@ -78,110 +79,13 @@ public class ShengchanActivity extends Activity {
     private String date = "";
     private ArrayList<ShengchanInfo1> listRecods;
     private ArrayList<ShengchanInfo2> listRecods2;
+    private ArrayList<ShengchanInfo2> listRecods3;
     private List<ShengchanList> shengchanLists = new ArrayList<>();
     private PopWindow popWindow;
     private List<String> timeList = new ArrayList<>();
     private List<String> companyList = new ArrayList<>();
     private ShengchanAdapter shengchanAdapter;
     private int dataType;
-    private String json = " [\n" +
-            "        {\n" +
-            "            \"gr_m\": \"0.00\",\n" +
-            "            \"mh_y\": \"286.18\",\n" +
-            "            \"fdl_d\": \"1919.95\",\n" +
-            "            \"ydl_y\": \"3.60\",\n" +
-            "            \"dw\": \"A\",\n" +
-            "            \"mh_d\": \"285.70\",\n" +
-            "            \"ydl_m\": \"4.20\",\n" +
-            "            \"name\": \" 平顶山分公司\",\n" +
-            "            \"gr_d\": \"0.00\",\n" +
-            "            \"fdl_y\": \"205820.90\",\n" +
-            "            \"fdl_m\": \"33859.76\",\n" +
-            "            \"gr_y\": \"0.00\",\n" +
-            "            \"mh_m\": \"289.82\",\n" +
-            "            \"ydl_d\": \"4.24\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"gr_m\": \"69479.16\",\n" +
-            "            \"mh_y\": \"299.19\",\n" +
-            "            \"fdl_d\": \"1009.00\",\n" +
-            "            \"ydl_y\": \"3.96\",\n" +
-            "            \"dw\": \"B\",\n" +
-            "            \"mh_d\": \"301.14\",\n" +
-            "            \"ydl_m\": \"4.35\",\n" +
-            "            \"name\": \" 开封分公 司\",\n" +
-            "            \"gr_d\": \"3076.22\",\n" +
-            "            \"fdl_y\": \"107189.71\",\n" +
-            "            \"fdl_m\": \"18522.27\",\n" +
-            "            \"gr_y\": \"374652.70\",\n" +
-            "            \"mh_m\": \"302.44\",\n" +
-            "            \"ydl_d\": \"4.10\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"gr_m\": \"43773.00\",\n" +
-            "            \"mh_y\": \"271.76\",\n" +
-            "            \"fdl_d\": \"441.20\",\n" +
-            "            \"ydl_y\": \"4.41\",\n" +
-            "            \"dw\": \"C\",\n" +
-            "            \"mh_d\": \"338.54\",\n" +
-            "            \"ydl_m\": \"5.67\",\n" +
-            "            \"name\": \" 豫新发 电\",\n" +
-            "            \"gr_d\": \"4071.00\",\n" +
-            "            \"fdl_y\": \"76485.01\",\n" +
-            "            \"fdl_m\": \"8569.27\",\n" +
-            "            \"gr_y\": \"2050082.00\",\n" +
-            "            \"mh_m\": \"330.01\",\n" +
-            "            \"ydl_d\": \"5.24\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"gr_m\": \"86307.00\",\n" +
-            "            \"mh_y\": \"270.35\",\n" +
-            "            \"fdl_d\": \"656.65\",\n" +
-            "            \"ydl_y\": \"4.17\",\n" +
-            "            \"dw\": \"D\",\n" +
-            "            \"mh_d\": \"316.91\",\n" +
-            "            \"ydl_m\": \"5.37\",\n" +
-            "            \"name\": \" 平东热 电\",\n" +
-            "            \"gr_d\": \"2904.00\",\n" +
-            "            \"fdl_y\": \"71580.07\",\n" +
-            "            \"fdl_m\": \"10013.18\",\n" +
-            "            \"gr_y\": \"1883958.00\",\n" +
-            "            \"mh_m\": \"319.69\",\n" +
-            "            \"ydl_d\": \"5.32\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"gr_m\": \"20769.00\",\n" +
-            "            \"mh_y\": \"306.27\",\n" +
-            "            \"fdl_d\": \"444.28\",\n" +
-            "            \"ydl_y\": \"5.35\",\n" +
-            "            \"dw\": \"E\",\n" +
-            "            \"mh_d\": \"320.01\",\n" +
-            "            \"ydl_m\": \"5.81\",\n" +
-            "            \"name\": \" 南阳热 电\",\n" +
-            "            \"gr_d\": \"857.00\",\n" +
-            "            \"fdl_y\": \"68502.97\",\n" +
-            "            \"fdl_m\": \"6503.38\",\n" +
-            "            \"gr_y\": \"1090095.00\",\n" +
-            "            \"mh_m\": \"317.91\",\n" +
-            "            \"ydl_d\": \"6.10\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"gr_m\": \"0.00\",\n" +
-            "            \"mh_y\": \"225.70\",\n" +
-            "            \"fdl_d\": \"654.48\",\n" +
-            "            \"ydl_y\": \"1.81\",\n" +
-            "            \"dw\": \"F\",\n" +
-            "            \"mh_d\": \"225.70\",\n" +
-            "            \"ydl_m\": \"1.80\",\n" +
-            "            \"name\": \" 郑州燃 机\",\n" +
-            "            \"gr_d\": \"0.00\",\n" +
-            "            \"fdl_y\": \"41464.00\",\n" +
-            "            \"fdl_m\": \"8580.62\",\n" +
-            "            \"gr_y\": \"0.00\",\n" +
-            "            \"mh_m\": \"225.70\",\n" +
-            "            \"ydl_d\": \"1.81\"\n" +
-            "        }\n" +
-            "    ]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,23 +96,7 @@ public class ShengchanActivity extends Activity {
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         initData();
         initListener();
-//        getData1();
-        listRecods = new Gson().fromJson(json, new TypeToken<ArrayList<ShengchanInfo1>>() {
-        }.getType());
-        if (listRecods != null && listRecods.size() > 0) {
-            for (int i = 0; i < listRecods.size(); i++) {
-                ShengchanList item = new ShengchanList();
-                item.setCompany(listRecods.get(i).getName());
-                item.setDw("万kWh");
-                item.setNum(listRecods.get(i).getFdl_d());
-                item.setTime(date);
-                shengchanLists.add(item);
-            }
-            shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
-            listView.setAdapter(shengchanAdapter);
-            listView.setDivider(null);
-            layout.addView(listView, layoutParams);
-        }
+        getData1();
     }
 
     @OnClick({R.id.company, R.id.back})
@@ -334,15 +222,26 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        getData2();
                         break;
                     case R.id.rb6:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        if (listRecods3==null){
+                            getData3();
+                        }else {
+                            showData6();
+                        }
                         break;
                     case R.id.rb7:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
+                        if (listRecods3==null){
+                            getData3();
+                        }else {
+                            showData7();
                         }
                         break;
                 }
@@ -555,7 +454,18 @@ public class ShengchanActivity extends Activity {
                         listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (listRecods2 != null && listRecods2.size() > 0) {
-
+                            ArrayList<Double> data = new ArrayList<>();
+                            List<String> label = new ArrayList<>();
+                            String unit = "";
+                            for (int i = 0; i < listRecods2.size(); i++) {
+                                if (listRecods2.get(i).getId().equals("A")){
+                                    data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                                    label.add(listRecods2.get(i).getDate());
+                                    unit = listRecods2.get(i).getUnit();
+                                }
+                            }
+                            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
+                            layout.addView(lineChartView,layoutParams);
                         }
                     }
                 }
@@ -569,5 +479,79 @@ public class ShengchanActivity extends Activity {
         };
         Utils.showWaiting(ShengchanActivity.this);
         callServer.add(12312, request, callback);
+    }
+
+    private void getData3() {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
+        String start = sDateFormat.format(new Date())+"-01";
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
+        request.add("timeStart", start);
+        request.add("timeEnd", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if ("success".equals(jsonObject.get("code"))) {
+                        listRecods3 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
+                        }.getType());
+                        if (rb6.isChecked()){
+                            showData6();
+                        }
+                        if (rb7.isChecked()){
+                            showData7();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(ShengchanActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(ShengchanActivity.this);
+        callServer.add(12312, request, callback);
+    }
+
+    private void showData6(){
+        if (listRecods3 != null && listRecods3.size() > 0) {
+            ArrayList<Double> data = new ArrayList<>();
+            List<String> label = new ArrayList<>();
+            String unit = "";
+            for (int i = 0; i < listRecods3.size(); i++) {
+                if (listRecods3.get(i).getId().equals("A")&&listRecods3.get(i).getName().contains("发电量")){
+                    data.add(Double.parseDouble(listRecods3.get(i).getValue()));
+                    label.add(listRecods3.get(i).getDate());
+                    unit = listRecods3.get(i).getUnit();
+                }
+            }
+            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
+            layout.addView(lineChartView,layoutParams);
+        }
+
+    }
+
+    private void showData7(){
+        if (listRecods3 != null && listRecods3.size() > 0) {
+            ArrayList<Double> data = new ArrayList<>();
+            List<String> label = new ArrayList<>();
+            String unit = "";
+            for (int i = 0; i < listRecods3.size(); i++) {
+                if (listRecods3.get(i).getId().equals("A")&&listRecods3.get(i).getName().contains("负荷率")){
+                    data.add(Double.parseDouble(listRecods3.get(i).getValue()));
+                    label.add(listRecods3.get(i).getDate());
+                    unit = listRecods3.get(i).getUnit();
+                }
+            }
+            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
+            layout.addView(lineChartView,layoutParams);
+        }
+
     }
 }

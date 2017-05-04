@@ -1,10 +1,6 @@
 package zz.zept.yczd.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -14,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.pager.BasePager;
 import zz.zept.yczd.pager.OnePager;
-import zz.zept.yczd.pager.ThreePager;
 import zz.zept.yczd.pager.TwoPager;
 import zz.zept.yczd.view.MyLazyViewpager;
 
@@ -71,7 +70,7 @@ public class MainActivity extends Activity {
 
 		pagers.add(new OnePager(context));
 		pagers.add(new TwoPager(context));
-		pagers.add(new ThreePager(context));
+//		pagers.add(new ThreePager(context));
 		MyPagerAdapter myPagerAdapter = new MyPagerAdapter();
 		vp_main.setAdapter(myPagerAdapter);
 		vp_main.setCurrentItem(0);

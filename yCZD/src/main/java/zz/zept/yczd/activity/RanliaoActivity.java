@@ -51,10 +51,8 @@ public class RanliaoActivity extends Activity {
         ButterKnife.bind(this);
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
-        lineChartView = new LineChartView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        layout.addView(lineChartView, layoutParams);
         initListener();
     }
 

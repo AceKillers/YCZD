@@ -1,22 +1,12 @@
 package zz.zept.yczd.trend_activity;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.rest.OnResponseListener;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.Response;
-
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -24,12 +14,24 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import zz.zept.tree.FileBean;
 import zz.zept.tree.Node;
 import zz.zept.tree.TreeListViewAdapter;
@@ -49,8 +51,9 @@ import zz.zept.yczd.view.MyCalendarView.OnCalendarClickListener;
 import zz.zept.yczd.view.MyCalendarView.OnCalendarDateChangedListener;
 
 public class TrendActivity extends BaseActicity {
-	private Button btn, btn_query, btn_clean;
-	EditText et_machine_name, et_channel1, et_channel2, et_start, et_end;
+	private Button btn_query, btn_clean;
+	private ImageView btn;
+	private TextView et_machine_name, et_channel1, et_channel2, et_start, et_end;
 	private List<FileBean> mDatas = new ArrayList<FileBean>();
 	String url, channel_Url;
 	String channelId1, channelId2;
@@ -85,14 +88,14 @@ public class TrendActivity extends BaseActicity {
 	@Override
 	void initView() {
 		// TODO Auto-generated method stub
-		btn = (Button) findViewById(R.id.btn);
+		btn = (ImageView) findViewById(R.id.btn);
 		btn_clean = (Button) findViewById(R.id.btn_clean);
 		btn_query = (Button) findViewById(R.id.btn_query);
-		et_start = (EditText) findViewById(R.id.et_start);
-		et_machine_name = (EditText) findViewById(R.id.et_machine_name);
-		et_end = (EditText) findViewById(R.id.et_end);
-		et_channel1 = (EditText) findViewById(R.id.et_channel1);
-		et_channel2 = (EditText) findViewById(R.id.et_channel2);
+		et_start = (TextView) findViewById(R.id.et_start);
+		et_machine_name = (TextView) findViewById(R.id.et_machine_name);
+		et_end = (TextView) findViewById(R.id.et_end);
+		et_channel1 = (TextView) findViewById(R.id.et_channel1);
+		et_channel2 = (TextView) findViewById(R.id.et_channel2);
 	}
 
 	@Override
@@ -499,5 +502,10 @@ public class TrendActivity extends BaseActicity {
 				}
 			});
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return false;
 	}
 }

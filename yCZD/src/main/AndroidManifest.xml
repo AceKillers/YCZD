@@ -34,13 +34,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="zz.zept.yczd.activity.MainTabActivity" />
-        <activity android:name="zz.zept.yczd.activity.MainInfoActivity" />
+        <activity android:name="zz.zept.yczd.activity.MainTabActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name="zz.zept.yczd.activity.MainInfoActivity"
+            android:screenOrientation="portrait" />
         <activity android:name="zz.zept.yczd.activity.DailyActiviyt"></activity>
-        <activity android:name="zz.zept.yczd.activity.DiagnoseActivity"></activity>
+        <activity android:name="zz.zept.yczd.activity.DiagnoseActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zz.zept.yczd.trend_activity.TrendActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zz.zept.yczd.activity.PicActivity"
             android:screenOrientation="landscape"></activity>
@@ -88,6 +93,10 @@
             android:name="zz.zept.yczd.activity.XinnengyuanActivity"
             android:screenOrientation="landscape" />
         <activity android:name="zz.zept.yczd.activity.BaojingActivity" />
+        <activity
+            android:name="zz.zept.yczd.pager.ThreePager"
+            android:screenOrientation="landscape" />
+
 
     </application>
 

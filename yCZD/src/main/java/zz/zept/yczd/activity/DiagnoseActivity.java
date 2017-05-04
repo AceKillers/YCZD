@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -493,4 +494,8 @@ public class DiagnoseActivity extends BaseActicity {
 		NoHttp.newRequestQueue().add(123, request, responseListener);
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return false;
+	}
 }
