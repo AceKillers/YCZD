@@ -21,7 +21,15 @@
             android:text="河南分公司"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/back"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="燃料信息"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"

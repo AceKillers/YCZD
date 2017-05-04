@@ -37,9 +37,9 @@ import org.xclcharts.common.IFormatterTextCallBack;
 import org.xclcharts.renderer.XEnum;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @ClassName BarChart04View
@@ -55,10 +55,19 @@ public class BarChart04View extends DemoView {
 	private List<String> chartLabels = new LinkedList<String>();
 	private List<BarData> chartData = new LinkedList<BarData>();
 	private List<CustomLineData> mCustomLineDataset = new LinkedList<CustomLineData>();
+
+	private double max;
+	private List<String> label;
+	private List<Double> data;
+	private String name;
 	
-	public BarChart04View(Context context) {
+	public BarChart04View(Context context, double max, List<String> label, ArrayList<Double> data, String name) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		this.max = max;
+		this.label = label;
+		this.data = data;
+		this.name = name;
 		initView();
 	}
 	
@@ -126,11 +135,11 @@ public class BarChart04View extends DemoView {
 			chart.getDataAxis().getAxisPaint().setStrokeWidth(2);
 			chart.getCategoryAxis().getAxisPaint().setStrokeWidth(2);
 			chart.getDataAxis().getTickMarksPaint().setStrokeWidth(2);
-			chart.getDataAxis().setAxisMax(40);
+			chart.getDataAxis().setAxisMax(max);
 			chart.getDataAxis().setAxisMin(0);
-			chart.getDataAxis().setAxisSteps(5);
+			chart.getDataAxis().setAxisSteps(max/10);
 			//指隔多少个轴刻度(即细刻度)后为主刻度
-			chart.getDataAxis().setDetailModeSteps(2);
+			chart.getDataAxis().setDetailModeSteps(1);
 			
 			//背景网格
 			chart.getPlotGrid().getHorizontalLinePaint().setStrokeWidth(0.1f);
@@ -197,15 +206,18 @@ public class BarChart04View extends DemoView {
 		List<Double> dataSeriesA= new LinkedList<Double>();
 		//依数据值确定对应的柱形颜色.
 		List<Integer> dataColorA= new LinkedList<Integer>();
-		
-		int max = 35;
-	    int min = 15;
+		for(int i=1;i<data.size();i++){
+			dataSeriesA.add(data.get(i));
+		}
+
+//		int max = 35;
+//	    int min = 15;
 	        
-		for(int i=1;i<31;i++) 
-		{
-			Random random = new Random();
-			int v = random.nextInt(max)%(max-min+1) + min;			 
-			dataSeriesA.add((double) v);
+//		for(int i=1;i<31;i++)
+//		{
+//			Random random = new Random();
+//			int v = random.nextInt(max)%(max-min+1) + min;
+//			dataSeriesA.add((double) v);
 			
 //			if(v <= 18.5d ) //适中
 //			{
@@ -217,9 +229,9 @@ public class BarChart04View extends DemoView {
 //			}else{  //肥胖
 //				dataColorA.add(Color.RED);
 //			}
-		}  
+//		}
 		//此地的颜色为Key值颜色及柱形的默认颜色
-		BarData BarDataA = new BarData("",dataSeriesA,dataColorA,
+		BarData BarDataA = new BarData(name,dataSeriesA,
 				Color.parseColor("#00baff"));
 		
 		chartData.add(BarDataA);
@@ -227,14 +239,9 @@ public class BarChart04View extends DemoView {
 	
 	private void chartLabels()
 	{		
-		for(int i=1;i<31;i++)
+		for(int i=1;i<label.size();i++)
 		{
-			if(1 == i || i%5 == 0)
-			{
-				chartLabels.add(Integer.toString(i));
-			}else{
-				chartLabels.add("");
-			}
+			chartLabels.add(label.get(i));
 		}
 	}	
 	

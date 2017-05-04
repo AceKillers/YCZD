@@ -77,21 +77,25 @@
         <activity android:name="zz.zept.yczd.message.acrtivity.ZDBGActivity"></activity>
         <activity
             android:name="zz.zept.yczd.activity.ShishiActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.ZongheActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.ShengchanActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.RanliaoActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name="zz.zept.yczd.activity.HuanbaoActivity" />
         <activity android:name="zz.zept.yczd.activity.AnquanActivity" />
         <activity
             android:name="zz.zept.yczd.activity.XinnengyuanActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name="zz.zept.yczd.activity.BaojingActivity" />
         <activity
             android:name="zz.zept.yczd.pager.ThreePager"

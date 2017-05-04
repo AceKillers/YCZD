@@ -30,14 +30,13 @@ import android.util.Log;
 
 import org.xclcharts.chart.BarChart;
 import org.xclcharts.chart.BarData;
-import org.xclcharts.common.IFormatterDoubleCallBack;
 import org.xclcharts.common.IFormatterTextCallBack;
 import org.xclcharts.renderer.XEnum;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @ClassName AnimationBar01View
@@ -58,10 +57,21 @@ public class BarChart06View extends DemoView implements Runnable {
 	//RGB颜色数组
 	private int[] colors ={Color.parseColor("#00baff"), Color.parseColor("#438483"), Color.parseColor("#31e5e3")};
    	private final int labelsNumber = 15;
+
+	private double max;
+	private List<String> label;
+	private List<Double> data1;
+	private List<Double> data2;
+	private String name;
 	
-	public BarChart06View(Context context) {
+	public BarChart06View(Context context, double max, List<String> label, ArrayList<Double> data1,ArrayList<Double> data2, String name) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		this.max = max;
+		this.label = label;
+		this.data1 = data1;
+		this.data2 = data2;
+		this.name = name;
 		initView();
 	}
 	
@@ -115,9 +125,10 @@ public class BarChart06View extends DemoView implements Runnable {
 			chart.setCategories(chartLabels);	
 			
 			//数据轴
-			chart.getDataAxis().setAxisMax(100);
+			chart.getDataAxis().setAxisMax(max);
 			chart.getDataAxis().setAxisMin(0);
-			chart.getDataAxis().setAxisSteps(5);
+			chart.getDataAxis().setAxisSteps(max/10);
+			chart.getDataAxis().setDetailModeSteps(1);
 			chart.getDataAxis().getAxisPaint().setColor(Color.parseColor("#a6a5b3"));
 			chart.getCategoryAxis().getAxisPaint().setColor(Color.parseColor("#a6a5b3"));
 			chart.getDataAxis().getTickMarksPaint().setColor(Color.parseColor("#a6a5b3"));
@@ -144,14 +155,14 @@ public class BarChart06View extends DemoView implements Runnable {
 			//在柱形顶部显示值
 			chart.getBar().setItemLabelVisible(true);
 			//设定格式
-			chart.setItemLabelFormatter(new IFormatterDoubleCallBack() {
-				@Override
-				public String doubleFormatter(Double value) {
-					// TODO Auto-generated method stub
-					DecimalFormat df=new DecimalFormat("#0");
-					String label = df.format(value).toString();
-					return label;
-				}});
+//			chart.setItemLabelFormatter(new IFormatterDoubleCallBack() {
+//				@Override
+//				public String doubleFormatter(Double value) {
+//					// TODO Auto-generated method stub
+//					DecimalFormat df=new DecimalFormat("#0");
+//					String label = df.format(value).toString();
+//					return label;
+//				}});
 			chart.setPlotPanMode(XEnum.PanMode.HORIZONTAL);
 			 //让柱子间不留空白
 			 chart.getBar().setBarInnerMargin(5f);
@@ -167,8 +178,21 @@ public class BarChart06View extends DemoView implements Runnable {
 	
 	private void chartDataSet()
 	{
+		LinkedList<Double> dataSeries1= new LinkedList<Double>();
+		for(int i=0;i<data1.size();i++){
+			dataSeries1.add(data1.get(i));
+		}
+		BarData barData1 = new BarData("进煤量",dataSeries1,colors[0]);
+		chartData.add(barData1);
+		LinkedList<Double> dataSeries2= new LinkedList<Double>();
+		for(int i=0;i<data2.size();i++){
+			dataSeries2.add(data2.get(i));
+		}
+		BarData barData2 = new BarData("耗煤量",dataSeries2,colors[1]);
+		chartData.add(barData2);
+
 		//标签对应的柱形数据集		
-		int max = 96;
+		/*int max = 96;
 	    int min = 15;
 	    
 		for(int i=0;i <colors.length;i++)
@@ -183,14 +207,14 @@ public class BarChart06View extends DemoView implements Runnable {
 			BarData barData = new BarData("柱形渐显动画",dataSeries,
 					colors[i]);
 			chartData.add(barData);
-		}
+		}*/
 		
 	}
 	
 	private void chartLabels()
 	{
-		for(int i=0;i < labelsNumber;i++)
-			chartLabels.add(Integer.toString(i+1));
+		for(int i=0;i < label.size();i++)
+			chartLabels.add(label.get(i));
 	}	
 		
 	@Override

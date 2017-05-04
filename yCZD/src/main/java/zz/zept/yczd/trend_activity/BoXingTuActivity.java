@@ -1,7 +1,12 @@
 package zz.zept.yczd.trend_activity;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -15,17 +20,11 @@ import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Response;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.TrendBoXingTuBean.DataBean;
-import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.ToastUtils;
 
 public class BoXingTuActivity extends BaseActicity {
@@ -43,7 +42,7 @@ public class BoXingTuActivity extends BaseActicity {
 	TextView tv_xy;
 	LineChart chartView;
 	private ArrayList<Entry> y1;
-	Button btn_back;
+	ImageView btn_back;
 	private ArrayList<Entry> y2;
 	private Intent intent;
 	private List<DataBean> data;
@@ -105,7 +104,7 @@ public class BoXingTuActivity extends BaseActicity {
 		chartView = (LineChart) findViewById(R.id.chartView);
 		pb = (ProgressBar) findViewById(R.id.pb);
 		tv_xy = (TextView) findViewById(R.id.tv_xy);
-		btn_back = (Button) findViewById(R.id.btn_back);
+		btn_back = (ImageView) findViewById(R.id.btn_back);
 	}
 
 	@Override

@@ -38,6 +38,9 @@ import org.xclcharts.renderer.XEnum;
 import org.xclcharts.renderer.plot.PlotLegend;
 
 import java.util.LinkedList;
+import java.util.List;
+
+import zz.zept.yczd.bean.XinnengyuanInfo;
 
 /**
  * @ClassName DountChart01View
@@ -51,10 +54,12 @@ public class DountChart01View extends DemoView {
     private int[] colors = {Color.parseColor("#00baff"), Color.parseColor("#438483"), Color.parseColor("#31e5e3"), Color.parseColor("#3ca3a1"), Color.parseColor("#3d6463"), Color.parseColor("#39abad"), Color.parseColor("#ff8386")};
 
     LinkedList<PieData> lPieData = new LinkedList<PieData>();
+    private List<XinnengyuanInfo> list;
 
-    public DountChart01View(Context context) {
+    public DountChart01View(Context context,List<XinnengyuanInfo> list) {
         super(context);
         // TODO Auto-generated constructor stub
+        this.list = list;
         initView();
     }
 
@@ -178,10 +183,14 @@ public class DountChart01View extends DemoView {
     private void chartDataSet() {
         //设置图表数据源
         //PieData(标签，百分比，在饼图中对应的颜色)
-        lPieData.add(new PieData("Solaris", "20%", 20, Color.parseColor("#00baff")));
-        lPieData.add(new PieData("Aix", "30%", 30, Color.parseColor("#438483")));
-        lPieData.add(new PieData("HP-UX", "10%", 10, Color.parseColor("#31e5e3")));
-        lPieData.add(new PieData("Linux", "40%", 40, Color.parseColor("#3ca3a1")));
+        for (int i = 0;i<list.size();i++){
+            XinnengyuanInfo info = list.get(i);
+            lPieData.add(new PieData(info.getInfo(),info.getPercent(),colors[i]));
+        }
+//        lPieData.add(new PieData("Solaris", "20%", 20, Color.parseColor("#00baff")));
+//        lPieData.add(new PieData("Aix", "30%", 30, Color.parseColor("#438483")));
+//        lPieData.add(new PieData("HP-UX", "10%", 10, Color.parseColor("#31e5e3")));
+//        lPieData.add(new PieData("Linux", "40%", 40, Color.parseColor("#3ca3a1")));
     }
 
     @Override
