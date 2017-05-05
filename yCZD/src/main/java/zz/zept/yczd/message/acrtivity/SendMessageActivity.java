@@ -1,5 +1,12 @@
 package zz.zept.yczd.message.acrtivity;
 
+import android.content.Intent;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Request;
@@ -7,11 +14,6 @@ import com.yolanda.nohttp.rest.RequestQueue;
 import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.SimpleResponseListener;
 
-import android.content.Intent;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import zz.zept.yczd.R;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.StatusBarCompat;
@@ -24,7 +26,8 @@ public class SendMessageActivity extends BaseActicity {
 	Request<String> request;
 	// 发送信息的base_url
 	String send_baseurl = MyRes.MY_SEND_URL;
-	Button bt_newsactivity, bt_send_message, bt_cancel_message;
+	Button  bt_send_message, bt_cancel_message;
+	ImageView bt_newsactivity;
 	EditText et_title, et_people, et_content;
 	String message_title, message_people, message_content;
 	private String username;
@@ -129,7 +132,7 @@ public class SendMessageActivity extends BaseActicity {
 
 	@Override
 	void initView() {
-		bt_newsactivity = (Button) findViewById(R.id.bt_newsactivity);
+		bt_newsactivity = (ImageView) findViewById(R.id.bt_newsactivity);
 		bt_send_message = (Button) findViewById(R.id.bt_send_message);
 		bt_cancel_message = (Button) findViewById(R.id.bt_cancel_message);
 		et_title = (EditText) findViewById(R.id.et_title);

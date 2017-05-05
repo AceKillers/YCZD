@@ -16,10 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.RequestMethod;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +27,7 @@ import zz.zept.yczd.bean.Company;
 import zz.zept.yczd.db.CompanyDBAction;
 import zz.zept.yczd.pager.ThreePager;
 import zz.zept.yczd.trend_activity.TrendActivity;
-import zz.zept.yczd.utils.CallServer;
-import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
-import zz.zept.yczd.utils.ToastUtils;
 
 /**
  * Created by HanChenxi on 2017/4/24.
@@ -111,32 +104,17 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
         }
     }
 
-    private void loadCompany(){
-        CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest("http://192.168.66.31:81/api/dept/getFactorys?companyid=101", RequestMethod.POST);
-        request.setTag(this);
-        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
-            @Override
-            public void onSucceed(int what, Response<String> response) {
-                String json = response.get();
-                if (!TextUtils.isEmpty(json)) {
-                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
-                        listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<Company>>() {
-                        }.getType());
-                        if (listRecods2!=null&&listRecods2.size()>0){
-                            dbAction.saveCompany(listRecods2);
-                        }
-                    }
-                }
+    private void loadCompany() {
+        String json = "{\"code\":\"success\",\"data\":[{\"FACTORYID\":\"201\",\"FACTORYNAME\":\"平顶山分公司\",\"CODE\":\"A\"},{\"FACTORYID\":\"202\",\"FACTORYNAME\":\"开封分公司\",\"CODE\":\"B\"},{\"FACTORYID\":\"426\",\"FACTORYNAME\":\"平东热电\",\"CODE\":\"D\"},{\"FACTORYID\":\"429\",\"FACTORYNAME\":\"豫新发电\",\"CODE\":\"C\"},{\"FACTORYID\":\"432\",\"FACTORYNAME\":\"南阳热电\",\"CODE\":\"E\"},{\"FACTORYID\":\"434\",\"FACTORYNAME\":\"郑州燃机\",\"CODE\":\"F\"},{\"FACTORYID\":\"438\",\"FACTORYNAME\":\"河南新能源\",\"CODE\":\"\"},{\"FACTORYID\":\"439\",\"FACTORYNAME\":\"湖北新能源\",\"CODE\":\"\"}],\"message\":\"读取数据成功\"}";
+        if (!TextUtils.isEmpty(json)) {
+            JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+            listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<Company>>() {
+            }.getType());
+            if (listRecods2 != null && listRecods2.size() > 0) {
+                dbAction.saveCompany(listRecods2);
             }
 
-            @Override
-            public void onFailed(int what, Response<String> response) {
-                ToastUtils.showToast(MainTabActivity.this, "服务器繁忙,稍后再试");
-            }
-        };
-        callServer.add(12312, request, callback);
+        }
     }
 
     private long mExitTime = 0;

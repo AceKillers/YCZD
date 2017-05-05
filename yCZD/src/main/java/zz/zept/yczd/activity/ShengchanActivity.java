@@ -36,6 +36,7 @@ import zz.zept.yczd.adapter.ShengchanAdapter;
 import zz.zept.yczd.bean.ShengchanInfo1;
 import zz.zept.yczd.bean.ShengchanInfo2;
 import zz.zept.yczd.bean.ShengchanList;
+import zz.zept.yczd.bean.ShishiInfo1;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.ChartUtil;
@@ -73,6 +74,8 @@ public class ShengchanActivity extends Activity {
     RadioGroup radiogroup;
     @BindView(R.id.layout)
     LinearLayout layout;
+    @BindView(R.id.rb8)
+    RadioButton rb8;
     private LineChartView lineChartView;
     private LinearLayout.LayoutParams layoutParams;
     private ListView listView;
@@ -80,6 +83,7 @@ public class ShengchanActivity extends Activity {
     private ArrayList<ShengchanInfo1> listRecods;
     private ArrayList<ShengchanInfo2> listRecods2;
     private ArrayList<ShengchanInfo2> listRecods3;
+    private ArrayList<ShishiInfo1> listRecods4;
     private List<ShengchanList> shengchanLists = new ArrayList<>();
     private PopWindow popWindow;
     private List<String> timeList = new ArrayList<>();
@@ -154,7 +158,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        switch (dataType){
+                        switch (dataType) {
                             case 0:
                                 dayData();
                                 break;
@@ -165,13 +169,13 @@ public class ShengchanActivity extends Activity {
                                 yearData();
                                 break;
                         }
-                        layout.addView(listView,layoutParams);
+                        layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb2:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        switch (dataType){
+                        switch (dataType) {
                             case 0:
                                 dayData();
                                 break;
@@ -182,13 +186,13 @@ public class ShengchanActivity extends Activity {
                                 yearData();
                                 break;
                         }
-                        layout.addView(listView,layoutParams);
+                        layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb3:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        switch (dataType){
+                        switch (dataType) {
                             case 0:
                                 dayData();
                                 break;
@@ -199,13 +203,13 @@ public class ShengchanActivity extends Activity {
                                 yearData();
                                 break;
                         }
-                        layout.addView(listView,layoutParams);
+                        layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb4:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        switch (dataType){
+                        switch (dataType) {
                             case 0:
                                 dayData();
                                 break;
@@ -216,7 +220,7 @@ public class ShengchanActivity extends Activity {
                                 yearData();
                                 break;
                         }
-                        layout.addView(listView,layoutParams);
+                        layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb5:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -228,9 +232,9 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
-                        if (listRecods3==null){
+                        if (listRecods3 == null) {
                             getData3();
-                        }else {
+                        } else {
                             showData6();
                         }
                         break;
@@ -238,10 +242,20 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
-                        if (listRecods3==null){
+                        if (listRecods3 == null) {
                             getData3();
-                        }else {
+                        } else {
                             showData7();
+                        }
+                        break;
+                    case R.id.rb8:
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                        }
+                        if (listRecods4 == null) {
+                            getData8();
+                        } else {
+                            showData8();
                         }
                         break;
                 }
@@ -437,7 +451,7 @@ public class ShengchanActivity extends Activity {
 
     private void getData2() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
-        String start = sDateFormat.format(new Date())+"-01";
+        String start = sDateFormat.format(new Date()) + "-01";
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForEveryDayValue.action", RequestMethod.POST);
         request.add("timeStart", start);
@@ -450,7 +464,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if (jsonObject.get("code").toString().contains("success")) {
+                    if ("success".equals(jsonObject.get("code"))) {
                         listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (listRecods2 != null && listRecods2.size() > 0) {
@@ -458,14 +472,14 @@ public class ShengchanActivity extends Activity {
                             List<String> label = new ArrayList<>();
                             String unit = "";
                             for (int i = 0; i < listRecods2.size(); i++) {
-                                if (listRecods2.get(i).getId().equals("A")){
+                                if (listRecods2.get(i).getId().equals("A")) {
                                     data.add(Double.parseDouble(listRecods2.get(i).getValue()));
                                     label.add(listRecods2.get(i).getDate());
                                     unit = listRecods2.get(i).getUnit();
                                 }
                             }
-                            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
-                            layout.addView(lineChartView,layoutParams);
+                            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+                            layout.addView(lineChartView, layoutParams);
                         }
                     }
                 }
@@ -483,7 +497,7 @@ public class ShengchanActivity extends Activity {
 
     private void getData3() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
-        String start = sDateFormat.format(new Date())+"-01";
+        String start = sDateFormat.format(new Date()) + "-01";
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
         request.add("timeStart", start);
@@ -496,13 +510,13 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if (jsonObject.get("code").toString().contains("success")) {
+                    if ("success".equals(jsonObject.get("code"))) {
                         listRecods3 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
-                        if (rb6.isChecked()){
+                        if (rb6.isChecked()) {
                             showData6();
                         }
-                        if (rb7.isChecked()){
+                        if (rb7.isChecked()) {
                             showData7();
                         }
                     }
@@ -519,39 +533,87 @@ public class ShengchanActivity extends Activity {
         callServer.add(12312, request, callback);
     }
 
-    private void showData6(){
+    private void showData6() {
         if (listRecods3 != null && listRecods3.size() > 0) {
             ArrayList<Double> data = new ArrayList<>();
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().equals("A")&&listRecods3.get(i).getName().contains("发电量")){
+                if (listRecods3.get(i).getId().equals("A") && listRecods3.get(i).getName().contains("发电量")) {
                     data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                     label.add(listRecods3.get(i).getDate());
                     unit = listRecods3.get(i).getUnit();
                 }
             }
-            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
-            layout.addView(lineChartView,layoutParams);
+            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+            layout.addView(lineChartView, layoutParams);
         }
 
     }
 
-    private void showData7(){
+    private void showData7() {
         if (listRecods3 != null && listRecods3.size() > 0) {
             ArrayList<Double> data = new ArrayList<>();
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().equals("A")&&listRecods3.get(i).getName().contains("负荷率")){
+                if (listRecods3.get(i).getId().equals("A") && listRecods3.get(i).getName().contains("负荷率")) {
                     data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                     label.add(listRecods3.get(i).getDate());
                     unit = listRecods3.get(i).getUnit();
                 }
             }
-            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)),label,data,unit);
-            layout.addView(lineChartView,layoutParams);
+            lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+            layout.addView(lineChartView, layoutParams);
         }
 
+    }
+
+    private void getData8() {
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
+        request.add("date", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if (jsonObject.get("code").toString().contains("success")) {
+                        listRecods4 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShishiInfo1>>() {
+                        }.getType());
+                        if (listRecods4 != null && listRecods4.size() > 0) {
+                            showData8();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(ShengchanActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(ShengchanActivity.this);
+        callServer.add(12312, request, callback);
+    }
+
+    private void showData8() {
+        shengchanLists.clear();
+        for (int i = 0; i < listRecods4.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods4.get(i).getDw());
+            item.setDw("%");
+            item.setNum(listRecods4.get(i).getFuhe());
+            item.setTime(date);
+            shengchanLists.add(item);
+
+        }
+        shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
+        listView.setAdapter(shengchanAdapter);
+        layout.addView(listView, layoutParams);
     }
 }

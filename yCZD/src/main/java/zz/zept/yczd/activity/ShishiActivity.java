@@ -103,11 +103,12 @@ public class ShishiActivity extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
         companyList = dbAction.searchCompany();
-//        companyId = companyList.get(0).getFACTORYID();
+        company.setText(companyList.get(0).getFACTORYNAME());
+        companyId = companyList.get(0).getCODE();
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         initListener();
-        getData1();
+        getData2();
     }
 
     @OnClick({R.id.company, R.id.back})
@@ -118,9 +119,12 @@ public class ShishiActivity extends Activity {
                 popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        companyId = companyList.get(i).getFACTORYID();
+                        companyId = companyList.get(i).getCODE();
                         company.setText(companyList.get(i).getFACTORYNAME());
                         popWindow.dissmiss();
+                        if (rb1.isChecked()||rb2.isChecked()){
+                            getData2();
+                        }
                     }
                 });
                 break;
@@ -137,12 +141,15 @@ public class ShishiActivity extends Activity {
                 layout.removeAllViews();
                 switch (i) {
                     case R.id.rb1:
-                        showData1();
+                        company.setVisibility(View.VISIBLE);
+                        getData2();
                         break;
                     case R.id.rb2:
+                        company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                     case R.id.rb3:
+                        company.setVisibility(View.GONE);
                         if (listRecods2 == null) {
                             getData3();
                         } else {
@@ -150,6 +157,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb4:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods2 == null) {
                             getData3();
                         } else {
@@ -157,6 +165,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb5:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods2 == null) {
                             getData3();
                         } else {
@@ -164,6 +173,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb6:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods2 == null) {
                             getData3();
                         } else {
@@ -171,6 +181,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb7:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods == null) {
                             getData2();
                         } else {
@@ -178,6 +189,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb8:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods == null) {
                             getData2();
                         } else {
@@ -185,6 +197,7 @@ public class ShishiActivity extends Activity {
                         }
                         break;
                     case R.id.rb9:
+                        company.setVisibility(View.VISIBLE);
                         if (listRecods == null) {
                             getData2();
                         } else {
@@ -194,38 +207,6 @@ public class ShishiActivity extends Activity {
                 }
             }
         });
-    }
-
-    private void getData1() {
-        CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
-        request.add("date", date);
-        request.setTag(this);
-        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
-            @Override
-            public void onSucceed(int what, Response<String> response) {
-                Utils.closeWaiting();
-                String json = response.get();
-                if (!TextUtils.isEmpty(json)) {
-                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if (jsonObject.get("code").toString().contains("success")) {
-                        listRecods1 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShishiInfo1>>() {
-                        }.getType());
-                        if (listRecods1 != null && listRecods1.size() > 0) {
-                            showData1();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailed(int what, Response<String> response) {
-                Utils.closeWaiting();
-                ToastUtils.showToast(ShishiActivity.this, "服务器繁忙,稍后再试");
-            }
-        };
-        Utils.showWaiting(ShishiActivity.this);
-        callServer.add(12312, request, callback);
     }
 
     private void getData2() {
@@ -248,7 +229,7 @@ public class ShishiActivity extends Activity {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {
                             layout.removeAllViews();
-                            if (rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
+                            if (rb1.isChecked() || rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
                                 showLineChart();
                             }
                         }
@@ -309,19 +290,6 @@ public class ShishiActivity extends Activity {
         callServer.add(12312, request, callback);
     }
 
-    private void showData1() {
-        ArrayList<Double> data = new ArrayList<>();
-        List<String> label = new ArrayList<>();
-        String unit = "";
-        for (int i = 0; i < listRecods1.size(); i++) {
-            data.add(Double.parseDouble(listRecods1.get(i).getFuhe()) * 100);
-            label.add(listRecods1.get(i).getDw());
-
-        }
-        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, unit);
-        layout.addView(lineChartView, layoutParams);
-    }
-
     private void showData3() {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
@@ -340,9 +308,9 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("供电煤耗")) {
+            if (listRecods2.get(i).getName().contains("供电煤耗")&&listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDw());
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -354,13 +322,13 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("发电厂用电率")) {
+            if (listRecods2.get(i).getName().contains("发电厂用电率")&&listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDw());
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
-        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "g/kWh");
+        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
         layout.addView(lineChartView, layoutParams);
     }
 
@@ -368,13 +336,13 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("综合厂用电率")) {
+            if (listRecods2.get(i).getName().contains("综合厂用电率")&&listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDw());
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
-        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "g/kWh");
+        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
         layout.addView(lineChartView, layoutParams);
     }
 
@@ -413,13 +381,13 @@ public class ShishiActivity extends Activity {
                 expr = "if 'PDSFD_1000_01_FDJ_10CGB01-MW' <10 then if 'PDSFD_1000_02_FDJ_20CGB01-MW' <10 then 0 else 'PDSFD_1000_02_FDJ_20CGB01-MW' else if 'PDSFD_1000_02_FDJ_20CGB01-MW' < 10 then 'PDSFD_1000_01_FDJ_10CGB01-MW' else 'PDSFD_1000_01_FDJ_10CGB01-MW'+ 'PDSFD_1000_02_FDJ_20CGB01-MW'";
             } else if ("开封分公司".equals(company.getText().toString())) {
                 expr = "if 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' <10 then if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' <10 then 0 else 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' else if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' < 10 then 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' else 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154'+ 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154'";
-            } else if ("新乡豫新公司".equals(company.getText().toString())) {
+            } else if ("豫新发电".equals(company.getText().toString())) {
                 expr = "if 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' <10 then if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' <10 then 0 else 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' else if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' < 10 then 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' else 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1'+ 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1'";
-            } else if ("平东热电公司".equals(company.getText().toString())) {
+            } else if ("平东热电".equals(company.getText().toString())) {
                 expr = "if 'JT_PDRD_210_06_0100001_60S1FW1' <10 then if 'JT_PDRD_210_07_0100001_70S1FW1' <10 then 0 else 'JT_PDRD_210_07_0100001_70S1FW1' else if 'JT_PDRD_210_07_0100001_70S1FW1' < 10 then 'JT_PDRD_210_06_0100001_60S1FW1' else 'JT_PDRD_210_06_0100001_60S1FW1'+ 'JT_PDRD_210_07_0100001_70S1FW1'";
-            } else if ("南阳热电公司".equals(company.getText().toString())) {
+            } else if ("南阳热电".equals(company.getText().toString())) {
                 expr = "if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' else if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' < 10 then 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' else 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'+ 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15'";
-            } else if ("郑州燃气公司".equals(company.getText().toString())) {
+            } else if ("郑州燃机".equals(company.getText().toString())) {
                 expr = "if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' else if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' < 10 then 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' else 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'+ 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01'";
             }
         }
@@ -428,13 +396,13 @@ public class ShishiActivity extends Activity {
                 expr = "if 'PDSFD_1000_01_TL_TL_10HTA30CQ001' <10 then if 'PDSFD_1000_02_TL_TL_20HTA30CQ001' <10 then 0 else 'PDSFD_1000_02_TL_TL_20HTA30CQ001' else if 'PDSFD_1000_02_TL_TL_20HTA30CQ001' < 10 then 'PDSFD_1000_01_TL_TL_10HTA30CQ001' else ('PDSFD_1000_01_TL_TL_10HTA30CQ001'+ 'PDSFD_1000_02_TL_TL_20HTA30CQ001')/2";
             } else if ("开封分公司".equals(company.getText().toString())) {
                 expr = "if 'KFFD_630_01_FWOPC_AIT0044' <10 then if 'KFFD_630_02_FWOPC_AIT0298' <10 then 0 else 'KFFD_630_02_FWOPC_AIT0298' else if 'KFFD_630_02_FWOPC_AIT0298' < 10 then 'KFFD_630_01_FWOPC_AIT0044' else ('KFFD_630_01_FWOPC_AIT0044'+ 'KFFD_630_02_FWOPC_AIT0298')/2";
-            } else if ("新乡豫新公司".equals(company.getText().toString())) {
+            } else if ("豫新发电".equals(company.getText().toString())) {
                 expr = "if 'JT_YXFD_330_06_0900004_SIS.TL.6ELZS601' <10 then if 'JT_YXFD_330_07_0900004_SIS.TL.7ELFG70S' <10 then 0 else 'JT_YXFD_330_07_0900004_SIS.TL.7ELFG70S' else if 'JT_YXFD_330_07_0900004_SIS.TL.7ELFG70S' < 10 then 'JT_YXFD_330_06_0900004_SIS.TL.6ELZS601' else ('JT_YXFD_330_06_0900004_SIS.TL.6ELZS601'+ 'JT_YXFD_330_07_0900004_SIS.TL.7ELFG70S')/2";
-            } else if ("平东热电公司".equals(company.getText().toString())) {
+            } else if ("平东热电".equals(company.getText().toString())) {
                 expr = "if 'JT_PDRD_210_06_0900003_60CQ20BY1' <10 then if 'JT_PDRD_210_07_0900003_70CQ40BY1' <10 then 0 else 'JT_PDRD_210_07_0900003_70CQ40BY1' else if 'JT_PDRD_210_07_0900003_70CQ40BY1' < 10 then 'JT_PDRD_210_06_0900003_60CQ20BY1' else ('JT_PDRD_210_06_0900003_60CQ20BY1'+ 'JT_PDRD_210_07_0900003_70CQ40BY1')/2";
-            } else if ("南阳热电公司".equals(company.getText().toString())) {
+            } else if ("南阳热电".equals(company.getText().toString())) {
                 expr = "if 'JT_NYRD_210_01_0900016_W3.FGD.A04P529O1' <10 then if 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' <10 then 0 else 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' else if 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' < 10 then 'JT_NYRD_210_01_0900016_W3.FGD.A04P529O1' else ('JT_NYRD_210_01_0900016_W3.FGD.A04P529O1'+ 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2')/2";
-            } else if ("郑州燃气公司".equals(company.getText().toString())) {
+            } else if ("郑州燃机".equals(company.getText().toString())) {
                 expr = "";
             }
         }
@@ -443,13 +411,13 @@ public class ShishiActivity extends Activity {
                 expr = "if 'PDSFD_1000_01_TL_TL_10FGDAO013' <10 then if 'PDSFD_1000_02_TL_TL_20FGDAO013' <10 then 0 else 'PDSFD_1000_02_TL_TL_20FGDAO013' else if 'PDSFD_1000_02_TL_TL_20FGDAO013' < 10 then 'PDSFD_1000_01_TL_TL_10FGDAO013' else ('PDSFD_1000_01_TL_TL_10FGDAO013'+ 'PDSFD_1000_02_TL_TL_20FGDAO013')/2";
             } else if ("开封分公司".equals(company.getText().toString())) {
                 expr = "if 'KFFD_630_01_FWOPC_AIT0046' <10 then if 'KFFD_630_02_FWOPC_AIT0300' <10 then 0 else 'KFFD_630_02_FWOPC_AIT0300' else if 'KFFD_630_02_FWOPC_AIT0300' < 10 then 'KFFD_630_01_FWOPC_AIT0046' else ('KFFD_630_01_FWOPC_AIT0046'+ 'KFFD_630_02_FWOPC_AIT0300')/2";
-            } else if ("新乡豫新公司".equals(company.getText().toString())) {
+            } else if ("豫新发电".equals(company.getText().toString())) {
                 expr = "if 'JT_YXFD_330_06_0900007_SIS.TL.6ELZS602' <10 then if 'JT_YXFD_330_07_0900007_SIS.TL.7ELZS702' <10 then 0 else 'JT_YXFD_330_07_0900007_SIS.TL.7ELZS702' else if 'JT_YXFD_330_07_0900007_SIS.TL.7ELZS702' < 10 then 'JT_YXFD_330_06_0900007_SIS.TL.6ELZS602' else ('JT_YXFD_330_06_0900007_SIS.TL.6ELZS602'+ 'JT_YXFD_330_07_0900007_SIS.TL.7ELZS702')/2";
-            } else if ("平东热电公司".equals(company.getText().toString())) {
+            } else if ("平东热电".equals(company.getText().toString())) {
                 expr = "if 'JT_PDRD_210_06_0900003_60CQ20BY1' <10 then if 'JT_PDRD_210_07_0900003_70CQ40BY1' <10 then 0 else 'JT_PDRD_210_07_0900003_70CQ40BY1' else if 'JT_PDRD_210_07_0900003_70CQ40BY1' < 10 then 'JT_PDRD_210_06_0900003_60CQ20BY1' else ('JT_PDRD_210_06_0900003_60CQ20BY1'+ 'JT_PDRD_210_07_0900003_70CQ40BY1')/2";
-            } else if ("南阳热电公司".equals(company.getText().toString())) {
+            } else if ("南阳热电".equals(company.getText().toString())) {
                 expr = "if 'JT_NYRD_210_01_0900016_W3.FGD.A04P529O1' <10 then if 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' <10 then 0 else 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' else if 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2' < 10 then 'JT_NYRD_210_01_0900016_W3.FGD.A04P529O1' else ('JT_NYRD_210_01_0900016_W3.FGD.A04P529O1'+ 'JT_NYRD_210_02_0900016_W3.FGD.ZS_JYSO2')/2";
-            } else if ("郑州燃气公司".equals(company.getText().toString())) {
+            } else if ("郑州燃机".equals(company.getText().toString())) {
                 expr = "";
             }
         }
@@ -458,13 +426,13 @@ public class ShishiActivity extends Activity {
                 expr = "if 'PDSFD_1000_01_TL_10FGDAO015' <10 then if 'PDSFD_1000_02_TL_20FGDAO015' <10 then 0 else 'PDSFD_1000_02_TL_20FGDAO015' else if 'PDSFD_1000_02_TL_20FGDAO015' < 10 then 'PDSFD_1000_01_TL_10FGDAO015' else ('PDSFD_1000_01_TL_10FGDAO015'+ 'PDSFD_1000_02_TL_20FGDAO015')/2";
             } else if ("开封分公司".equals(company.getText().toString())) {
                 expr = "if 'KFFD_630_01_FWOPC_AIT0047' <10 then if 'KFFD_630_02_FWOPC_AIT0301' <10 then 0 else 'KFFD_630_02_FWOPC_AIT0301' else if 'KFFD_630_02_FWOPC_AIT0301' < 10 then 'KFFD_630_01_FWOPC_AIT0047' else ('KFFD_630_01_FWOPC_AIT0047'+ 'KFFD_630_02_FWOPC_AIT0301')/2";
-            } else if ("新乡豫新公司".equals(company.getText().toString())) {
+            } else if ("豫新发电".equals(company.getText().toString())) {
                 expr = "if 'JT_YXFD_330_06_0900006_SIS.TL.6ELF604S' <10 then if 'JT_YXFD_330_07_0900006_SIS.TL.7ELF704' <10 then 0 else 'JT_YXFD_330_07_0900006_SIS.TL.7ELF704' else if 'JT_YXFD_330_07_0900006_SIS.TL.7ELF704' < 10 then 'JT_YXFD_330_06_0900006_SIS.TL.6ELF604S' else ('JT_YXFD_330_06_0900006_SIS.TL.6ELF604S'+ 'JT_YXFD_330_07_0900006_SIS.TL.7ELF704')/2";
-            } else if ("平东热电公司".equals(company.getText().toString())) {
+            } else if ("平东热电".equals(company.getText().toString())) {
                 expr = "if 'JT_PDRD_210_06_0900005_60TLFEN' <10 then if 'JT_PDRD_210_07_0900004_70CQ40BY2' <10 then 0 else 'JT_PDRD_210_07_0900004_70CQ40BY2' else if 'JT_PDRD_210_07_0900004_70CQ40BY2' < 10 then 'JT_PDRD_210_06_0900005_60TLFEN' else ('JT_PDRD_210_06_0900005_60TLFEN'+ 'JT_PDRD_210_07_0900004_70CQ40BY2')/2";
-            } else if ("南阳热电公司".equals(company.getText().toString())) {
+            } else if ("南阳热电".equals(company.getText().toString())) {
                 expr = "if 'JT_NYRD_210_01_0900018_W3.FGD.A04P529O2' <10 then if 'JT_NYRD_210_02_0900018_W3.FGD.ZS_JYYC' <10 then 0 else 'JT_NYRD_210_02_0900018_W3.FGD.ZS_JYYC' else if 'JT_NYRD_210_02_0900018_W3.FGD.ZS_JYYC' < 10 then 'JT_NYRD_210_01_0900018_W3.FGD.A04P529O2' else ('JT_NYRD_210_01_0900018_W3.FGD.A04P529O2'+ 'JT_NYRD_210_02_0900018_W3.FGD.ZS_JYYC')/2";
-            } else if ("郑州燃气公司".equals(company.getText().toString())) {
+            } else if ("郑州燃机".equals(company.getText().toString())) {
                 expr = "";
             }
         }
