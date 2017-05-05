@@ -261,7 +261,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo1>>() {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {
@@ -450,7 +450,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (listRecods2 != null && listRecods2.size() > 0) {
@@ -496,7 +496,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods3 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (rb6.isChecked()){

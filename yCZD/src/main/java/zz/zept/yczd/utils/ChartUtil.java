@@ -1,5 +1,8 @@
 package zz.zept.yczd.utils;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,5 +28,20 @@ public class ChartUtil {
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         date = calendar.getTime();
         return date;
+    }
+
+    public static long getTodayZero() {
+        Date date = new Date();
+        long l = 24*60*60*1000; //每天的毫秒数
+        //date.getTime()是现在的毫秒数，它 减去 当天零点到现在的毫秒数（ 现在的毫秒数%一天总的毫秒数，取余。），理论上等于零点的毫秒数，不过这个毫秒数是UTC+0时区的。
+        //减8个小时的毫秒值是为了解决时区的问题。
+        return (date.getTime() - (date.getTime()%l) - 8* 60 * 60 *1000);
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getTime(long time) {
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d1=new Date(time);
+        return format.format(d1);
     }
 }
