@@ -92,18 +92,6 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="热值差"
-            android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
-            android:textSize="10sp" />
-
-        <RadioButton
-            android:id="@+id/rb5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
             android:text="月助燃用油"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"

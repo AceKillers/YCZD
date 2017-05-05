@@ -31,7 +31,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
+import zz.zept.yczd.adapter.ShengchanAdapter;
 import zz.zept.yczd.bean.RanliaoInfo1;
+import zz.zept.yczd.bean.RanliaoInfo2;
+import zz.zept.yczd.bean.ShengchanList;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.ChartUtil;
@@ -59,8 +62,6 @@ public class RanliaoActivity extends Activity {
     RadioButton rb3;
     @BindView(R.id.rb4)
     RadioButton rb4;
-    @BindView(R.id.rb5)
-    RadioButton rb5;
     @BindView(R.id.radiogroup)
     RadioGroup radiogroup;
     @BindView(R.id.layout)
@@ -70,7 +71,9 @@ public class RanliaoActivity extends Activity {
     private String date = "";
     private ListView listView;
     private List<RanliaoInfo1> listRecods;
+    private List<RanliaoInfo2> listRecods2;
     private BarChart06View barChart06View;
+    private ShengchanAdapter shengchanAdapter;
     private String json = "[\n" +
             "        {\n" +
             "            \"id\": \"A\",\n" +
@@ -159,19 +162,35 @@ public class RanliaoActivity extends Activity {
                 Configuration mConfiguration = getResources().getConfiguration();
                 switch (i) {
                     case R.id.rb1:
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         showData1();
                         break;
                     case R.id.rb2:
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         break;
                     case R.id.rb3:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        if (listRecods2==null){
+                            getData2();
+                        }else {
+                            showData3();
+                        }
                         break;
                     case R.id.rb4:
-
-                        break;
-                    case R.id.rb5:
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                        }
+                        if (listRecods2==null){
+                            getData2();
+                        }else {
+                            showData4();
+                        }
                         break;
                 }
             }
@@ -190,7 +209,7 @@ public class RanliaoActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<RanliaoInfo1>>() {
                         }.getType());
 
@@ -228,5 +247,65 @@ public class RanliaoActivity extends Activity {
             }
             layout.addView(barChart06View,layoutParams);
         }
+    }
+
+    private void getData2() {
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForRLMValue.action", RequestMethod.POST);
+        request.add("date", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if (jsonObject.get("code").toString().contains("success")) {
+                        listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<RanliaoInfo2>>() {
+                        }.getType());
+                        if (listRecods2!=null&&listRecods2.size()>0){
+                            if (rb3.isChecked()){
+                                showData3();
+                            }
+                            if (rb4.isChecked()){
+                                showData4();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(RanliaoActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(RanliaoActivity.this);
+        callServer.add(12312, request, callback);
+    }
+
+    private void showData2(){
+
+    }
+
+    private void showData3(){
+
+    }
+
+    private void showData4(){
+        List<ShengchanList> shengchanLists = new ArrayList<>();
+        for (int i = 0; i < listRecods2.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods2.get(i).getDw());
+            item.setDw("t");
+            item.setNum(listRecods2.get(i).getZr());
+            item.setTime(date);
+            shengchanLists.add(item);
+        }
+        shengchanAdapter = new ShengchanAdapter(RanliaoActivity.this, shengchanLists);
+        listView.setAdapter(shengchanAdapter);
+        layout.addView(listView, layoutParams);
     }
 }

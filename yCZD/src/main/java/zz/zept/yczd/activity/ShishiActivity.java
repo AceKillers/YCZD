@@ -20,7 +20,9 @@ import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +31,10 @@ import butterknife.OnClick;
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.Company;
 import zz.zept.yczd.bean.ShishiInfo;
+import zz.zept.yczd.bean.ShishiInfo1;
+import zz.zept.yczd.bean.ShishiInfo2;
 import zz.zept.yczd.db.CompanyDBAction;
+import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.ChartUtil;
 import zz.zept.yczd.utils.HttpResponseListener;
@@ -80,9 +85,12 @@ public class ShishiActivity extends Activity {
     private CompanyPopWindow popWindow;
     private String companyId;
     private List<ShishiInfo> listRecods;
+    private List<ShishiInfo1> listRecods1;
+    private List<ShishiInfo2> listRecods2;
     private BarChart04View barChart04View;
     private String expr;
     private long endTime = System.currentTimeMillis();
+    private String date = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +100,14 @@ public class ShishiActivity extends Activity {
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         dbAction = CompanyDBAction.getInstance(this);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date = sDateFormat.format(new Date());
         companyList = dbAction.searchCompany();
-        companyId = companyList.get(0).getFACTORYID();
+//        companyId = companyList.get(0).getFACTORYID();
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         initListener();
-        getData();
+        getData1();
     }
 
     @OnClick({R.id.company, R.id.back})
@@ -124,32 +134,101 @@ public class ShishiActivity extends Activity {
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                getData();
+                layout.removeAllViews();
                 switch (i) {
                     case R.id.rb1:
+                        showData1();
                         break;
                     case R.id.rb2:
+                        getData2();
                         break;
                     case R.id.rb3:
+                        if (listRecods2 == null) {
+                            getData3();
+                        } else {
+                            showData3();
+                        }
                         break;
                     case R.id.rb4:
+                        if (listRecods2 == null) {
+                            getData3();
+                        } else {
+                            showData4();
+                        }
                         break;
                     case R.id.rb5:
+                        if (listRecods2 == null) {
+                            getData3();
+                        } else {
+                            showData5();
+                        }
                         break;
                     case R.id.rb6:
+                        if (listRecods2 == null) {
+                            getData3();
+                        } else {
+                            showData6();
+                        }
                         break;
                     case R.id.rb7:
+                        if (listRecods == null) {
+                            getData2();
+                        } else {
+                            showLineChart();
+                        }
                         break;
                     case R.id.rb8:
+                        if (listRecods == null) {
+                            getData2();
+                        } else {
+                            showLineChart();
+                        }
                         break;
                     case R.id.rb9:
+                        if (listRecods == null) {
+                            getData2();
+                        } else {
+                            showLineChart();
+                        }
                         break;
                 }
             }
         });
     }
 
-    private void getData() {
+    private void getData1() {
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
+        request.add("date", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if (jsonObject.get("code").toString().contains("success")) {
+                        listRecods1 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShishiInfo1>>() {
+                        }.getType());
+                        if (listRecods1 != null && listRecods1.size() > 0) {
+                            showData1();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(ShishiActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(ShishiActivity.this);
+        callServer.add(12312, request, callback);
+    }
+
+    private void getData2() {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest("http://192.168.66.31:81/API/Advanced/getPIDataByExpr", RequestMethod.POST);
         request.add("expr", getExpr());
@@ -169,11 +248,8 @@ public class ShishiActivity extends Activity {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {
                             layout.removeAllViews();
-                            if (rb1.isChecked() || rb2.isChecked() || rb4.isChecked() || rb5.isChecked() || rb6.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
+                            if (rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
                                 showLineChart();
-                            }
-                            if (rb3.isChecked()) {
-                                showBarChart();
                             }
                         }
                     }
@@ -190,6 +266,118 @@ public class ShishiActivity extends Activity {
         callServer.add(12312, request, callback);
     }
 
+    private void getData3() {
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/ adFindForFMZDValue.action", RequestMethod.POST);
+        request.add("date", date);
+        request.setTag(this);
+        HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                String json = response.get();
+                if (!TextUtils.isEmpty(json)) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    if (jsonObject.get("code").toString().contains("success")) {
+                        listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShishiInfo2>>() {
+                        }.getType());
+                        if (listRecods2 != null && listRecods2.size() > 0) {
+                            if (rb3.isChecked()) {
+                                showData3();
+                            }
+                            if (rb4.isChecked()) {
+                                showData4();
+                            }
+                            if (rb5.isChecked()) {
+                                showData5();
+                            }
+                            if (rb6.isChecked()) {
+                                showData6();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+                Utils.closeWaiting();
+                ToastUtils.showToast(ShishiActivity.this, "服务器繁忙,稍后再试");
+            }
+        };
+        Utils.showWaiting(ShishiActivity.this);
+        callServer.add(12312, request, callback);
+    }
+
+    private void showData1() {
+        ArrayList<Double> data = new ArrayList<>();
+        List<String> label = new ArrayList<>();
+        String unit = "";
+        for (int i = 0; i < listRecods1.size(); i++) {
+            data.add(Double.parseDouble(listRecods1.get(i).getFuhe()) * 100);
+            label.add(listRecods1.get(i).getDw());
+
+        }
+        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, unit);
+        layout.addView(lineChartView, layoutParams);
+    }
+
+    private void showData3() {
+        ArrayList<Double> data = new ArrayList<>();
+        List<String> label = new ArrayList<>();
+        for (int i = 0; i < listRecods2.size(); i++) {
+            if (listRecods2.get(i).getName().contains("发电量")) {
+                data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                label.add(listRecods2.get(i).getDw());
+            }
+
+        }
+        barChart04View = new BarChart04View(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
+        layout.addView(barChart04View, layoutParams);
+    }
+
+    private void showData4() {
+        ArrayList<Double> data = new ArrayList<>();
+        List<String> label = new ArrayList<>();
+        for (int i = 0; i < listRecods2.size(); i++) {
+            if (listRecods2.get(i).getName().contains("供电煤耗")) {
+                data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                label.add(listRecods2.get(i).getDw());
+            }
+
+        }
+        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "g/kWh");
+        layout.addView(lineChartView, layoutParams);
+    }
+
+    private void showData5() {
+        ArrayList<Double> data = new ArrayList<>();
+        List<String> label = new ArrayList<>();
+        for (int i = 0; i < listRecods2.size(); i++) {
+            if (listRecods2.get(i).getName().contains("发电厂用电率")) {
+                data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                label.add(listRecods2.get(i).getDw());
+            }
+
+        }
+        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "g/kWh");
+        layout.addView(lineChartView, layoutParams);
+    }
+
+    private void showData6() {
+        ArrayList<Double> data = new ArrayList<>();
+        List<String> label = new ArrayList<>();
+        for (int i = 0; i < listRecods2.size(); i++) {
+            if (listRecods2.get(i).getName().contains("综合厂用电率")) {
+                data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                label.add(listRecods2.get(i).getDw());
+            }
+
+        }
+        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "g/kWh");
+        layout.addView(lineChartView, layoutParams);
+    }
+
     private void showLineChart() {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
@@ -203,16 +391,6 @@ public class ShishiActivity extends Activity {
         layout.addView(lineChartView, layoutParams);
     }
 
-    private void showBarChart() {
-        ArrayList<Double> data = new ArrayList<>();
-        List<String> label = new ArrayList<>();
-        for (int i = 0; i < listRecods.size(); i++) {
-            data.add(Double.parseDouble(listRecods.get(i).getpValue()));
-            label.add(listRecods.get(i).getLocalDate());
-        }
-        barChart04View = new BarChart04View(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
-        layout.addView(barChart04View, layoutParams);
-    }
 
     private String getExpr() {
         if (rb1.isChecked()) {
