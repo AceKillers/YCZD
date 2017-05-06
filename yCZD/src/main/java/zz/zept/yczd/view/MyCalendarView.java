@@ -122,7 +122,7 @@ public class MyCalendarView extends ViewFlipper implements android.view.GestureD
 		LinearLayout title = new LinearLayout(getContext());
 		title.setBackgroundColor(COLOR_BG_WEEK_TITLE);
 		title.setOrientation(LinearLayout.HORIZONTAL);
-		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(-1, 0, 0.5f);
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(-1, -2);
 		Resources res = getResources();
 		tb = res.getDimension(R.dimen.historyscore_tb);
 		layout.setMargins(0, 0, 0, (int) (tb * 1.2));
@@ -142,7 +142,7 @@ public class MyCalendarView extends ViewFlipper implements android.view.GestureD
 		// 添加日期布局
 		LinearLayout content = new LinearLayout(getContext());
 		content.setOrientation(LinearLayout.VERTICAL);
-		content.setLayoutParams(new LinearLayout.LayoutParams(-1, 0, 7f));
+		content.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
 		oneCalendar.addView(content);
 
 		// 添加日期TextView

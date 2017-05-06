@@ -44,6 +44,7 @@ import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
+import zz.zept.yczd.view.CalendarWindow;
 import zz.zept.yczd.view.LineChartView;
 import zz.zept.yczd.view.PopWindow;
 
@@ -76,6 +77,8 @@ public class ShengchanActivity extends Activity {
     LinearLayout layout;
     @BindView(R.id.rb8)
     RadioButton rb8;
+    @BindView(R.id.time)
+    TextView time;
     private LineChartView lineChartView;
     private LinearLayout.LayoutParams layoutParams;
     private ListView listView;
@@ -103,7 +106,7 @@ public class ShengchanActivity extends Activity {
         getData1();
     }
 
-    @OnClick({R.id.company, R.id.back})
+    @OnClick({R.id.company, R.id.back, R.id.time})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
@@ -133,12 +136,16 @@ public class ShengchanActivity extends Activity {
             case R.id.back:
                 finish();
                 break;
+            case R.id.time:
+                CalendarWindow calendarWindow = new CalendarWindow(ShengchanActivity.this,time);
+                break;
         }
     }
 
     private void initData() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
+        time.setText(date);
         listView = new ListView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
