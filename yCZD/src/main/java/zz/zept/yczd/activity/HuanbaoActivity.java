@@ -38,6 +38,7 @@ import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
+import zz.zept.yczd.view.CalendarWindow;
 
 /**
  * Created by HanChenxi on 2017/4/28.
@@ -72,6 +73,7 @@ public class HuanbaoActivity extends Activity {
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
+        company.setText(date);
         initListener();
         getData();
     }
@@ -80,6 +82,7 @@ public class HuanbaoActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
+                CalendarWindow calendarWindow = new CalendarWindow(HuanbaoActivity.this,company);
                 break;
             case R.id.back:
                 finish();
@@ -109,7 +112,7 @@ public class HuanbaoActivity extends Activity {
     private void getData() {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForHBValue.action", RequestMethod.POST);
-        request.add("date", date);
+        request.add("date", company.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -118,7 +121,7 @@ public class HuanbaoActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<HuanbaoInfo>>() {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {

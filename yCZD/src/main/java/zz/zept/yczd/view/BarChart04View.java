@@ -32,7 +32,6 @@ import android.util.Log;
 import org.xclcharts.chart.BarChart;
 import org.xclcharts.chart.BarData;
 import org.xclcharts.chart.CustomLineData;
-import org.xclcharts.common.IFormatterDoubleCallBack;
 import org.xclcharts.common.IFormatterTextCallBack;
 import org.xclcharts.renderer.XEnum;
 
@@ -168,14 +167,14 @@ public class BarChart04View extends DemoView {
 			//在柱形顶部显示值
 			chart.getBar().setItemLabelVisible(true);
 			//设定格式
-			chart.setItemLabelFormatter(new IFormatterDoubleCallBack() {
-				@Override
-				public String doubleFormatter(Double value) {
-					// TODO Auto-generated method stub
-					DecimalFormat df=new DecimalFormat("#0");
-					String label = df.format(value).toString();
-					return label;
-				}});
+//			chart.setItemLabelFormatter(new IFormatterDoubleCallBack() {
+//				@Override
+//				public String doubleFormatter(Double value) {
+//					// TODO Auto-generated method stub
+//					DecimalFormat df=new DecimalFormat("#0");
+//					String label = df.format(value).toString();
+//					return label;
+//				}});
 			
 			//隐藏Key
 			chart.getPlotLegend().hide();

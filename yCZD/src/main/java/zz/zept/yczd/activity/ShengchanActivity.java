@@ -33,10 +33,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
 import zz.zept.yczd.adapter.ShengchanAdapter;
+import zz.zept.yczd.bean.Company;
 import zz.zept.yczd.bean.ShengchanInfo1;
 import zz.zept.yczd.bean.ShengchanInfo2;
 import zz.zept.yczd.bean.ShengchanList;
 import zz.zept.yczd.bean.ShishiInfo1;
+import zz.zept.yczd.db.CompanyDBAction;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.ChartUtil;
@@ -45,6 +47,7 @@ import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
 import zz.zept.yczd.view.CalendarWindow;
+import zz.zept.yczd.view.CompanyPopWindow;
 import zz.zept.yczd.view.LineChartView;
 import zz.zept.yczd.view.PopWindow;
 
@@ -90,9 +93,12 @@ public class ShengchanActivity extends Activity {
     private List<ShengchanList> shengchanLists = new ArrayList<>();
     private PopWindow popWindow;
     private List<String> timeList = new ArrayList<>();
-    private List<String> companyList = new ArrayList<>();
     private ShengchanAdapter shengchanAdapter;
     private int dataType;
+    private List<Company> companyList = new ArrayList<>();
+    private CompanyDBAction dbAction;
+    private CompanyPopWindow companyPopWindow;
+    private String companyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +116,7 @@ public class ShengchanActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
-                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
+                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()|| rb8.isChecked()) {
                     popWindow = new PopWindow(this, timeList, company);
                     popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                         @Override
@@ -128,6 +134,19 @@ public class ShengchanActivity extends Activity {
                                 case 2:
                                     yearData();
                                     break;
+                            }
+                        }
+                    });
+                }else {
+                    companyPopWindow = new CompanyPopWindow(this, companyList, company);
+                    companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            companyId = companyList.get(i).getCODE();
+                            company.setText(companyList.get(i).getFACTORYNAME());
+                            companyPopWindow.dissmiss();
+                            if (rb1.isChecked()||rb2.isChecked()){
+                                getData2();
                             }
                         }
                     });
@@ -152,6 +171,10 @@ public class ShengchanActivity extends Activity {
         timeList.add("当日");
         timeList.add("月累");
         timeList.add("年累");
+        dbAction = CompanyDBAction.getInstance(this);
+        companyList = dbAction.searchCompany();
+        company.setText(companyList.get(0).getFACTORYNAME());
+        companyId = companyList.get(0).getCODE();
     }
 
     private void initListener() {
@@ -165,6 +188,8 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setText("当日");
+                        dataType = 0;
                         switch (dataType) {
                             case 0:
                                 dayData();
@@ -182,6 +207,8 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setText("当日");
+                        dataType = 0;
                         switch (dataType) {
                             case 0:
                                 dayData();
@@ -199,6 +226,8 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setText("当日");
+                        dataType = 0;
                         switch (dataType) {
                             case 0:
                                 dayData();
@@ -216,6 +245,8 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setText("当日");
+                        dataType = 0;
                         switch (dataType) {
                             case 0:
                                 dayData();
@@ -273,7 +304,7 @@ public class ShengchanActivity extends Activity {
     private void getData1() {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForSCValue.action", RequestMethod.POST);
-        request.add("date", date);
+        request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -462,7 +493,7 @@ public class ShengchanActivity extends Activity {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForEveryDayValue.action", RequestMethod.POST);
         request.add("timeStart", start);
-        request.add("timeEnd", date);
+        request.add("timeEnd", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -479,7 +510,7 @@ public class ShengchanActivity extends Activity {
                             List<String> label = new ArrayList<>();
                             String unit = "";
                             for (int i = 0; i < listRecods2.size(); i++) {
-                                if (listRecods2.get(i).getId().equals("A")) {
+                                if (listRecods2.get(i).getId().contains(companyId)) {
                                     data.add(Double.parseDouble(listRecods2.get(i).getValue()));
                                     label.add(listRecods2.get(i).getDate());
                                     unit = listRecods2.get(i).getUnit();
@@ -504,11 +535,11 @@ public class ShengchanActivity extends Activity {
 
     private void getData3() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
-        String start = sDateFormat.format(new Date()) + "-01";
+        String end = sDateFormat.format(new Date()) + "-30";
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
-        request.add("timeStart", start);
-        request.add("timeEnd", date);
+        request.add("timeStart", time.getText().toString());
+        request.add("timeEnd", end);
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -579,7 +610,7 @@ public class ShengchanActivity extends Activity {
     private void getData8() {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
-        request.add("date", date);
+        request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override

@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.R.attr.max;
+
 /**
  * Created by HanChenxi on 2017/5/4.
  */
 
 public class ChartUtil {
+
     public static double getMax(ArrayList<Double> list){
         double max = list.get(0);
         for (int i = 0;i<list.size();i++){
@@ -20,6 +23,16 @@ public class ChartUtil {
             }
         }
         return max;
+    }
+
+    public static double getMin(ArrayList<Double> list){
+        double min = list.get(0);
+        for (int i = 0;i<list.size();i++){
+            if (list.get(i)<min){
+                min = list.get(i);
+            }
+        }
+        return min;
     }
 
     public static Date getYesterday(Date date) {

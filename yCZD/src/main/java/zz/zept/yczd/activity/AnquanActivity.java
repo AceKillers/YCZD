@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -35,6 +36,7 @@ import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
+import zz.zept.yczd.view.PopWindow;
 
 /**
  * Created by HanChenxi on 2017/4/28.
@@ -57,6 +59,8 @@ public class AnquanActivity extends Activity {
     ListView list;
     private String date = "";
     private List<AnquanInfo> listRecods;
+    private List<String> timeList = new ArrayList<>();
+    private PopWindow popWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +71,25 @@ public class AnquanActivity extends Activity {
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
+        for (int i = 1990; i<=Integer.parseInt(date.substring(0,3));i++){
+            timeList.add(i+"");
+        }
         initListener();
+        getData();
     }
 
     @OnClick({R.id.company, R.id.back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
+                popWindow = new PopWindow(this, timeList, company);
+                popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        popWindow.dissmiss();
+                        company.setText(timeList.get(i));
+                    }
+                });
                 break;
             case R.id.back:
                 finish();
@@ -99,8 +115,8 @@ public class AnquanActivity extends Activity {
 
     private void getData() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForHBValue.action", RequestMethod.POST);
-        request.add("date", date);
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindSafeInfoByDate.action", RequestMethod.POST);
+        request.add("date", company.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -112,7 +128,9 @@ public class AnquanActivity extends Activity {
                     if ("success".equals(jsonObject.get("code"))) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<AnquanInfo>>() {
                         }.getType());
-                        showData1();
+                        if (listRecods!=null&&listRecods.size()>0){
+                            showData1();
+                        }
                     }
                 }
             }
@@ -128,8 +146,14 @@ public class AnquanActivity extends Activity {
     }
 
     private void showData1() {
-        if (listRecods!=null){
 
-        }
+    }
+
+    private void showData2() {
+
+    }
+
+    private void showData3() {
+
     }
 }

@@ -39,6 +39,7 @@ import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 import zz.zept.yczd.utils.Utils;
 import zz.zept.yczd.view.BarChart04View;
+import zz.zept.yczd.view.CalendarWindow;
 import zz.zept.yczd.view.DountChart01View;
 
 /**
@@ -74,6 +75,7 @@ public class XinnengyuanActivity extends Activity {
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
+        company.setText(date);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         initListener();
@@ -84,6 +86,7 @@ public class XinnengyuanActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
+                CalendarWindow calendarWindow = new CalendarWindow(XinnengyuanActivity.this,company);
                 break;
             case R.id.back:
                 finish();
@@ -99,17 +102,18 @@ public class XinnengyuanActivity extends Activity {
                 Configuration mConfiguration = getResources().getConfiguration();
                 switch (i) {
                     case R.id.rb1:
-                        if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
                         showData1();
                         break;
                     case R.id.rb2:
-                        if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
                         showData2();
                         break;
+
                 }
             }
         });
@@ -118,7 +122,7 @@ public class XinnengyuanActivity extends Activity {
     private void getData() {
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForHBValue.action", RequestMethod.POST);
-        request.add("date", date);
+        request.add("date", company.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -145,7 +149,7 @@ public class XinnengyuanActivity extends Activity {
         callServer.add(12312, request, callback);
     }
 
-    private void showData1() {
+    private void showData2() {
         if (listRecods != null && listRecods.size() > 0) {
             for (int i = 0; i < listRecods.size(); i++) {
                 total += Double.parseDouble(listRecods.get(i).getYx());
@@ -159,7 +163,7 @@ public class XinnengyuanActivity extends Activity {
         }
     }
 
-    private void showData2() {
+    private void showData1() {
         if (listRecods != null && listRecods.size() > 0) {
             ArrayList<Double> data = new ArrayList<>();
             List<String> label = new ArrayList<>();
