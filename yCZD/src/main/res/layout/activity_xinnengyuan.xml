@@ -8,7 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/nva_bg">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/back"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="新能源信息"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
         <TextView
             android:id="@+id/company"
             android:layout_width="wrap_content"

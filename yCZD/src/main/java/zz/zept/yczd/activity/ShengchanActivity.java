@@ -145,9 +145,24 @@ public class ShengchanActivity extends Activity {
                             companyId = companyList.get(i).getCODE();
                             company.setText(companyList.get(i).getFACTORYNAME());
                             companyPopWindow.dissmiss();
-                            if (rb1.isChecked()||rb2.isChecked()){
+                            if (rb5.isChecked()){
                                 getData2();
                             }
+                            if (rb6.isChecked()){
+                                if (listRecods3 == null) {
+                                    getData3();
+                                } else {
+                                    showData6();
+                                }
+                            }
+                            if (rb7.isChecked()){
+                                if (listRecods3 == null) {
+                                    getData3();
+                                } else {
+                                    showData7();
+                                }
+                            }
+
                         }
                     });
                 }
@@ -264,12 +279,14 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setText(companyList.get(0).getFACTORYNAME());
                         getData2();
                         break;
                     case R.id.rb6:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setText(companyList.get(0).getFACTORYNAME());
                         if (listRecods3 == null) {
                             getData3();
                         } else {
@@ -280,6 +297,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setText(companyList.get(0).getFACTORYNAME());
                         if (listRecods3 == null) {
                             getData3();
                         } else {

@@ -125,7 +125,7 @@ public class AnquanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<AnquanInfo>>() {
                         }.getType());
                         if (listRecods!=null&&listRecods.size()>0){
