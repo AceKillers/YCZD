@@ -8,18 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/nva_bg">
-        <TextView
+
+        <EditText
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/company"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/company"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/arrow_down"
             android:text="当日"
+            android:editable="false"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/company"
             android:layout_width="wrap_content"
@@ -32,15 +35,17 @@
             android:text="当日"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/back"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/back"
             android:text="生产信息"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
@@ -63,24 +68,36 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:text="发电量"
             android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rb8"
+            android:layout_width="68.5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/shishi_radio_bg"
-            android:textSize="10sp"
-            android:checked="true"/>
+            android:button="@null"
+            android:gravity="center"
+            android:text="负荷率"
+            android:textColor="@drawable/rb_font"
+            android:textSize="10sp" />
 
         <RadioButton
             android:id="@+id/rb2"
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="发电厂用电率"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
         <RadioButton
@@ -88,11 +105,11 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="供电煤耗"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
         <RadioButton
@@ -100,11 +117,11 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="供热量"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
         <RadioButton
@@ -112,11 +129,11 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="当月每天发电量"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
         <RadioButton
@@ -124,11 +141,11 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="完成计划需日发电量"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
         <RadioButton
@@ -136,22 +153,11 @@
             android:layout_width="68.5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/shishi_radio_bg"
             android:button="@null"
             android:gravity="center"
             android:text="完成计划需日负荷率"
             android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
-            android:textSize="10sp" />
-        <RadioButton
-            android:id="@+id/rb8"
-            android:layout_width="68.5dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="负荷率"
-            android:textColor="@drawable/rb_font"
-            android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
 
 
@@ -161,8 +167,8 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#f5f5f5">
+        android:background="#f5f5f5"
+        android:orientation="vertical">
 
     </LinearLayout>
 </LinearLayout>

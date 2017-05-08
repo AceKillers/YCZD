@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -134,6 +136,7 @@ public class RanliaoActivity extends Activity {
     }
 
     private void initListener() {
+        time.addTextChangedListener(textWatcher);
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -304,4 +307,26 @@ public class RanliaoActivity extends Activity {
         listView.setAdapter(shengchanAdapter);
         layout.addView(listView, layoutParams);
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            layout.removeAllViews();
+            if (rb1.isChecked()){
+                getData1();
+            }else {
+                getData2();
+            }
+        }
+    };
 }

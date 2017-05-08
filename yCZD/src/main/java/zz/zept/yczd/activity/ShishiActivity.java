@@ -122,8 +122,11 @@ public class ShishiActivity extends Activity {
                         companyId = companyList.get(i).getCODE();
                         company.setText(companyList.get(i).getFACTORYNAME());
                         popWindow.dissmiss();
-                        if (rb1.isChecked() || rb2.isChecked()) {
+                        if (rb1.isChecked() || rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
                             getData2();
+                        }
+                        if (rb3.isChecked() || rb4.isChecked() || rb5.isChecked() || rb6.isChecked()) {
+                            getData3();
                         }
                     }
                 });
@@ -215,7 +218,7 @@ public class ShishiActivity extends Activity {
         request.add("expr", getExpr());
         request.add("startTime", ChartUtil.getTime(getTodayZero()));
         request.add("endTime", ChartUtil.getTime(endTime));
-        request.add("interval", (endTime - ChartUtil.getTodayZero()) / 20 * 1000 + "s");
+        request.add("interval", "3600s");
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override

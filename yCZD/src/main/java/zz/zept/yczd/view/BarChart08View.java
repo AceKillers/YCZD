@@ -81,11 +81,11 @@ public class BarChart08View extends DemoView{
             chart.setPadding(ltrb[0], ltrb[1], ltrb[2], ltrb[3]);
 
             //显示边框
-            chart.showRoundBorder();
+//            chart.showRoundBorder();
 
             //标题
-            chart.setTitle("正负背向式图");
-            chart.addSubtitle("(XCL-Charts Demo)");
+//            chart.setTitle("正负背向式图");
+//            chart.addSubtitle("(XCL-Charts Demo)");
             //数据源
             chart.setDataSource(chartData);
             chart.setCategories(chartLabels);

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -175,4 +177,28 @@ public class XinnengyuanActivity extends Activity {
             layout.addView(barChart04View, layoutParams);
         }
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            layout.removeAllViews();
+           if(rb1.isChecked()){
+               showData1();
+           }
+            if(rb2.isChecked()){
+                showData2();
+            }
+        }
+    };
+
 }

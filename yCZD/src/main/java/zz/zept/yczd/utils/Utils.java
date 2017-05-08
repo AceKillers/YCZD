@@ -1,8 +1,6 @@
 package zz.zept.yczd.utils;
 
 
-import zz.zept.yczd.R;
-import zz.zept.yczd.view.AlertDialog;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,12 +10,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+
+import zz.zept.yczd.R;
+import zz.zept.yczd.view.AlertDialog;
 
 /**
  * 通用工具类
@@ -29,6 +28,7 @@ public class Utils {
     private static final String TAG = "CommonUtils";
 
     static AlertDialog dialog;
+    static ProgressDialog progressDialog;
 
     /**
      * 开启activity
@@ -145,9 +145,10 @@ public class Utils {
      */
 
     public static void showWaiting(Context context) {
-        dialog = new AlertDialog(context, R.style.dialogstyle, false);
-        dialog.setContentView(R.layout.alert_dialog);
-        dialog.show();
+//        dialog = new AlertDialog(context, R.style.dialogstyle, false);
+//        dialog.setContentView(R.layout.alert_dialog);
+//        dialog.show();
+        progressDialog = ProgressDialog.show(context,"提示","正在加载...");
     }
 
     /**

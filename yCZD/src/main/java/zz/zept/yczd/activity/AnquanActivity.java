@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
+import zz.zept.yczd.adapter.AnquanAdapter;
 import zz.zept.yczd.bean.AnquanInfo;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
@@ -61,6 +62,7 @@ public class AnquanActivity extends Activity {
     private List<AnquanInfo> listRecods;
     private List<String> timeList = new ArrayList<>();
     private PopWindow popWindow;
+    private AnquanAdapter anquanAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +105,13 @@ public class AnquanActivity extends Activity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb1:
+                        showData1();
                         break;
                     case R.id.rb2:
+                        showData2();
                         break;
                     case R.id.rb3:
+                        showData3();
                         break;
                 }
             }
@@ -146,14 +151,35 @@ public class AnquanActivity extends Activity {
     }
 
     private void showData1() {
-
+        List<AnquanInfo> lists = new ArrayList<>();
+        for (int i = 0;i<listRecods.size();i++){
+            if (listRecods.get(i).getType().contains("1")){
+                lists.add(listRecods.get(i));
+            }
+        }
+        anquanAdapter = new AnquanAdapter(AnquanActivity.this,lists);
+        list.setAdapter(anquanAdapter);
     }
 
     private void showData2() {
-
+        List<AnquanInfo> lists = new ArrayList<>();
+        for (int i = 0;i<listRecods.size();i++){
+            if (listRecods.get(i).getType().contains("2")){
+                lists.add(listRecods.get(i));
+            }
+        }
+        anquanAdapter = new AnquanAdapter(AnquanActivity.this,lists);
+        list.setAdapter(anquanAdapter);
     }
 
     private void showData3() {
-
+        List<AnquanInfo> lists = new ArrayList<>();
+        for (int i = 0;i<listRecods.size();i++){
+            if (listRecods.get(i).getType().contains("3")){
+                lists.add(listRecods.get(i));
+            }
+        }
+        anquanAdapter = new AnquanAdapter(AnquanActivity.this,lists);
+        list.setAdapter(anquanAdapter);
     }
 }

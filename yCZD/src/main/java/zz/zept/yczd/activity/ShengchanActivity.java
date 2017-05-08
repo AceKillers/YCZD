@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -81,7 +84,7 @@ public class ShengchanActivity extends Activity {
     @BindView(R.id.rb8)
     RadioButton rb8;
     @BindView(R.id.time)
-    TextView time;
+    EditText time;
     private LineChartView lineChartView;
     private LinearLayout.LayoutParams layoutParams;
     private ListView listView;
@@ -116,7 +119,7 @@ public class ShengchanActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
-                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()|| rb8.isChecked()) {
+                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
                     popWindow = new PopWindow(this, timeList, company);
                     popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                         @Override
@@ -142,6 +145,7 @@ public class ShengchanActivity extends Activity {
                     companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            layout.removeAllViews();
                             companyId = companyList.get(i).getCODE();
                             company.setText(companyList.get(i).getFACTORYNAME());
                             companyPopWindow.dissmiss();
@@ -172,6 +176,7 @@ public class ShengchanActivity extends Activity {
                 break;
             case R.id.time:
                 CalendarWindow calendarWindow = new CalendarWindow(ShengchanActivity.this,time);
+
                 break;
         }
     }
@@ -188,11 +193,12 @@ public class ShengchanActivity extends Activity {
         timeList.add("年累");
         dbAction = CompanyDBAction.getInstance(this);
         companyList = dbAction.searchCompany();
-        company.setText(companyList.get(0).getFACTORYNAME());
+        company.setText("当日");
         companyId = companyList.get(0).getCODE();
     }
 
     private void initListener() {
+        time.addTextChangedListener(textWatcher);
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -596,9 +602,12 @@ public class ShengchanActivity extends Activity {
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
                 if (listRecods3.get(i).getId().equals("A") && listRecods3.get(i).getName().contains("发电量")) {
-                    data.add(Double.parseDouble(listRecods3.get(i).getValue()));
-                    label.add(listRecods3.get(i).getDate());
-                    unit = listRecods3.get(i).getUnit();
+                    if (!TextUtils.isEmpty(listRecods3.get(i).getValue())){
+                        data.add(Double.parseDouble(listRecods3.get(i).getValue()));
+                        label.add(listRecods3.get(i).getDate());
+                        unit = listRecods3.get(i).getUnit();
+                    }
+
                 }
             }
             lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
@@ -672,4 +681,33 @@ public class ShengchanActivity extends Activity {
         listView.setAdapter(shengchanAdapter);
         layout.addView(listView, layoutParams);
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            layout.removeAllViews();
+            if (rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()){
+                getData1();
+            }
+            if (rb5.isChecked()){
+                getData2();
+            }
+            if (rb6.isChecked()||rb7.isChecked()){
+                getData3();
+            }
+            if (rb8.isChecked()){
+                getData8();
+            }
+        }
+    };
 }

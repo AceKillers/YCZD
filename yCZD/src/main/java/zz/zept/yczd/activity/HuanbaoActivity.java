@@ -2,7 +2,9 @@ package zz.zept.yczd.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -91,6 +93,7 @@ public class HuanbaoActivity extends Activity {
     }
 
     private void initListener() {
+        company.addTextChangedListener(textWatcher);
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -125,16 +128,15 @@ public class HuanbaoActivity extends Activity {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<HuanbaoInfo>>() {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {
-                            for (int i = 0; i < listRecods.size(); i++) {
-                                ShengchanList item = new ShengchanList();
-                                item.setCompany(listRecods.get(i).getDw());
-                                item.setDw(listRecods.get(i).getUnit());
-                                item.setNum(listRecods.get(i).getYc());
-                                item.setTime(date);
-                                shengchanLists.add(item);
+                            if (rb1.isChecked()){
+                                showData1();
                             }
-                            shengchanAdapter = new ShengchanAdapter(HuanbaoActivity.this, shengchanLists);
-                            list.setAdapter(shengchanAdapter);
+                            if (rb2.isChecked()){
+                                showData2();
+                            }
+                            if (rb3.isChecked()){
+                                showData3();
+                            }
                         }
                     }
                 }
@@ -156,11 +158,12 @@ public class HuanbaoActivity extends Activity {
                 ShengchanList item = new ShengchanList();
                 item.setCompany(listRecods.get(i).getDw());
                 item.setDw(listRecods.get(i).getUnit());
-                item.setNum(listRecods.get(i).getYc());
-                item.setTime(date);
+                item.setNum("时间"+listRecods.get(i).getYc());
+                item.setTime(company.getText().toString());
                 shengchanLists.add(item);
             }
-            shengchanAdapter.notifyDataSetChanged();
+            shengchanAdapter = new ShengchanAdapter(HuanbaoActivity.this, shengchanLists);
+            list.setAdapter(shengchanAdapter);
         }
     }
 
@@ -170,11 +173,12 @@ public class HuanbaoActivity extends Activity {
                 ShengchanList item = new ShengchanList();
                 item.setCompany(listRecods.get(i).getDw());
                 item.setDw(listRecods.get(i).getUnit());
-                item.setNum(listRecods.get(i).getSo2());
-                item.setTime(date);
+                item.setNum("时间"+listRecods.get(i).getSo2());
+                item.setTime(company.getText().toString());
                 shengchanLists.add(item);
             }
-            shengchanAdapter.notifyDataSetChanged();
+            shengchanAdapter = new ShengchanAdapter(HuanbaoActivity.this, shengchanLists);
+            list.setAdapter(shengchanAdapter);
         }
     }
 
@@ -184,11 +188,29 @@ public class HuanbaoActivity extends Activity {
                 ShengchanList item = new ShengchanList();
                 item.setCompany(listRecods.get(i).getDw());
                 item.setDw(listRecods.get(i).getUnit());
-                item.setNum(listRecods.get(i).getNo());
-                item.setTime(date);
+                item.setNum("时间"+listRecods.get(i).getNo());
+                item.setTime(company.getText().toString());
                 shengchanLists.add(item);
             }
-            shengchanAdapter.notifyDataSetChanged();
+            shengchanAdapter = new ShengchanAdapter(HuanbaoActivity.this, shengchanLists);
+            list.setAdapter(shengchanAdapter);
         }
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            getData();
+        }
+    };
 }
