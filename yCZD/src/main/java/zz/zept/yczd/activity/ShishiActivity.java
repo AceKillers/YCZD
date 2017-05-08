@@ -122,7 +122,7 @@ public class ShishiActivity extends Activity {
                         companyId = companyList.get(i).getCODE();
                         company.setText(companyList.get(i).getFACTORYNAME());
                         popWindow.dissmiss();
-                        if (rb1.isChecked()||rb2.isChecked()){
+                        if (rb1.isChecked() || rb2.isChecked()) {
                             getData2();
                         }
                     }
@@ -223,15 +223,13 @@ public class ShishiActivity extends Activity {
                 Utils.closeWaiting();
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
-                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if (jsonObject.get("code").toString().contains("success")) {
-                        listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShishiInfo>>() {
-                        }.getType());
-                        if (listRecods != null && listRecods.size() > 0) {
-                            layout.removeAllViews();
-                            if (rb1.isChecked() || rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
-                                showLineChart();
-                            }
+                    listRecods = new Gson().fromJson(json, new TypeToken<ArrayList<ShishiInfo>>() {
+                    }.getType());
+                    if (listRecods != null && listRecods.size() > 0) {
+                        layout.removeAllViews();
+                        if (rb1.isChecked() || rb2.isChecked() || rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
+                            showLineChart();
+
                         }
                     }
                 }
@@ -308,7 +306,7 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("供电煤耗")&&listRecods2.get(i).getId().contains(companyId)) {
+            if (listRecods2.get(i).getName().contains("供电煤耗") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
                 label.add(listRecods2.get(i).getDate());
             }
@@ -322,7 +320,7 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("发电厂用电率")&&listRecods2.get(i).getId().contains(companyId)) {
+            if (listRecods2.get(i).getName().contains("发电厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
                 label.add(listRecods2.get(i).getDate());
             }
@@ -336,7 +334,7 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("综合厂用电率")&&listRecods2.get(i).getId().contains(companyId)) {
+            if (listRecods2.get(i).getName().contains("综合厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
                 label.add(listRecods2.get(i).getDate());
             }
