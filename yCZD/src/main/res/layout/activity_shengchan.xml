@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/nva_bg">
 
-        <EditText
-            android:id="@+id/time"
+        <TextView
+            android:id="@+id/company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/company"
+            android:layout_toLeftOf="@+id/time"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/arrow_down"
             android:text="当日"
@@ -24,7 +24,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/company"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

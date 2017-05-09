@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -84,7 +83,7 @@ public class ShengchanActivity extends Activity {
     @BindView(R.id.rb8)
     RadioButton rb8;
     @BindView(R.id.time)
-    EditText time;
+    TextView time;
     private LineChartView lineChartView;
     private LinearLayout.LayoutParams layoutParams;
     private ListView listView;
@@ -175,7 +174,7 @@ public class ShengchanActivity extends Activity {
 
     private void initData() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         time.setText(date);
         listView = new ListView(this);
         layoutParams = new LinearLayout.LayoutParams(
@@ -344,6 +343,8 @@ public class ShengchanActivity extends Activity {
                             shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
                             listView.setAdapter(shengchanAdapter);
                             layout.addView(listView, layoutParams);
+                        }else {
+                            ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
                     }
                 }
@@ -534,6 +535,8 @@ public class ShengchanActivity extends Activity {
                             }
                             lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
                             layout.addView(lineChartView, layoutParams);
+                        }else {
+                            ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
                     }
                 }
@@ -574,6 +577,8 @@ public class ShengchanActivity extends Activity {
                         if (rb7.isChecked()) {
                             showData7();
                         }
+                    }else {
+                        ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                     }
                 }
             }
@@ -645,6 +650,8 @@ public class ShengchanActivity extends Activity {
                         if (listRecods4 != null && listRecods4.size() > 0) {
                             showData8();
                         }
+                    }else {
+                        ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                     }
                 }
             }

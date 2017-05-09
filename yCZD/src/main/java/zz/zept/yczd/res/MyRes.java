@@ -25,7 +25,7 @@ public static final String MONITOR_ACTIVITYLEVEL_Machine_name = "MONITOR_ACTIVIT
 public static final String MY_URL = "http://192.168.66.13:8090/SPIC/message.action?";
 public static final String MY_SEND_URL = "http://192.168.66.13:8090/SPIC/sendmessage.action?";
 public static final String ONLINE_URL = "http://192.168.66.13:8090/SPIC/onlineMonitor.action?";
-public static final String BASE_URL = "http://192.168.66.13:8090/SPIC/";
+public static final String BASE_URL = "http://192.168.66.31:8080/";
 // public static final String MY_URL =
 // "http://192.168.23.22:8080/SPIC/message.action?";
 // public static final String MY_SEND_URL =

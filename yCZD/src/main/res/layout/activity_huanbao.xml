@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="烟尘"
+            android:text="烟尘超标时间"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp"
@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="二氧化硫"
+            android:text="二氧化硫超标时间"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
@@ -80,7 +80,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="氮氧化物"
+            android:text="氮氧化物超标时间"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />

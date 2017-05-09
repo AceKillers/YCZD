@@ -82,7 +82,7 @@ public class XinnengyuanActivity extends Activity {
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         company.setText(date);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -143,12 +143,17 @@ public class XinnengyuanActivity extends Activity {
                     if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<XinnengyuanInfo>>() {
                         }.getType());
-                        if (rb1.isChecked()) {
-                            showData1();
+                        if (listRecods != null && listRecods.size() > 0) {
+                            if (rb1.isChecked()) {
+                                showData1();
+                            }
+                            if (rb2.isChecked()) {
+                                showData2();
+                            }
+                        } else {
+                            ToastUtils.showToast(XinnengyuanActivity.this, "查询不到数据");
                         }
-                        if (rb2.isChecked()) {
-                            showData2();
-                        }
+
                     }
                 }
             }
@@ -164,48 +169,47 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void showData2() {
-        if (listRecods != null && listRecods.size() > 0) {
-            View view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
-            LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.layout);
-            ListView listView = (ListView) view.findViewById(R.id.listview);
-            if (dountChart01View != null) {
-                linearLayout.addView(dountChart01View, layoutParams);
-                listView.setAdapter(adapter);
-                layout.addView(view);
-            } else {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    total += Double.parseDouble(listRecods.get(i).getYx());
-                }
-                for (int i = 0; i < listRecods.size(); i++) {
-                    double percent = Double.parseDouble(listRecods.get(i).getYx()) / total;
-                    listRecods.get(i).setPercent(percent * 100);
-                }
-                dountChart01View = new DountChart01View(XinnengyuanActivity.this, listRecods);
-                linearLayout.addView(dountChart01View, layoutParams);
-                adapter = new XinnengyuanAdapter(XinnengyuanActivity.this, listRecods, colors);
-                listView.setAdapter(adapter);
-                layout.addView(view);
+
+        View view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.layout);
+        ListView listView = (ListView) view.findViewById(R.id.listview);
+        if (dountChart01View != null) {
+            linearLayout.addView(dountChart01View, layoutParams);
+            listView.setAdapter(adapter);
+            layout.addView(view);
+        } else {
+            for (int i = 0; i < listRecods.size(); i++) {
+                total += Double.parseDouble(listRecods.get(i).getYx());
             }
+            for (int i = 0; i < listRecods.size(); i++) {
+                double percent = Double.parseDouble(listRecods.get(i).getYx()) / total;
+                listRecods.get(i).setPercent(percent * 100);
+            }
+            dountChart01View = new DountChart01View(XinnengyuanActivity.this, listRecods);
+            linearLayout.addView(dountChart01View, layoutParams);
+            adapter = new XinnengyuanAdapter(XinnengyuanActivity.this, listRecods, colors);
+            listView.setAdapter(adapter);
+            layout.addView(view);
         }
+
     }
 
     private void showData1() {
-        if (listRecods != null && listRecods.size() > 0) {
-            if (barChart04View != null) {
-                layout.addView(barChart04View, layoutParams);
-            } else {
-                ArrayList<Double> data = new ArrayList<>();
-                List<String> label = new ArrayList<>();
-                for (int i = 0; i < listRecods.size(); i++) {
-                    data.add(Double.parseDouble(listRecods.get(i).getFdl()));
-                    label.add(listRecods.get(i).getInfo());
-                }
-                barChart04View = new BarChart04View(XinnengyuanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
-                layout.addView(barChart04View, layoutParams);
+        if (barChart04View != null) {
+            layout.addView(barChart04View, layoutParams);
+        } else {
+            ArrayList<Double> data = new ArrayList<>();
+            List<String> label = new ArrayList<>();
+            for (int i = 0; i < listRecods.size(); i++) {
+                data.add(Double.parseDouble(listRecods.get(i).getFdl()));
+                label.add(listRecods.get(i).getInfo());
             }
-
+            barChart04View = new BarChart04View(XinnengyuanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
+            layout.addView(barChart04View, layoutParams);
         }
+
     }
+
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override

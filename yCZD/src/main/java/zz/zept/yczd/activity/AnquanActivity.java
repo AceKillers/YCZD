@@ -33,6 +33,7 @@ import zz.zept.yczd.adapter.AnquanAdapter;
 import zz.zept.yczd.bean.AnquanInfo;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
+import zz.zept.yczd.utils.ChartUtil;
 import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
@@ -72,7 +73,7 @@ public class AnquanActivity extends Activity {
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         for (int i = Integer.parseInt(date.substring(0,4)); i>=1990;i--){
             timeList.add(i+"");
         }
@@ -145,6 +146,8 @@ public class AnquanActivity extends Activity {
                             if (rb3.isChecked()){
                                 showData3();
                             }
+                        }else {
+                            ToastUtils.showToast(AnquanActivity.this, "查询不到数据");
                         }
                     }
                 }

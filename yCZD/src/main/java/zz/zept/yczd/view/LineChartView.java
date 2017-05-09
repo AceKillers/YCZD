@@ -191,7 +191,7 @@ public class LineChartView extends DemoView implements Runnable {
 			// 允许线与轴交叉时，线会断开
 			chart.setLineAxisIntersectVisible(false);
 
-			// chart.setDataSource(chartData);
+			chart.setDataSource(chartData);
 			// 动态线
 			chart.showDyLine();
 			int axisColor = Color.rgb(184,184,184); // Color.rgb(222, 136, 166);

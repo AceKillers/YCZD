@@ -137,6 +137,8 @@ public class HuanbaoActivity extends Activity {
                             if (rb3.isChecked()){
                                 showData3();
                             }
+                        }else {
+                            ToastUtils.showToast(HuanbaoActivity.this, "查询不到数据");
                         }
                     }
                 }
@@ -153,6 +155,7 @@ public class HuanbaoActivity extends Activity {
     }
 
     private void showData1(){
+        shengchanLists.clear();
         if (listRecods != null && listRecods.size() > 0) {
             for (int i = 0; i < listRecods.size(); i++) {
                 ShengchanList item = new ShengchanList();
@@ -168,6 +171,7 @@ public class HuanbaoActivity extends Activity {
     }
 
     private void showData2(){
+        shengchanLists.clear();
         if (listRecods != null && listRecods.size() > 0) {
             for (int i = 0; i < listRecods.size(); i++) {
                 ShengchanList item = new ShengchanList();
@@ -183,6 +187,7 @@ public class HuanbaoActivity extends Activity {
     }
 
     private void showData3(){
+        shengchanLists.clear();
         if (listRecods != null && listRecods.size() > 0) {
             for (int i = 0; i < listRecods.size(); i++) {
                 ShengchanList item = new ShengchanList();

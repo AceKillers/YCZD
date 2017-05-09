@@ -100,7 +100,7 @@ public class RanliaoActivity extends Activity {
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         dbAction = CompanyDBAction.getInstance(this);
@@ -200,6 +200,8 @@ public class RanliaoActivity extends Activity {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<RanliaoInfo1>>() {
                         }.getType());
                         showData1();
+                    }else {
+                        ToastUtils.showToast(RanliaoActivity.this, "查询不到数据");
                     }
                 }
             }
@@ -261,6 +263,8 @@ public class RanliaoActivity extends Activity {
                             if (rb4.isChecked()) {
                                 showData4();
                             }
+                        }else {
+                            ToastUtils.showToast(RanliaoActivity.this, "查询不到数据");
                         }
                     }
                 }
@@ -288,6 +292,7 @@ public class RanliaoActivity extends Activity {
     }
 
     private void showData3() {
+        listView = new ListView(this);
         ranliaoAdapter = new RanliaoAdapter(RanliaoActivity.this,listRecods2);
         listView.setAdapter(ranliaoAdapter);
         layout.addView(listView, layoutParams);

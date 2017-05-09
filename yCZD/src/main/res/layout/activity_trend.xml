@@ -26,7 +26,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="15dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <ScrollView

@@ -32,6 +32,7 @@ import zz.zept.yczd.adapter.ZongheAdapter;
 import zz.zept.yczd.bean.ZongheInfo;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
+import zz.zept.yczd.utils.ChartUtil;
 import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
@@ -61,7 +62,7 @@ public class ZongheActivity extends Activity implements View.OnClickListener {
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         company.setText(date);
         company.addTextChangedListener(textWatcher);
         getData();
@@ -75,6 +76,7 @@ public class ZongheActivity extends Activity implements View.OnClickListener {
                 CalendarWindow calendarWindow = new CalendarWindow(ZongheActivity.this,company);
                 break;
             case R.id.back:
+                finish();
                 break;
         }
     }
@@ -99,6 +101,8 @@ public class ZongheActivity extends Activity implements View.OnClickListener {
                         }
                         adapter = new ZongheAdapter(ZongheActivity.this,listRecods);
                         list.setAdapter(adapter);
+                    }else {
+                        ToastUtils.showToast(ZongheActivity.this, "查询不到数据");
                     }
                 }
             }

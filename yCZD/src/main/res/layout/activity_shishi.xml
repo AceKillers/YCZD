@@ -79,7 +79,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="发电量"
+            android:text="昨日发电量"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="供电煤耗"
+            android:text="昨日供电煤耗"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="发电厂用电率"
+            android:text="昨日发电厂用电率"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
@@ -115,7 +115,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="综合厂用电率"
+            android:text="昨日综合厂用电率"
             android:textColor="@drawable/rb_font"
             android:background="@drawable/shishi_radio_bg"
             android:textSize="10sp" />
