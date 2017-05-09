@@ -13,8 +13,25 @@
         <!--<item name="android:fitsSystemWindows">true</item>-->
         <item name="colorAccent">@color/theme_blue</item>
     </style>
-   
- <style name="dialogstyle" parent="@android:style/Theme.Dialog">
+
+    <style name="dialogstyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 边框 -->
+        <item name="android:windowFrame">@android:color/transparent</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="progressstyle" parent="@style/AppTheme">
 
         <!-- 边框 -->
         <item name="android:windowFrame">@android:color/transparent</item>

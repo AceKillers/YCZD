@@ -28,7 +28,7 @@ public class Utils {
     private static final String TAG = "CommonUtils";
 
     static AlertDialog dialog;
-    static ProgressDialog progressDialog;
+    static zz.zept.yczd.view.ProgressDialog progressDialog;
 
     /**
      * 开启activity
@@ -148,7 +148,8 @@ public class Utils {
 //        dialog = new AlertDialog(context, R.style.dialogstyle, false);
 //        dialog.setContentView(R.layout.alert_dialog);
 //        dialog.show();
-        progressDialog = ProgressDialog.show(context,"提示","正在加载...");
+        progressDialog = new zz.zept.yczd.view.ProgressDialog(context, R.style.progressstyle, false);
+        progressDialog.show();
     }
 
     /**
