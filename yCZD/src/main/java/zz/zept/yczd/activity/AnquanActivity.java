@@ -73,9 +73,10 @@ public class AnquanActivity extends Activity {
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
-        for (int i = 1990; i<=Integer.parseInt(date.substring(0,3));i++){
+        for (int i = Integer.parseInt(date.substring(0,4)); i>=1990;i--){
             timeList.add(i+"");
         }
+        company.setText(date.substring(0,4));
         initListener();
         getData();
     }
@@ -90,6 +91,7 @@ public class AnquanActivity extends Activity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         popWindow.dissmiss();
                         company.setText(timeList.get(i));
+                        getData();
                     }
                 });
                 break;
@@ -134,7 +136,15 @@ public class AnquanActivity extends Activity {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<AnquanInfo>>() {
                         }.getType());
                         if (listRecods!=null&&listRecods.size()>0){
-                            showData1();
+                            if (rb1.isChecked()){
+                                showData1();
+                            }
+                            if (rb2.isChecked()){
+                                showData2();
+                            }
+                            if (rb3.isChecked()){
+                                showData3();
+                            }
                         }
                     }
                 }
