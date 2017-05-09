@@ -99,6 +99,15 @@ public class BarChart08View extends DemoView{
             chart.getDataAxis().setAxisMax(max);
             chart.getDataAxis().setAxisMin(min);
             chart.getDataAxis().setAxisSteps((max-min)/10);
+            chart.getDataAxis().getAxisPaint().setColor(Color.parseColor("#a6a5b3"));
+            chart.getCategoryAxis().getAxisPaint().setColor(Color.parseColor("#a6a5b3"));
+            chart.getDataAxis().getTickMarksPaint().setColor(Color.parseColor("#a6a5b3"));
+            chart.getCategoryAxis().getTickMarksPaint().setColor(Color.parseColor("#a6a5b3"));
+
+            chart.getDataAxis().getTickLabelPaint().setColor(Color.parseColor("#a6a5b3"));
+            chart.getCategoryAxis().getTickLabelPaint().setColor(Color.parseColor("#a6a5b3"));
+            chart.getPlotGrid().getHorizontalLinePaint().setColor(Color.parseColor("#edeff5"));
+            chart.getPlotGrid().getVerticalLinePaint().setColor(Color.parseColor("#edeff5"));
             //指隔多少个轴刻度(即细刻度)后为主刻度
             chart.getDataAxis().setDetailModeSteps(1);
 

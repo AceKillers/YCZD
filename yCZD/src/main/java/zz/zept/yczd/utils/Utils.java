@@ -167,9 +167,13 @@ public class Utils {
      * 关闭等待对话框
      */
     public static void closeWaiting() {
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
+//        if (dialog != null) {
+//            dialog.dismiss();
+//            dialog = null;
+//        }
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
         }
     }
 
