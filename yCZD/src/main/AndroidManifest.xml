@@ -81,7 +81,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.ZongheActivity"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="zz.zept.yczd.activity.ShengchanActivity"

@@ -3,6 +3,7 @@ package zz.zept.yczd.activity;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
+import zz.zept.yczd.adapter.XinnengyuanAdapter;
 import zz.zept.yczd.bean.XinnengyuanInfo;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
@@ -67,6 +70,9 @@ public class XinnengyuanActivity extends Activity {
     private String date = "";
     private double total = 0.00;
     private DountChart01View dountChart01View;
+    private XinnengyuanAdapter adapter;
+    private int[] colors = {Color.parseColor("#00baff"), Color.parseColor("#438483"), Color.parseColor("#31e5e3"), Color.parseColor("#3ca3a1"), Color.parseColor("#3d6463"), Color.parseColor("#39abad"), Color.parseColor("#ff8386")};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +94,7 @@ public class XinnengyuanActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
-                CalendarWindow calendarWindow = new CalendarWindow(XinnengyuanActivity.this,company);
+                CalendarWindow calendarWindow = new CalendarWindow(XinnengyuanActivity.this, company);
                 break;
             case R.id.back:
                 finish();
@@ -97,6 +103,7 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void initListener() {
+        company.addTextChangedListener(textWatcher);
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -123,7 +130,7 @@ public class XinnengyuanActivity extends Activity {
 
     private void getData() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForHBValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForXnyValue.action", RequestMethod.POST);
         request.add("date", company.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
@@ -136,7 +143,12 @@ public class XinnengyuanActivity extends Activity {
                     if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<XinnengyuanInfo>>() {
                         }.getType());
-                        showData1();
+                        if (rb1.isChecked()) {
+                            showData1();
+                        }
+                        if (rb2.isChecked()) {
+                            showData2();
+                        }
                     }
                 }
             }
@@ -153,28 +165,45 @@ public class XinnengyuanActivity extends Activity {
 
     private void showData2() {
         if (listRecods != null && listRecods.size() > 0) {
-            for (int i = 0; i < listRecods.size(); i++) {
-                total += Double.parseDouble(listRecods.get(i).getYx());
+            View view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
+            LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.layout);
+            ListView listView = (ListView) view.findViewById(R.id.listview);
+            if (dountChart01View != null) {
+                linearLayout.addView(dountChart01View, layoutParams);
+                listView.setAdapter(adapter);
+                layout.addView(view);
+            } else {
+                for (int i = 0; i < listRecods.size(); i++) {
+                    total += Double.parseDouble(listRecods.get(i).getYx());
+                }
+                for (int i = 0; i < listRecods.size(); i++) {
+                    double percent = Double.parseDouble(listRecods.get(i).getYx()) / total;
+                    listRecods.get(i).setPercent(percent * 100);
+                }
+                dountChart01View = new DountChart01View(XinnengyuanActivity.this, listRecods);
+                linearLayout.addView(dountChart01View, layoutParams);
+                adapter = new XinnengyuanAdapter(XinnengyuanActivity.this, listRecods, colors);
+                listView.setAdapter(adapter);
+                layout.addView(view);
             }
-            for (int i = 0; i < listRecods.size(); i++) {
-                double percent = Double.parseDouble(listRecods.get(i).getYx()) / total;
-                listRecods.get(i).setPercent(percent * 100);
-            }
-            dountChart01View = new DountChart01View(XinnengyuanActivity.this, listRecods);
-            layout.addView(dountChart01View, layoutParams);
         }
     }
 
     private void showData1() {
         if (listRecods != null && listRecods.size() > 0) {
-            ArrayList<Double> data = new ArrayList<>();
-            List<String> label = new ArrayList<>();
-            for (int i = 0; i < listRecods.size(); i++) {
-                data.add(Double.parseDouble(listRecods.get(i).getFdl()));
-                label.add(listRecods.get(i).getInfo());
+            if (barChart04View != null) {
+                layout.addView(barChart04View, layoutParams);
+            } else {
+                ArrayList<Double> data = new ArrayList<>();
+                List<String> label = new ArrayList<>();
+                for (int i = 0; i < listRecods.size(); i++) {
+                    data.add(Double.parseDouble(listRecods.get(i).getFdl()));
+                    label.add(listRecods.get(i).getInfo());
+                }
+                barChart04View = new BarChart04View(XinnengyuanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
+                layout.addView(barChart04View, layoutParams);
             }
-            barChart04View = new BarChart04View(XinnengyuanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, "万/kWh");
-            layout.addView(barChart04View, layoutParams);
+
         }
     }
 
@@ -192,12 +221,7 @@ public class XinnengyuanActivity extends Activity {
         @Override
         public void afterTextChanged(Editable s) {
             layout.removeAllViews();
-           if(rb1.isChecked()){
-               showData1();
-           }
-            if(rb2.isChecked()){
-                showData2();
-            }
+            getData();
         }
     };
 

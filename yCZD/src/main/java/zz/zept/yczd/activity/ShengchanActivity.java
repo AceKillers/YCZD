@@ -140,7 +140,7 @@ public class ShengchanActivity extends Activity {
                             }
                         }
                     });
-                }else {
+                } else {
                     companyPopWindow = new CompanyPopWindow(this, companyList, company);
                     companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                         @Override
@@ -149,22 +149,14 @@ public class ShengchanActivity extends Activity {
                             companyId = companyList.get(i).getCODE();
                             company.setText(companyList.get(i).getFACTORYNAME());
                             companyPopWindow.dissmiss();
-                            if (rb5.isChecked()){
+                            if (rb5.isChecked()) {
                                 getData2();
                             }
-                            if (rb6.isChecked()){
-                                if (listRecods3 == null) {
-                                    getData3();
-                                } else {
-                                    showData6();
-                                }
+                            if (rb6.isChecked()) {
+                                getData3();
                             }
-                            if (rb7.isChecked()){
-                                if (listRecods3 == null) {
-                                    getData3();
-                                } else {
-                                    showData7();
-                                }
+                            if (rb7.isChecked()) {
+                                getData3();
                             }
 
                         }
@@ -175,7 +167,7 @@ public class ShengchanActivity extends Activity {
                 finish();
                 break;
             case R.id.time:
-                CalendarWindow calendarWindow = new CalendarWindow(ShengchanActivity.this,time);
+                CalendarWindow calendarWindow = new CalendarWindow(ShengchanActivity.this, time);
 
                 break;
         }
@@ -526,7 +518,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (listRecods2 != null && listRecods2.size() > 0) {
@@ -564,6 +556,7 @@ public class ShengchanActivity extends Activity {
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
         request.add("timeStart", time.getText().toString());
         request.add("timeEnd", end);
+        request.add("code", companyId);
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -572,7 +565,7 @@ public class ShengchanActivity extends Activity {
                 String json = response.get();
                 if (!TextUtils.isEmpty(json)) {
                     JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                    if ("success".equals(jsonObject.get("code"))) {
+                    if (jsonObject.get("code").toString().contains("success")) {
                         listRecods3 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
                         if (rb6.isChecked()) {
@@ -601,8 +594,8 @@ public class ShengchanActivity extends Activity {
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().equals("A") && listRecods3.get(i).getName().contains("发电量")) {
-                    if (!TextUtils.isEmpty(listRecods3.get(i).getValue())){
+                if (listRecods3.get(i).getId().contains(companyId) && listRecods3.get(i).getName().contains("发电量")) {
+                    if (!TextUtils.isEmpty(listRecods3.get(i).getValue())) {
                         data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                         label.add(listRecods3.get(i).getDate());
                         unit = listRecods3.get(i).getUnit();
@@ -622,7 +615,7 @@ public class ShengchanActivity extends Activity {
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().equals("A") && listRecods3.get(i).getName().contains("负荷率")) {
+                if (listRecods3.get(i).getId().contains(companyId) && listRecods3.get(i).getName().contains("负荷率")) {
                     data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                     label.add(listRecods3.get(i).getDate());
                     unit = listRecods3.get(i).getUnit();
@@ -696,16 +689,16 @@ public class ShengchanActivity extends Activity {
         @Override
         public void afterTextChanged(Editable s) {
             layout.removeAllViews();
-            if (rb1.isChecked()||rb2.isChecked()||rb3.isChecked()||rb4.isChecked()){
+            if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
                 getData1();
             }
-            if (rb5.isChecked()){
+            if (rb5.isChecked()) {
                 getData2();
             }
-            if (rb6.isChecked()||rb7.isChecked()){
+            if (rb6.isChecked() || rb7.isChecked()) {
                 getData3();
             }
-            if (rb8.isChecked()){
+            if (rb8.isChecked()) {
                 getData8();
             }
         }
