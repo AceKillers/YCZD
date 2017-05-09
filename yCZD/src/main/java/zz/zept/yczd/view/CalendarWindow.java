@@ -3,6 +3,7 @@ package zz.zept.yczd.view;
 import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -117,7 +118,10 @@ public class CalendarWindow extends PopupWindow {
 
             public void onClick(View v) {
                 dismiss();
-                parent.setText(date);
+                if (!TextUtils.isEmpty(date)){
+                    parent.setText(date);
+                }
+
             }
         });
     }
