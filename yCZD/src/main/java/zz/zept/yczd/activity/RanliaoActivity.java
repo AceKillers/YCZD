@@ -266,6 +266,9 @@ public class RanliaoActivity extends Activity {
                         }else {
                             ToastUtils.showToast(RanliaoActivity.this, "查询不到数据");
                         }
+                    }else {
+                        ToastUtils.showToast(RanliaoActivity.this, jsonObject.get("message").toString());
+
                     }
                 }
             }

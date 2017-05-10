@@ -189,7 +189,7 @@ public class LineChartView extends DemoView implements Runnable {
 			// chart.setItemLabelFormatter(callBack)
 
 			// 允许线与轴交叉时，线会断开
-			chart.setLineAxisIntersectVisible(false);
+			chart.setLineAxisIntersectVisible(true);
 
 			chart.setDataSource(chartData);
 			// 动态线

@@ -35,6 +35,7 @@ import org.xclcharts.chart.DountChart;
 import org.xclcharts.chart.PieData;
 import org.xclcharts.event.click.ArcPosition;
 import org.xclcharts.renderer.XEnum;
+import org.xclcharts.renderer.plot.PlotLegend;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -110,15 +111,15 @@ public class DountChart01View extends DemoView {
             //显示key
 //            chart.getPlotLegend().show();
             //显示图例
-//            PlotLegend legend = chart.getPlotLegend();
-//            legend.setType(XEnum.LegendType.COLUMN);
-//            legend.getPaint().setTextSize(30f);
-//            legend.show();
+            PlotLegend legend = chart.getPlotLegend();
+            legend.setType(XEnum.LegendType.COLUMN);
+            legend.getPaint().setTextSize(30f);
+            legend.hide();
 
-//            legend.setHorizontalAlign(XEnum.HorizontalAlign.CENTER);
-//            legend.setVerticalAlign(XEnum.VerticalAlign.BOTTOM);
-//            legend.showBox();
-//            legend.getBox().setBorderRectType(XEnum.RectType.RECT);
+            legend.setHorizontalAlign(XEnum.HorizontalAlign.CENTER);
+            legend.setVerticalAlign(XEnum.VerticalAlign.BOTTOM);
+            legend.hideBox();
+            legend.getBox().setBorderRectType(XEnum.RectType.RECT);
 
 
             //图背景色
@@ -185,14 +186,14 @@ public class DountChart01View extends DemoView {
     private void chartDataSet() {
         //设置图表数据源
         //PieData(标签，百分比，在饼图中对应的颜色)
-//        for (int i = 0;i<list.size();i++){
-//            XinnengyuanInfo info = list.get(i);
-//            lPieData.add(new PieData(info.getInfo()+":"+info.getYx()+"  占比："+info.getPercent()+"%",info.getPercent(),colors[i]));
-//        }
-        lPieData.add(new PieData("Solarissssssssssssssssssssssssssss", "20%", 20, Color.parseColor("#00baff")));
-        lPieData.add(new PieData("Aixxxxxxxxxxxxxxxxxxxxxxx", "30%", 30, Color.parseColor("#438483")));
-        lPieData.add(new PieData("HP-UXxxxxxxxxxxxxxxxxxxx", "10%", 10, Color.parseColor("#31e5e3")));
-        lPieData.add(new PieData("Linuxxxxxxxxxxxxxxxxxxxxxxxxxx", "40%", 40, Color.parseColor("#3ca3a1")));
+        for (int i = 0;i<list.size();i++){
+            XinnengyuanInfo info = list.get(i);
+            lPieData.add(new PieData(info.getInfo(),info.getPercent(),colors[i]));
+        }
+//        lPieData.add(new PieData("Solarissssssssssssssssssssssssssss", "20%", 20, Color.parseColor("#00baff")));
+//        lPieData.add(new PieData("Aixxxxxxxxxxxxxxxxxxxxxxx", "30%", 30, Color.parseColor("#438483")));
+//        lPieData.add(new PieData("HP-UXxxxxxxxxxxxxxxxxxxx", "10%", 10, Color.parseColor("#31e5e3")));
+//        lPieData.add(new PieData("Linuxxxxxxxxxxxxxxxxxxxxxxxxxx", "40%", 40, Color.parseColor("#3ca3a1")));
     }
 
     @Override

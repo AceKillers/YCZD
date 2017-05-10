@@ -96,11 +96,16 @@ public class ZongheActivity extends Activity implements View.OnClickListener {
                     if (jsonObject.get("code").toString().contains("success")) {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ZongheInfo>>() {
                         }.getType());
-                        for (int i = 0;i<listRecods.size();i++){
-                            listRecods.get(i).setTime(company.getText().toString());
+                        if (listRecods!=null&&listRecods.size()>0){
+                            for (int i = 0;i<listRecods.size();i++){
+                                listRecods.get(i).setTime(company.getText().toString());
+                            }
+                            adapter = new ZongheAdapter(ZongheActivity.this,listRecods);
+                            list.setAdapter(adapter);
+                        }else {
+                            ToastUtils.showToast(ZongheActivity.this, "查询不到数据");
                         }
-                        adapter = new ZongheAdapter(ZongheActivity.this,listRecods);
-                        list.setAdapter(adapter);
+
                     }else {
                         ToastUtils.showToast(ZongheActivity.this, "查询不到数据");
                     }

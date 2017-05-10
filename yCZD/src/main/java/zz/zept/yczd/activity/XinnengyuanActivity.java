@@ -42,6 +42,7 @@ import zz.zept.yczd.utils.ChartUtil;
 import zz.zept.yczd.utils.HttpResponseListener;
 import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
+import zz.zept.yczd.utils.UItools;
 import zz.zept.yczd.utils.Utils;
 import zz.zept.yczd.view.BarChart04View;
 import zz.zept.yczd.view.CalendarWindow;
@@ -85,7 +86,7 @@ public class XinnengyuanActivity extends Activity {
         date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         company.setText(date);
         layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                UItools.dip2px(this,240), UItools.dip2px(this,240));
         initListener();
         getData();
     }
@@ -169,10 +170,10 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void showData2() {
-
         View view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.layout);
         ListView listView = (ListView) view.findViewById(R.id.listview);
+        linearLayout.removeAllViews();
         if (dountChart01View != null) {
             linearLayout.addView(dountChart01View, layoutParams);
             listView.setAdapter(adapter);

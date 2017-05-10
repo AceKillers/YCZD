@@ -153,59 +153,31 @@ public class ShishiActivity extends Activity {
                         break;
                     case R.id.rb3:
                         company.setVisibility(View.GONE);
-                        if (listRecods2 == null) {
-                            getData3();
-                        } else {
-                            showData3();
-                        }
+                        getData3();
                         break;
                     case R.id.rb4:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods2 == null) {
-                            getData3();
-                        } else {
-                            showData4();
-                        }
+                        getData3();
                         break;
                     case R.id.rb5:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods2 == null) {
-                            getData3();
-                        } else {
-                            showData5();
-                        }
+                        getData3();
                         break;
                     case R.id.rb6:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods2 == null) {
-                            getData3();
-                        } else {
-                            showData6();
-                        }
+                        getData3();
                         break;
                     case R.id.rb7:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods == null) {
-                            getData2();
-                        } else {
-                            showLineChart();
-                        }
+                        getData2();
                         break;
                     case R.id.rb8:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods == null) {
-                            getData2();
-                        } else {
-                            showLineChart();
-                        }
+                        getData2();
                         break;
                     case R.id.rb9:
                         company.setVisibility(View.VISIBLE);
-                        if (listRecods == null) {
-                            getData2();
-                        } else {
-                            showLineChart();
-                        }
+                        getData2();
                         break;
                 }
             }
@@ -234,7 +206,7 @@ public class ShishiActivity extends Activity {
                             showLineChart();
 
                         }
-                    }else {
+                    } else {
                         ToastUtils.showToast(ShishiActivity.this, "查询不到数据");
                     }
                 }
@@ -251,10 +223,12 @@ public class ShishiActivity extends Activity {
     }
 
     private void getData3() {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date = sDateFormat.format(new Date());
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFMZDValue.action", RequestMethod.POST);
-        request.add("timeStart", date);
-        request.add("timeEnd", date);
+        request.add("timeStart", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
+        request.add("timeEnd", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -279,7 +253,7 @@ public class ShishiActivity extends Activity {
                             if (rb6.isChecked()) {
                                 showData6();
                             }
-                        }else {
+                        } else {
                             ToastUtils.showToast(ShishiActivity.this, "查询不到数据");
                         }
                     }
@@ -316,7 +290,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("供电煤耗") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate().substring(11,listRecods2.get(i).getDate().length()));
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -330,7 +304,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("发电厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate().substring(11,listRecods2.get(i).getDate().length()));
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -344,7 +318,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("综合厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate().substring(11,listRecods2.get(i).getDate().length()));
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -358,10 +332,20 @@ public class ShishiActivity extends Activity {
         String unit = "";
         for (int i = 0; i < listRecods.size(); i++) {
             data.add(Double.parseDouble(listRecods.get(i).getpValue()));
-            label.add(listRecods.get(i).getLocalDate().substring(11,listRecods2.get(i).getDate().length()));
-
+            label.add(listRecods.get(i).getLocalDate().substring(0,11));
         }
-        lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+        if (rb2.isChecked()){
+            unit = "MW";
+        }
+        if (rb7.isChecked()||rb8.isChecked()||rb9.isChecked()){
+            unit = "mg/m3";
+        }
+        if (rb1.isChecked()){
+            lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
+        }else {
+            lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+        }
+
         layout.addView(lineChartView, layoutParams);
     }
 

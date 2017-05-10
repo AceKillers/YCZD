@@ -343,7 +343,7 @@ public class ShengchanActivity extends Activity {
                             shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
                             listView.setAdapter(shengchanAdapter);
                             layout.addView(listView, layoutParams);
-                        }else {
+                        } else {
                             ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
                     }
@@ -527,15 +527,14 @@ public class ShengchanActivity extends Activity {
                             List<String> label = new ArrayList<>();
                             String unit = "";
                             for (int i = 0; i < listRecods2.size(); i++) {
-                                if (listRecods2.get(i).getId().contains(companyId)) {
-                                    data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                                    label.add(listRecods2.get(i).getDate());
-                                    unit = listRecods2.get(i).getUnit();
-                                }
+                                data.add(Double.parseDouble(listRecods2.get(i).getValue()));
+                                label.add(listRecods2.get(i).getDate());
+                                unit = listRecods2.get(i).getUnit();
+
                             }
                             lineChartView = new LineChartView(ShengchanActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
                             layout.addView(lineChartView, layoutParams);
-                        }else {
+                        } else {
                             ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
                     }
@@ -571,14 +570,16 @@ public class ShengchanActivity extends Activity {
                     if (jsonObject.get("code").toString().contains("success")) {
                         listRecods3 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo2>>() {
                         }.getType());
-                        if (rb6.isChecked()) {
-                            showData6();
+                        if (listRecods3 != null && listRecods3.size() > 0) {
+                            if (rb6.isChecked()) {
+                                showData6();
+                            }
+                            if (rb7.isChecked()) {
+                                showData7();
+                            }
+                        } else {
+                            ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
-                        if (rb7.isChecked()) {
-                            showData7();
-                        }
-                    }else {
-                        ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                     }
                 }
             }
@@ -599,7 +600,7 @@ public class ShengchanActivity extends Activity {
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().contains(companyId) && listRecods3.get(i).getName().contains("发电量")) {
+                if (listRecods3.get(i).getName().contains("发电量")) {
                     if (!TextUtils.isEmpty(listRecods3.get(i).getValue())) {
                         data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                         label.add(listRecods3.get(i).getDate());
@@ -620,7 +621,7 @@ public class ShengchanActivity extends Activity {
             List<String> label = new ArrayList<>();
             String unit = "";
             for (int i = 0; i < listRecods3.size(); i++) {
-                if (listRecods3.get(i).getId().contains(companyId) && listRecods3.get(i).getName().contains("负荷率")) {
+                if (listRecods3.get(i).getName().contains("负荷率")) {
                     data.add(Double.parseDouble(listRecods3.get(i).getValue()));
                     label.add(listRecods3.get(i).getDate());
                     unit = listRecods3.get(i).getUnit();
@@ -650,7 +651,7 @@ public class ShengchanActivity extends Activity {
                         if (listRecods4 != null && listRecods4.size() > 0) {
                             showData8();
                         }
-                    }else {
+                    } else {
                         ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                     }
                 }
