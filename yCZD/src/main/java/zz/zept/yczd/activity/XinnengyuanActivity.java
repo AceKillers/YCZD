@@ -73,7 +73,9 @@ public class XinnengyuanActivity extends Activity {
     private DountChart01View dountChart01View;
     private XinnengyuanAdapter adapter;
     private int[] colors = {Color.parseColor("#00baff"), Color.parseColor("#438483"), Color.parseColor("#31e5e3"), Color.parseColor("#3ca3a1"), Color.parseColor("#3d6463"), Color.parseColor("#39abad"), Color.parseColor("#ff8386")};
-
+    private View view;
+    private LinearLayout linearLayout;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,9 @@ public class XinnengyuanActivity extends Activity {
         ButterKnife.bind(this);
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
+        view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
+        linearLayout = (LinearLayout) view.findViewById(R.id.layout);
+        listView = (ListView) view.findViewById(R.id.listview);
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
         company.setText(date);
@@ -170,9 +175,8 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void showData2() {
-        View view = getLayoutInflater().inflate(R.layout.view_xinnengyuan, null);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.layout);
-        ListView listView = (ListView) view.findViewById(R.id.listview);
+        layoutParams = new LinearLayout.LayoutParams(
+                UItools.dip2px(this,240), UItools.dip2px(this,240));
         linearLayout.removeAllViews();
         if (dountChart01View != null) {
             linearLayout.addView(dountChart01View, layoutParams);
@@ -196,6 +200,8 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void showData1() {
+        layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         if (barChart04View != null) {
             layout.addView(barChart04View, layoutParams);
         } else {
