@@ -136,7 +136,7 @@ public class XinnengyuanActivity extends Activity {
 
     private void getData() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForXnyValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForXnyValue.action", RequestMethod.POST);
         request.add("date", company.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {

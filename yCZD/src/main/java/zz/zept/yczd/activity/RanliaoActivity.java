@@ -186,7 +186,7 @@ public class RanliaoActivity extends Activity {
 
     private void getData1() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForMHValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForMHValue.action", RequestMethod.POST);
         request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
@@ -240,7 +240,7 @@ public class RanliaoActivity extends Activity {
 
     private void getData2() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForRLMValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForRLMValue.action", RequestMethod.POST);
         request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {

@@ -226,7 +226,7 @@ public class ShishiActivity extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFMZDValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForFMZDValue.action", RequestMethod.POST);
         request.add("timeStart", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
         request.add("timeEnd", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
         request.setTag(this);

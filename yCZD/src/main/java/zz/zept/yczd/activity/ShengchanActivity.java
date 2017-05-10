@@ -318,7 +318,7 @@ public class ShengchanActivity extends Activity {
 
     private void getData1() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForSCValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForSCValue.action", RequestMethod.POST);
         request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
@@ -508,7 +508,7 @@ public class ShengchanActivity extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
         String start = sDateFormat.format(new Date()) + "-01";
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForEveryDayValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForEveryDayValue.action", RequestMethod.POST);
         request.add("timeStart", start);
         request.add("timeEnd", time.getText().toString());
         request.setTag(this);
@@ -555,7 +555,7 @@ public class ShengchanActivity extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
         String end = sDateFormat.format(new Date()) + "-30";
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
         request.add("timeStart", time.getText().toString());
         request.add("timeEnd", end);
         request.add("code", companyId);
@@ -635,7 +635,7 @@ public class ShengchanActivity extends Activity {
 
     private void getData8() {
         CallServer callServer = CallServer.getRequestInstance();
-        Request<String> request = NoHttp.createStringRequest(MyRes.BASE_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
+        Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindFhInfoByDate.action", RequestMethod.POST);
         request.add("date", time.getText().toString());
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
