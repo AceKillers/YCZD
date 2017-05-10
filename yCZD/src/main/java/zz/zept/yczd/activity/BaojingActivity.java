@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yolanda.nohttp.NoHttp;
@@ -32,11 +33,15 @@ public class BaojingActivity extends Activity {
     @BindView(R.id.btn_back)
     ImageView btnBack;
     @BindView(R.id.baojing)
-    ImageView baojing;
+    LinearLayout baojing;
     @BindView(R.id.yujing)
-    ImageView yujing;
+    LinearLayout yujing;
+    @BindView(R.id.num_baojing)
+    TextView numBaojing;
+    @BindView(R.id.num_yujing)
+    TextView numYujing;
     private String url1, url2;
-    private int loadNum=0;
+    private int loadNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,7 @@ public class BaojingActivity extends Activity {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 System.out.println(response.get());
-//                tv1.setText(response.get().replace("\"", ""));
+                numBaojing.setText(response.get().replace("\"", ""));
                 loadNum++;
                 isLoadFinish();
             }
@@ -107,7 +112,7 @@ public class BaojingActivity extends Activity {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 System.out.println(response.get());
-//                tv2.setText(response.get().replace("\"", ""));
+                numYujing.setText(response.get().replace("\"", ""));
                 loadNum++;
                 isLoadFinish();
             }
@@ -135,8 +140,8 @@ public class BaojingActivity extends Activity {
 
     }
 
-    private void isLoadFinish(){
-        if(loadNum==2){
+    private void isLoadFinish() {
+        if (loadNum == 2) {
             Utils.closeWaiting();
         }
 

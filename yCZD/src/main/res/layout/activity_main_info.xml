@@ -47,13 +47,15 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layerType="software"
-        android:background="#f1f1f4" />
+        android:background="#f1f1f4"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/menhu"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

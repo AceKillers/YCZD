@@ -30,16 +30,29 @@
             android:src="@drawable/ic_back" />
     </RelativeLayout>
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/baojing"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/zhendongbaojing" />
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <ImageView
+        <TextView
+            android:id="@+id/num_baojing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/yujing"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/yujing" />
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/num_yujing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

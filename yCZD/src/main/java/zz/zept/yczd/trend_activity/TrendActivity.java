@@ -488,16 +488,19 @@ public class TrendActivity extends BaseActicity {
 
 				public void onClick(View v) {
 					dismiss();
-					if (x.equals("1")) {
-						System.out.println("是1点击的");
-						et_start.setText(date);
+					if (!TextUtils.isEmpty(date)){
+						if (x.equals("1")) {
+							System.out.println("是1点击的");
+							et_start.setText(date);
 
-						x = "init";
+							x = "init";
 
-					} else if (x.equals("2")) {
-						et_end.setText(date);
-						x = "init";
+						} else if (x.equals("2")) {
+							et_end.setText(date);
+							x = "init";
+						}
 					}
+
 
 				}
 			});
