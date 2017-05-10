@@ -52,8 +52,6 @@ public class BoXingTuActivity extends BaseActicity {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_back:
-			intent = new Intent(this, TrendActivity.class);
-			startActivity(intent);
 			finish();
 			break;
 

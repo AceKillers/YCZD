@@ -436,18 +436,18 @@ public class WarnTwoActivity extends BaseActicity {
 				convertView = View.inflate(WarnTwoActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
 				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
-				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
-				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
-				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
-				vh.tv4 = (TextView) convertView.findViewById(R.id.tv4);
+				vh.tv1 = (TextView) convertView.findViewById(R.id.company);
+				vh.tv2 = (TextView) convertView.findViewById(R.id.level);
+				vh.tv3 = (TextView) convertView.findViewById(R.id.content);
+				vh.tv4 = (TextView) convertView.findViewById(R.id.time);
 				convertView.setTag(vh);
 			} else {
 				vh = (ViewHolder) convertView.getTag();
 			}
 			if (AlldatasOne.get(position).check) {
-				vh.iv.setBackgroundResource(R.drawable.check2);
+				vh.iv.setChecked(true);
 			} else {
-				vh.iv.setBackgroundResource(R.drawable.check1);
+				vh.iv.setChecked(false);
 			}
 			vh.tv1.setText(AlldatasOne.get(position).getFactoryName());
 			vh.tv2.setText(AlldatasOne.get(position).getMacName());
@@ -483,18 +483,18 @@ public class WarnTwoActivity extends BaseActicity {
 			// TODO Auto-generated method stub
 			ViewHolder vh = null;
 			if (convertView == null) {
-				convertView = View.inflate(WarnTwoActivity.this, R.layout.item_list_warn2, null);
+				convertView = View.inflate(WarnTwoActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
-
-				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
-				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
-				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
-				vh.tv4 = (TextView) convertView.findViewById(R.id.tv4);
+				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
+				vh.tv1 = (TextView) convertView.findViewById(R.id.company);
+				vh.tv2 = (TextView) convertView.findViewById(R.id.level);
+				vh.tv3 = (TextView) convertView.findViewById(R.id.content);
+				vh.tv4 = (TextView) convertView.findViewById(R.id.time);
 				convertView.setTag(vh);
 			} else {
 				vh = (ViewHolder) convertView.getTag();
 			}
-
+			vh.iv.setVisibility(View.GONE);
 			vh.tv1.setText(AlldatasTwo.get(position).getFactoryName());
 			vh.tv2.setText(AlldatasTwo.get(position).getMacName());
 			vh.tv3.setText(AlldatasTwo.get(position).getMsglevel() + "");

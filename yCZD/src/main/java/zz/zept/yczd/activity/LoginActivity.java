@@ -39,12 +39,6 @@ public class LoginActivity extends BaseActicity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_login:
-			Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
-			Date date = new Date();
-			long time = date.getTime();
-			sp.edit().putLong("time", time).commit();
-			startActivity(intent);
-			finish();
 //			Date date = new Date();
 //			long time = date.getTime();
 //			sp.edit().putLong("time", time).commit();

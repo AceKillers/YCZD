@@ -189,7 +189,7 @@ public class DiagnoseActivity extends BaseActicity {
 		case R.id.btn_clean:
 			et_start_time.setText(null);
 			et_end_time.setText(null);
-			et_machine.setText("");
+			et_machine.setText("选择机组");
 			break;
 		case R.id.et_start_time:
 			// ToastUtils.showToast(DiagnoseActivity1.this, "et_start_time置");
@@ -416,13 +416,11 @@ public class DiagnoseActivity extends BaseActicity {
 			popupwindow_calendar_bt_enter.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-
 					dismiss();
-					if (tag == 1) {
-						et_start_time.setText(date);
-					} else {
-						et_end_time.setText(date);
+					if(TextUtils.isEmpty(date)){
+
 					}
+
 
 				}
 			});

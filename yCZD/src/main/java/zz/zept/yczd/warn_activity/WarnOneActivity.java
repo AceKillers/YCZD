@@ -503,10 +503,10 @@ public class WarnOneActivity extends BaseActicity {
 				convertView = View.inflate(WarnOneActivity.this, R.layout.item_list_warm, null);
 				vh = new ViewHolder();
 				vh.iv = (CheckBox) convertView.findViewById(R.id.checkbox);
-				vh.tv1 = (TextView) convertView.findViewById(R.id.tv1);
-				vh.tv2 = (TextView) convertView.findViewById(R.id.tv2);
-				vh.tv3 = (TextView) convertView.findViewById(R.id.tv3);
-				vh.tv4 = (TextView) convertView.findViewById(R.id.tv4);
+				vh.tv1 = (TextView) convertView.findViewById(R.id.company);
+				vh.tv2 = (TextView) convertView.findViewById(R.id.level);
+				vh.tv3 = (TextView) convertView.findViewById(R.id.content);
+				vh.tv4 = (TextView) convertView.findViewById(R.id.time);
 				convertView.setTag(vh);
 			} else {
 				vh = (ViewHolder) convertView.getTag();

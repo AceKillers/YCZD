@@ -64,14 +64,13 @@
 
                 <TextView
                     android:id="@+id/et_machine_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/xiajiantou_icon"
-                    android:gravity="center"
-                    android:text="选择机构" />
+                    android:gravity="center"/>
 
             </LinearLayout>
 
@@ -104,14 +103,13 @@
 
                 <TextView
                     android:id="@+id/et_channel1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/xiajiantou_icon"
-                    android:gravity="center"
-                    android:text="点击选择通道" />
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -144,14 +142,13 @@
 
                 <TextView
                     android:id="@+id/et_channel2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/xiajiantou_icon"
-                    android:gravity="center"
-                    android:text="点击选择通道" />
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -184,14 +181,13 @@
 
                 <TextView
                     android:id="@+id/et_start"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/xiajiantou_icon"
-                    android:gravity="center"
-                    android:text="点击选择时间" />
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -224,14 +220,13 @@
 
                 <TextView
                     android:id="@+id/et_end"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/xiajiantou_icon"
-                    android:gravity="center"
-                    android:text="点击选择时间" />
+                    android:gravity="center"/>
 
             </LinearLayout>
 

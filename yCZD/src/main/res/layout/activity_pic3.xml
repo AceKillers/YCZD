@@ -47,7 +47,6 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="@dimen/tv_nox_top"
             android:layout_marginLeft="@dimen/tv_nox_left"
-            android:text="tv_nox"
             android:textColor="#000"
             android:textSize="12dp" />
         
@@ -59,7 +58,6 @@
             android:layout_below="@id/tv_nox"
             android:layout_marginLeft="@dimen/tv_so2_left"
             android:layout_marginTop="@dimen/tv_so2_top"
-            android:text="tv_so2"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -69,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/tv_pywd_left"
             android:layout_marginTop="@dimen/tv_pywd_top"
-            android:text="tv_pywd"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -81,7 +78,6 @@
             android:layout_below="@+id/tv_pywd"
             android:layout_marginLeft="@dimen/tv_gsll_left"
             android:layout_marginTop="@dimen/tv_gsll_top"
-            android:text="tv_gsll"
             android:textColor="#000"
             android:textSize="12dp" />
        
@@ -96,7 +92,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/tv_njswd_bottom"
             android:layout_marginRight="@dimen/tv_njswd_right"
-            android:text="tv_njswd"
             android:textColor="#000"
             android:textSize="12dp" />
         
@@ -107,7 +102,6 @@
             android:layout_toLeftOf="@id/tv_njswd"
             android:layout_alignBaseline="@id/tv_njswd"
             android:layout_marginRight="@dimen/tv_djckwd_right"
-            android:text="tv_djckwd"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -118,7 +112,6 @@
               android:layout_alignBaseline="@id/tv_njswd"
               android:layout_alignParentLeft="true"
               android:layout_marginLeft="@dimen/tv_gjckwd_left"
-            android:text="tv_gjckwd"
             android:textColor="#000"
             android:textSize="12dp" />
         
@@ -129,7 +122,6 @@
             android:layout_alignBaseline="@id/tv_njswd"
             android:layout_toRightOf="@id/tv_gjckwd"
             android:layout_marginLeft="@dimen/tv_gjrkwd_left"
-            android:text="tv_gjrkwd"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -140,7 +132,6 @@
             android:layout_alignBaseline="@+id/tv_dypqwd2"
             android:layout_marginRight="@dimen/tv_dypqwd1_right"
             android:layout_toLeftOf="@+id/tv_dypqwd2"
-            android:text="tv_dypqwd1"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -150,7 +141,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_nox"
             android:layout_marginLeft="@dimen/tv_zqyl_left"
-            android:text="tv_zryl"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -161,7 +151,6 @@
             android:layout_alignLeft="@id/tv_zryl"
             android:layout_below="@id/tv_zryl"
             android:layout_marginTop="@dimen/tv_zryl_top"
-            android:text="tv_zqyl"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -187,7 +176,6 @@
             android:layout_alignBaseline="@+id/tv_nox"
             android:layout_toRightOf="@id/tv_zryl"
             android:layout_marginLeft="@dimen/tv_zrqw_left"
-            android:text="tv_zrqw"
             android:textColor="#000"
             android:textSize="12dp" />
         
@@ -199,7 +187,6 @@
             android:layout_alignLeft="@id/tv_zrqw"
             android:layout_below="@id/tv_zrqw"
             android:layout_alignBaseline="@id/tv_zqyl"
-            android:text="tv_zqwd"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -210,7 +197,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/tv_dypqwd2_right"
             android:layout_marginTop="@dimen/tv_dypqwd2_top"
-            android:text="tv_dypqwd2"
             android:textColor="#000"
             android:textSize="12dp" />
     </RelativeLayout>
@@ -230,7 +216,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="tv_jzfh"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -241,7 +226,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="tv_zqll"
             android:textColor="#000"
             android:textSize="12dp" />
 
@@ -252,7 +236,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="tv_zk"
             android:textColor="#000"
             android:textSize="12dp" />
     </LinearLayout>

@@ -1,12 +1,13 @@
 package zz.zept.yczd.utils;
 
-import com.yolanda.nohttp.Logger;
-import com.yolanda.nohttp.NoHttp;
-
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+
+import com.yolanda.nohttp.Logger;
+import com.yolanda.nohttp.NoHttp;
+
 import config.AppConfig;
 
 public class MyApplication extends Application {
@@ -19,6 +20,8 @@ public class MyApplication extends Application {
 		_instance = this;
 
 		NoHttp.initialize(this);
+		NoHttp.setDefaultConnectTimeout(120000);
+		NoHttp.setDefaultReadTimeout(120000);
 
 		Logger.setTag("sld");
 		Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
