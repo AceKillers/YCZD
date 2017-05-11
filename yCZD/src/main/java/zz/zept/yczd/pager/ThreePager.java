@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class ThreePager extends Activity {
 	TextView tv_nox, tv_dypqwd1, tv_dypqwd2, tv_zk, tv_zryl, tv_zrqw, tv_zqyl, tv_zqwd, tv_so2,
 			tv_pywd, tv_gsll, tv_gjckwd, tv_djckwd, tv_gjrkwd, tv_njswd, tv_jzfh,tv_zqll;
 	private View view;
+	private ImageView back;
 	TextView et;
 	private int width;
 	private int height;
@@ -92,7 +94,7 @@ public class ThreePager extends Activity {
 //		tv_so2 = (TextView) view.findViewById(R.id.tv_so2);
 //		tv_jzfh = (TextView) view.findViewById(R.id.tv_jzfh);
 		
-		
+		back = (ImageView)findViewById(R.id.back);
 		et = (TextView)findViewById(R.id.et_mach);
 		tv_nox = (TextView)findViewById(R.id.tv_nox);
 		tv_pywd = (TextView)findViewById(R.id.tv_pywd);
@@ -123,6 +125,12 @@ public class ThreePager extends Activity {
 	}
 
 	public void initListener() {
+		back.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
 		et.setOnClickListener(new OnClickListener() {
 
 			private PopupWindow popupwindow;

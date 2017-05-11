@@ -27,7 +27,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="15dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -35,12 +36,17 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:gravity="center"
+        android:background="@drawable/baojing_bg"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/num_baojing"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:drawableTop="@drawable/zhengdongbaojing"
+            android:layout_height="wrap_content"
+            android:textColor="#fc790a"
+            android:drawablePadding="10dp"
+            android:gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
@@ -48,11 +54,17 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:gravity="center"
+        android:background="@drawable/baojing_bg"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/num_yujing"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/yujing"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:textColor="#ea3e81"/>
     </LinearLayout>
 </LinearLayout>

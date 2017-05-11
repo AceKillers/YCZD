@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
 import zz.zept.yczd.message.acrtivity.MessageActivity;
+import zz.zept.yczd.pager.ThreePager;
 
 /**
  * Created by HanChenxi on 2017/4/24.
@@ -51,7 +52,7 @@ public class MainInfoActivity extends Activity {
             "环保信息",
             "安全信息",
             "新能源信息",
-            "报警查询",
+            "实时监测",
             "注销"};
     private List<Map<String, Object>> data_list;
     private SimpleAdapter sim_adapter;
@@ -107,7 +108,7 @@ public class MainInfoActivity extends Activity {
                         startActivity(intent);
                         break;
                     case 7:
-                        intent.setClass(MainInfoActivity.this,BaojingActivity.class);
+                        intent.setClass(MainInfoActivity.this,ThreePager.class);
                         startActivity(intent);
                         break;
                     case 8:

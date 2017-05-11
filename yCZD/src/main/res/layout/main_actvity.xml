@@ -62,7 +62,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/tab_time_bg"
-                        android:text="实时监测"
+                        android:text="报警查询"
                         android:textColor="@drawable/tab_home_font" />
 
                     <RadioButton

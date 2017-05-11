@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.Company;
 import zz.zept.yczd.db.CompanyDBAction;
-import zz.zept.yczd.pager.ThreePager;
 import zz.zept.yczd.trend_activity.TrendActivity;
 import zz.zept.yczd.utils.StatusBarCompat;
 
@@ -68,7 +67,7 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
         rg.setOnCheckedChangeListener(this);
         mTabHost = getTabHost();
         mTabHost.addTab(mTabHost.newTabSpec(TAB_NEWS).setIndicator(TAB_NEWS).setContent(new Intent(this, MainInfoActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_BBS).setIndicator(TAB_BBS).setContent(new Intent(this, ThreePager.class)));
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_BBS).setIndicator(TAB_BBS).setContent(new Intent(this, BaojingActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec(TAB_DISCOVER).setIndicator(TAB_DISCOVER).setContent(new Intent(this, DiagnoseActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec(TAB_MINE).setIndicator(TAB_MINE).setContent(new Intent(this, TrendActivity.class)));
     }
