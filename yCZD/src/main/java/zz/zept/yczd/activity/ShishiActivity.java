@@ -308,7 +308,7 @@ public class ShishiActivity extends Activity {
             }
 
         }
-        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
+        lineChartView = new LineChartView(ShishiActivity.this, 10, label, data, "%");
         layout.addView(lineChartView, layoutParams);
     }
 
@@ -322,7 +322,7 @@ public class ShishiActivity extends Activity {
             }
 
         }
-        lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
+        lineChartView = new LineChartView(ShishiActivity.this, 10, label, data, "%");
         layout.addView(lineChartView, layoutParams);
     }
 
