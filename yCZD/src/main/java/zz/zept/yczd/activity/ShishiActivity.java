@@ -126,6 +126,7 @@ public class ShishiActivity extends Activity {
                             getData2();
                         }
                         if (rb3.isChecked() || rb4.isChecked() || rb5.isChecked() || rb6.isChecked()) {
+                            layout.removeAllViews();
                             getData3();
                         }
                     }
@@ -152,7 +153,7 @@ public class ShishiActivity extends Activity {
                         getData2();
                         break;
                     case R.id.rb3:
-                        company.setVisibility(View.GONE);
+                        company.setVisibility(View.VISIBLE);
                         getData3();
                         break;
                     case R.id.rb4:
@@ -223,12 +224,13 @@ public class ShishiActivity extends Activity {
     }
 
     private void getData3() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = sDateFormat.format(new Date());
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat sDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sDateFormat.format(new Date()) + "-01";
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForFMZDValue.action", RequestMethod.POST);
-        request.add("timeStart", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
-        request.add("timeEnd", sDateFormat.format((ChartUtil.getYesterday(new Date()))));
+        request.add("timeStart", start);
+        request.add("timeEnd", sDateFormat1.format((ChartUtil.getYesterday(new Date()))));
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
             @Override
@@ -274,9 +276,9 @@ public class ShishiActivity extends Activity {
         ArrayList<Double> data = new ArrayList<>();
         List<String> label = new ArrayList<>();
         for (int i = 0; i < listRecods2.size(); i++) {
-            if (listRecods2.get(i).getName().contains("发电量")) {
+            if (listRecods2.get(i).getName().contains("发电量") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDw());
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -290,7 +292,12 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("供电煤耗") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate());
+                if (i==0){
+                    label.add(listRecods2.get(i).getDate());
+                }else {
+                    label.add(listRecods2.get(i).getDate().substring(8,10));
+                }
+
             }
 
         }
@@ -304,7 +311,11 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("发电厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate());
+                if (i==0){
+                    label.add(listRecods2.get(i).getDate());
+                }else {
+                    label.add(listRecods2.get(i).getDate().substring(8,10));
+                }
             }
 
         }
@@ -318,7 +329,11 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("综合厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                label.add(listRecods2.get(i).getDate());
+                if (i==0){
+                    label.add(listRecods2.get(i).getDate());
+                }else {
+                    label.add(listRecods2.get(i).getDate().substring(8,10));
+                }
             }
 
         }
@@ -332,7 +347,12 @@ public class ShishiActivity extends Activity {
         String unit = "";
         for (int i = 0; i < listRecods.size(); i++) {
             data.add(Double.parseDouble(listRecods.get(i).getpValue()));
-            label.add(listRecods.get(i).getLocalDate().substring(0,11));
+            if (i==0){
+                label.add(listRecods.get(i).getLocalDate());
+            }else {
+                label.add(listRecods.get(i).getLocalDate().substring(listRecods.get(i).getLocalDate().length()-8,listRecods.get(i).getLocalDate().length()-6));
+            }
+
         }
         if (rb2.isChecked()){
             unit = "MW";

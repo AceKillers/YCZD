@@ -65,7 +65,8 @@
             android:launchMode="singleTask"></activity>
         <activity
             android:name="zz.zept.yczd.trend_activity.BoXingTuActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="zz.zept.yczd.warn_activity.WarnOneActivity"
             android:theme="@style/StyleIndicators"></activity>

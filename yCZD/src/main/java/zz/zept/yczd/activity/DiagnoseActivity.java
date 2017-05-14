@@ -108,7 +108,7 @@ public class DiagnoseActivity extends BaseActicity {
 		et_start_time = (TextView) findViewById(R.id.et_start_time);
 		et_machine = (TextView) findViewById(R.id.et_machine);
 		lv_diagonse = (ListViewForScrollView) findViewById(R.id.lv_diagonse);
-
+		ll = (LinearLayout)findViewById(R.id.ll);
 	}
 
 	@Override

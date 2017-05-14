@@ -193,13 +193,13 @@ public class MessageReciverActivity1 extends BaseActicity implements OnItemClick
 		switch (parent.getId()) {
 		case R.id.lv_message_content:
 			// ToastUtils.showToast(this, "lv_message_content");
-			String parentId = (String) content.get(position).getId();
-			sp.edit().putString(MyRes.MESSAGE_TAG1, parentId).commit();
-			// System.out.println(sp.getString(MyRes.MESSAGE_TAG1, "xxxxx"));
-			Intent intent1 = new Intent(this, MessageReciverActivity2.class);
-			intent1.putExtra(MyRes.PARENTID, parentId);
-			startActivity(intent1);
-			finish();
+//			String parentId = (String) content.get(position).getId();
+//			sp.edit().putString(MyRes.MESSAGE_TAG1, parentId).commit();
+//			// System.out.println(sp.getString(MyRes.MESSAGE_TAG1, "xxxxx"));
+//			Intent intent1 = new Intent(this, MessageReciverActivity2.class);
+//			intent1.putExtra(MyRes.PARENTID, parentId);
+//			startActivity(intent1);
+//			finish();
 			break;
 		case R.id.lv_message_people:
 

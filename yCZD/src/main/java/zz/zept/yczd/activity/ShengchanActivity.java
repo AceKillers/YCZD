@@ -99,7 +99,6 @@ public class ShengchanActivity extends Activity {
     private int dataType;
     private List<Company> companyList = new ArrayList<>();
     private CompanyDBAction dbAction;
-    private CompanyPopWindow companyPopWindow;
     private String companyId;
 
     @Override
@@ -140,7 +139,7 @@ public class ShengchanActivity extends Activity {
                         }
                     });
                 } else {
-                    companyPopWindow = new CompanyPopWindow(this, companyList, company);
+                    final CompanyPopWindow companyPopWindow = new CompanyPopWindow(this, companyList, company);
                     companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -305,6 +304,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setText(companyList.get(0).getFACTORYNAME());
                         if (listRecods4 == null) {
                             getData8();
                         } else {
@@ -369,7 +369,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("万kWh");
                     item.setNum(listRecods.get(i).getFdl_d());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -379,7 +379,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("%");
                     item.setNum(listRecods.get(i).getYdl_d());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -389,7 +389,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("g/kWh");
                     item.setNum(listRecods.get(i).getMh_d());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -399,7 +399,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("GJ");
                     item.setNum(listRecods.get(i).getGr_d());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -417,7 +417,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("万kWh");
                     item.setNum(listRecods.get(i).getFdl_m());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -427,7 +427,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("%");
                     item.setNum(listRecods.get(i).getYdl_m());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -437,7 +437,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("g/kWh");
                     item.setNum(listRecods.get(i).getMh_m());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -447,7 +447,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("GJ");
                     item.setNum(listRecods.get(i).getGr_m());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -465,7 +465,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("万kWh");
                     item.setNum(listRecods.get(i).getFdl_y());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -475,7 +475,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("%");
                     item.setNum(listRecods.get(i).getYdl_y());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -485,7 +485,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("g/kWh");
                     item.setNum(listRecods.get(i).getMh_y());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -495,7 +495,7 @@ public class ShengchanActivity extends Activity {
                     item.setCompany(listRecods.get(i).getName());
                     item.setDw("GJ");
                     item.setNum(listRecods.get(i).getGr_y());
-                    item.setTime(date);
+                    item.setTime(time.getText().toString());
                     shengchanLists.add(item);
                 }
             }
@@ -553,11 +553,11 @@ public class ShengchanActivity extends Activity {
 
     private void getData3() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
-        String end = sDateFormat.format(new Date()) + "-30";
+        String end = sDateFormat.format(new Date()) + "-01";
         CallServer callServer = CallServer.getRequestInstance();
         Request<String> request = NoHttp.createStringRequest(MyRes.NEW_URL + "zdpt/sts/adFindForFHValue.action", RequestMethod.POST);
-        request.add("timeStart", time.getText().toString());
-        request.add("timeEnd", end);
+        request.add("timeStart", end);
+        request.add("timeEnd", time.getText().toString());
         request.add("code", companyId);
         request.setTag(this);
         HttpResponseListener.HttpListener<String> callback = new HttpResponseListener.HttpListener<String>() {
@@ -698,6 +698,7 @@ public class ShengchanActivity extends Activity {
         public void afterTextChanged(Editable s) {
             layout.removeAllViews();
             if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
+                shengchanLists.clear();
                 getData1();
             }
             if (rb5.isChecked()) {

@@ -58,8 +58,11 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
         dbAction = CompanyDBAction.getInstance(this);
+        listRecods2 = dbAction.searchCompany();
+        if (listRecods2==null||listRecods2.size()<=0){
+            loadCompany();
+        }
         initTab();
-        loadCompany();
     }
 
     private void initTab() {
@@ -91,7 +94,7 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
     }
 
     private void loadCompany() {
-        String json = "{\"code\":\"success\",\"data\":[{\"FACTORYID\":\"201\",\"FACTORYNAME\":\"平顶山分公司\",\"CODE\":\"A\"},{\"FACTORYID\":\"202\",\"FACTORYNAME\":\"开封分公司\",\"CODE\":\"B\"},{\"FACTORYID\":\"426\",\"FACTORYNAME\":\"平东热电\",\"CODE\":\"D\"},{\"FACTORYID\":\"429\",\"FACTORYNAME\":\"豫新发电\",\"CODE\":\"C\"},{\"FACTORYID\":\"432\",\"FACTORYNAME\":\"南阳热电\",\"CODE\":\"E\"},{\"FACTORYID\":\"434\",\"FACTORYNAME\":\"郑州燃机\",\"CODE\":\"F\"},{\"FACTORYID\":\"438\",\"FACTORYNAME\":\"河南新能源\",\"CODE\":\"\"},{\"FACTORYID\":\"439\",\"FACTORYNAME\":\"湖北新能源\",\"CODE\":\"\"}],\"message\":\"读取数据成功\"}";
+        String json = "{\"code\":\"success\",\"data\":[{\"FACTORYID\":\"201\",\"FACTORYNAME\":\"平顶山分公司\",\"CODE\":\"A\"},{\"FACTORYID\":\"202\",\"FACTORYNAME\":\"开封分公司\",\"CODE\":\"B\"},{\"FACTORYID\":\"426\",\"FACTORYNAME\":\"平东热电\",\"CODE\":\"D\"},{\"FACTORYID\":\"429\",\"FACTORYNAME\":\"豫新发电\",\"CODE\":\"C\"},{\"FACTORYID\":\"432\",\"FACTORYNAME\":\"南阳热电\",\"CODE\":\"E\"},{\"FACTORYID\":\"434\",\"FACTORYNAME\":\"郑州燃机\",\"CODE\":\"F\"}],\"message\":\"读取数据成功\"}";
         if (!TextUtils.isEmpty(json)) {
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
             listRecods2 = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<Company>>() {

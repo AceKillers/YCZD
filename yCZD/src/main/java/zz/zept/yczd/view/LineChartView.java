@@ -40,6 +40,7 @@ import org.xclcharts.common.IFormatterTextCallBack;
 import org.xclcharts.event.click.PointPosition;
 import org.xclcharts.renderer.XEnum;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -117,7 +118,12 @@ public class LineChartView extends DemoView implements Runnable {
 //			chart.setDesireLines(mCustomLineDataset);
 
 			//数据轴最大值
-			chart.getDataAxis().setAxisMax(max);
+			if (new BigDecimal(max).compareTo(new BigDecimal(0.0))==0){
+				chart.getDataAxis().setAxisMax(1);
+			}else {
+				chart.getDataAxis().setAxisMax(max);
+			}
+
 			//数据轴刻度间隔
 			chart.getDataAxis().setAxisSteps(max/10);
 			//指隔多少个轴刻度(即细刻度)后为主刻度

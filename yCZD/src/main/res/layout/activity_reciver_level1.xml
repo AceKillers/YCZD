@@ -29,16 +29,14 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/tv_content"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_weight="5"
             android:gravity="center"
             android:text="机构"
             android:textColor="#333"
@@ -48,23 +46,19 @@
     <ListView
         android:id="@+id/lv_message_content"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_height="wrap_content"
         android:divider="@null" >
     </ListView>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
         android:orientation="horizontal" >
-
         <TextView
             android:id="@+id/tv_people"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_weight="5"
             android:gravity="center"
             android:text="工作人员"
             android:textColor="#333"
@@ -75,7 +69,7 @@
         android:id="@+id/lv_message_people"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:divider="@null" >
     </ListView>
 
