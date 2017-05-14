@@ -199,6 +199,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText("当日");
                         dataType = 0;
                         switch (dataType) {
@@ -218,6 +219,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText("当日");
                         dataType = 0;
                         switch (dataType) {
@@ -237,6 +239,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText("当日");
                         dataType = 0;
                         switch (dataType) {
@@ -256,6 +259,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText("当日");
                         dataType = 0;
                         switch (dataType) {
@@ -275,6 +279,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
                         getData2();
                         break;
@@ -282,6 +287,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
                         if (listRecods3 == null) {
                             getData3();
@@ -293,6 +299,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
                         if (listRecods3 == null) {
                             getData3();
@@ -304,7 +311,7 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        company.setText(companyList.get(0).getFACTORYNAME());
+                        company.setVisibility(View.GONE);
                         if (listRecods4 == null) {
                             getData8();
                         } else {

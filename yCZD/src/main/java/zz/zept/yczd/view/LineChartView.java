@@ -40,7 +40,6 @@ import org.xclcharts.common.IFormatterTextCallBack;
 import org.xclcharts.event.click.PointPosition;
 import org.xclcharts.renderer.XEnum;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -118,11 +117,8 @@ public class LineChartView extends DemoView implements Runnable {
 //			chart.setDesireLines(mCustomLineDataset);
 
 			//数据轴最大值
-			if (new BigDecimal(max).compareTo(new BigDecimal(0.0))==0){
-				chart.getDataAxis().setAxisMax(1);
-			}else {
-				chart.getDataAxis().setAxisMax(max);
-			}
+			chart.getDataAxis().setAxisMax(max);
+
 
 			//数据轴刻度间隔
 			chart.getDataAxis().setAxisSteps(max/10);
@@ -212,6 +208,9 @@ public class LineChartView extends DemoView implements Runnable {
 			// 扩展绘图区右边分割的范围，让定制线的说明文字能显示出来
 			chart.getClipExt().setExtRight(150.f);
 			chart.disablePanMode();
+			//标签旋转45度
+			chart.getCategoryAxis().setTickLabelRotateAngle(45f);
+			chart.getCategoryAxis().getTickLabelPaint().setTextSize(15);
 			// chart.getDataAxis().hide();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

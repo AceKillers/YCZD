@@ -292,12 +292,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("供电煤耗") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                if (i==0){
-                    label.add(listRecods2.get(i).getDate());
-                }else {
-                    label.add(listRecods2.get(i).getDate().substring(8,10));
-                }
-
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -311,11 +306,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("发电厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                if (i==0){
-                    label.add(listRecods2.get(i).getDate());
-                }else {
-                    label.add(listRecods2.get(i).getDate().substring(8,10));
-                }
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -329,11 +320,7 @@ public class ShishiActivity extends Activity {
         for (int i = 0; i < listRecods2.size(); i++) {
             if (listRecods2.get(i).getName().contains("综合厂用电率") && listRecods2.get(i).getId().contains(companyId)) {
                 data.add(Double.parseDouble(listRecods2.get(i).getValue()));
-                if (i==0){
-                    label.add(listRecods2.get(i).getDate());
-                }else {
-                    label.add(listRecods2.get(i).getDate().substring(8,10));
-                }
+                label.add(listRecods2.get(i).getDate());
             }
 
         }
@@ -347,23 +334,24 @@ public class ShishiActivity extends Activity {
         String unit = "";
         for (int i = 0; i < listRecods.size(); i++) {
             data.add(Double.parseDouble(listRecods.get(i).getpValue()));
-            if (i==0){
+            if (i == 0) {
                 label.add(listRecods.get(i).getLocalDate());
-            }else {
-                label.add(listRecods.get(i).getLocalDate().substring(listRecods.get(i).getLocalDate().length()-8,listRecods.get(i).getLocalDate().length()-6));
+            } else {
+                label.add(listRecods.get(i).getLocalDate().substring(listRecods.get(i).getLocalDate().length() - 8, listRecods.get(i).getLocalDate().length() - 6));
             }
 
         }
-        if (rb2.isChecked()){
+        if (rb2.isChecked()) {
             unit = "MW";
         }
-        if (rb7.isChecked()||rb8.isChecked()||rb9.isChecked()){
+        if (rb7.isChecked() || rb8.isChecked() || rb9.isChecked()) {
             unit = "mg/m3";
         }
-        if (rb1.isChecked()){
+        if (rb1.isChecked()) {
             lineChartView = new LineChartView(ShishiActivity.this, 100, label, data, "%");
-        }else {
-            lineChartView = new LineChartView(ShishiActivity.this, Math.ceil(ChartUtil.getMax(data)), label, data, unit);
+        } else {
+            double max = Math.ceil(ChartUtil.getMax(data)) > 10 ? Math.ceil(ChartUtil.getMax(data)) : 10;
+            lineChartView = new LineChartView(ShishiActivity.this, max, label, data, unit);
         }
 
         layout.addView(lineChartView, layoutParams);

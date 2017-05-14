@@ -175,6 +175,11 @@ public class MainInfoActivity extends Activity {
                 Utils.closeWaiting();
                 Log.e("json", json);
                 msgNum.setText(json.replaceAll("\"",""));
+                if (msgNum.getText().toString().equals("0")){
+                    msgNum.setVisibility(View.GONE);
+                }else {
+                    msgNum.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
