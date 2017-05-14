@@ -1,6 +1,10 @@
 package zz.zept.yczd.message.acrtivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -72,6 +76,7 @@ public class SendMessageActivity extends BaseActicity {
 					public void onSucceed(int what, Response<String> response) {
 						super.onSucceed(what, response);
 						ToastUtils.showToast(SendMessageActivity.this, "发送成功");
+						sendNotification(message_title,message_content);
 						Intent intent = new Intent(SendMessageActivity.this, MessageActivity.class);
 						startActivity(intent);
 						finish();
@@ -145,5 +150,23 @@ public class SendMessageActivity extends BaseActicity {
 		et_people.setText(username);
 		et_title.setText(sp.getString(MyRes.MESSAGE_TITLE, ""));
 		et_content.setText(sp.getString(MyRes.MESSAGE_CONTENT, ""));
+	}
+
+	private void sendNotification(String tittle,String content) {
+		//获取NotificationManager实例
+		NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		//实例化NotificationCompat.Builde并设置相关属性
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+				//设置小图标
+				.setSmallIcon(R.drawable.ic_launcher)
+				//设置通知标题
+				.setContentTitle(tittle)
+				.setDefaults(Notification.DEFAULT_SOUND)
+				//设置通知内容
+				.setContentText(content);
+		//设置通知时间，默认为系统发出通知的时间，通常不用设置
+		//.setWhen(System.currentTimeMillis());
+		//通过builder.build()方法生成Notification对象,并发送通知,id=1
+		notifyManager.notify(1, builder.build());
 	}
 }

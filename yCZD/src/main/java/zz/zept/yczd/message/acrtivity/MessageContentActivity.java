@@ -41,7 +41,7 @@ public class MessageContentActivity extends Activity {
 			tag = "10";
 		}
 //		ll = (LinearLayout) findViewById(R.id.ll);
-//		btn_backnews = (Button) findViewById(R.id.btn_backnews);
+		btn_backnews = (ImageView) findViewById(R.id.btn_backnews);
 //
 //		bnt_check = (Button) findViewById(R.id.bnt_check);
 //		if (tag.equals("0")) {

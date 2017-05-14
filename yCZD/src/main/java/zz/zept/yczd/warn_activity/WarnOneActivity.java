@@ -468,7 +468,7 @@ public class WarnOneActivity extends BaseActicity {
 			}
 			vh.tv1.setText(AlldatasOne.get(position).getFactoryName());
 			vh.tv3.setText(AlldatasOne.get(position).getMacName());
-			vh.tv2.setText(AlldatasOne.get(position).getMsglevel() + "级");
+			vh.tv2.setText(AlldatasOne.get(position).getContent());
 			vh.tv4.setText(AlldatasOne.get(position).getSendTime());
 
 			return convertView;
@@ -514,7 +514,7 @@ public class WarnOneActivity extends BaseActicity {
 			vh.iv.setVisibility(View.GONE);
 			vh.tv1.setText(AlldatasTwo.get(position).getFactoryName());
 			vh.tv3.setText(AlldatasTwo.get(position).getMacName());
-			vh.tv2.setText(AlldatasTwo.get(position).getMsglevel() + "级");
+			vh.tv2.setText(AlldatasTwo.get(position).getContent());
 			vh.tv4.setText(AlldatasTwo.get(position).getSendTime());
 
 			return convertView;

@@ -1,15 +1,5 @@
 package zz.zept.yczd.message.acrtivity;
 
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.RequestMethod;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.RequestQueue;
-import com.yolanda.nohttp.rest.Response;
-import com.yolanda.nohttp.rest.SimpleResponseListener;
-
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +9,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
+import com.yolanda.nohttp.rest.SimpleResponseListener;
+
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.OtherReciverBean;
 import zz.zept.yczd.bean.OtherReciverBean.DataBean.SysdeptBean;
@@ -35,7 +36,7 @@ public class MessageReciverActivity5 extends BaseActicity implements OnItemClick
 	private List<SysdeptBean> content;
 	private List<SysuserBean> people;
 	ListView lv_message_content, lv_message_people;
-	String baseurl = "http://192.168.1.106:8080/"+sp.getString(MyRes.LOGIN_NAME, "")+"/message.action?username_=spic&msgState_=25&deptid_=";
+	String baseurl;
 
 	@Override
 	public void onClick(View v) {
@@ -79,6 +80,7 @@ public class MessageReciverActivity5 extends BaseActicity implements OnItemClick
 
 	@Override
 	void initData() {
+		baseurl = MyRes.MY_URL + "username_=" + sp.getString(MyRes.LOGIN_NAME, "") + "&msgState_=25&deptid_=";
 		String url;
 		String old_deptid = null;
 		if (deptid == null) {
@@ -169,14 +171,6 @@ public class MessageReciverActivity5 extends BaseActicity implements OnItemClick
 				view = View.inflate(MessageReciverActivity5.this, R.layout.item_textview, null);
 			} else {
 				view = convertView;
-			}		if (position==0) {
-				view.setBackgroundResource(R.drawable.item2);
-			}else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}	
 			}
 			tv_People = (TextView) view.findViewById(R.id.tv);
 			tv_People.setText(people.get(position).getUsername());
@@ -210,14 +204,6 @@ public class MessageReciverActivity5 extends BaseActicity implements OnItemClick
 				view = View.inflate(MessageReciverActivity5.this, R.layout.item_textview, null);
 			} else {
 				view = convertView;
-			}		if (position==0) {
-				view.setBackgroundResource(R.drawable.item2);
-			}else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}	
 			}
 			tv_Content = (TextView) view.findViewById(R.id.tv);
 			tv_Content.setText(content.get(position).getName());

@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -33,6 +32,7 @@ import zz.zept.yczd.adapter.SimpleTreeAdapter;
 import zz.zept.yczd.bean.PicBean;
 import zz.zept.yczd.bean.YCZDMachineBean;
 import zz.zept.yczd.utils.LogUtils;
+import zz.zept.yczd.utils.StatusBarCompat;
 import zz.zept.yczd.utils.ToastUtils;
 
 /**
@@ -70,6 +70,7 @@ public class ThreePager extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pic3);
+		StatusBarCompat.compat(this, getResources().getColor(R.color.theme_blue));
 		initView();
 		initData();
 		initListener();
@@ -292,8 +293,4 @@ public class ThreePager extends Activity {
 
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return false;
-	}
 }

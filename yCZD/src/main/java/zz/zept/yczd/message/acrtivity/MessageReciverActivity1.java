@@ -1,6 +1,14 @@
 package zz.zept.yczd.message.acrtivity;
 
-import java.util.List;
+import android.content.Intent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.yolanda.nohttp.NoHttp;
@@ -10,15 +18,8 @@ import com.yolanda.nohttp.rest.RequestQueue;
 import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.SimpleResponseListener;
 
-import android.content.Intent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import java.util.List;
+
 import zz.zept.yczd.R;
 import zz.zept.yczd.bean.TopReciverBean;
 import zz.zept.yczd.res.MyRes;
@@ -29,7 +30,7 @@ public class MessageReciverActivity1 extends BaseActicity implements OnItemClick
 	private List<zz.zept.yczd.bean.TopReciverBean.DataBean.SysdeptBean> content;
 	private List<zz.zept.yczd.bean.TopReciverBean.DataBean.SysuserBean> people;
 	ListView lv_message_content, lv_message_people;
-	Button btn_back_send_message_activity;
+	ImageView btn_back_send_message_activity;
 	TextView tv_content, tv_people;
 
 	@Override
@@ -63,7 +64,7 @@ public class MessageReciverActivity1 extends BaseActicity implements OnItemClick
 	@Override
 	void initView() {
 		// TODO Auto-generated method stub
-		btn_back_send_message_activity = (Button) findViewById(R.id.btn_back_send_message_activity);
+		btn_back_send_message_activity = (ImageView) findViewById(R.id.btn_back_send_message_activity);
 		tv_content = (TextView) findViewById(R.id.tv_content);
 		tv_people = (TextView) findViewById(R.id.tv_people);
 		lv_message_content = (ListView) findViewById(R.id.lv_message_content);
@@ -147,15 +148,6 @@ public class MessageReciverActivity1 extends BaseActicity implements OnItemClick
 			} else {
 				view = convertView;
 			}
-			if (position==0) {
-				view.setBackgroundResource(R.drawable.item2);
-			}else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}	
-			}
 			tv_People = (TextView) view.findViewById(R.id.tv);
 			tv_People.setText(people.get(position).getUsername());
 			return view;
@@ -188,15 +180,6 @@ public class MessageReciverActivity1 extends BaseActicity implements OnItemClick
 				view = View.inflate(MessageReciverActivity1.this, R.layout.item_textview, null);
 			} else {
 				view = convertView;
-			}
-			if (position==0) {
-				view.setBackgroundResource(R.drawable.item2);
-			}else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}	
 			}
 			tv_Content = (TextView) view.findViewById(R.id.tv);
 			tv_Content.setText(content.get(position).getName());

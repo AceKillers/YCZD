@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,7 +83,7 @@ public class BaojingActivity extends Activity {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 System.out.println(response.get());
-                numBaojing.setText(response.get().replace("\"", ""));
+                numBaojing.setText("振动报警（"+response.get().replace("\"", "")+"）");
                 loadNum++;
                 isLoadFinish();
             }
@@ -112,7 +113,7 @@ public class BaojingActivity extends Activity {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 System.out.println(response.get());
-                numYujing.setText(response.get().replace("\"", ""));
+                numYujing.setText("预警（"+response.get().replace("\"", "")+"）");
                 loadNum++;
                 isLoadFinish();
             }
@@ -145,5 +146,10 @@ public class BaojingActivity extends Activity {
             Utils.closeWaiting();
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return false;
     }
 }

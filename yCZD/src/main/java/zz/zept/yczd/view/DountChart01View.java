@@ -188,7 +188,9 @@ public class DountChart01View extends DemoView {
         //PieData(标签，百分比，在饼图中对应的颜色)
         for (int i = 0;i<list.size();i++){
             XinnengyuanInfo info = list.get(i);
-            lPieData.add(new PieData(info.getInfo(),info.getPercent(),colors[i]));
+            PieData pieData = new PieData(info.getInfo(),info.getPercent(),colors[i]);
+            pieData.setCustLabelStyle(XEnum.SliceLabelStyle.BROKENLINE,Color.parseColor("#6d7091"));
+            lPieData.add(pieData);
         }
 //        lPieData.add(new PieData("Solarissssssssssssssssssssssssssss", "20%", 20, Color.parseColor("#00baff")));
 //        lPieData.add(new PieData("Aixxxxxxxxxxxxxxxxxxxxxxx", "30%", 30, Color.parseColor("#438483")));

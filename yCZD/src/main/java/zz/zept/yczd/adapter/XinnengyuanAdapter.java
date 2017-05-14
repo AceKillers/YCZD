@@ -58,8 +58,8 @@ public class XinnengyuanAdapter extends BaseAdapter {
         XinnengyuanInfo item = list.get(i);
         holder.color.setBackgroundColor(colors[i]);
         holder.name.setText(item.getInfo());
-        holder.num.setText(item.getYx());
-        holder.percent.setText(item.getPercent()+"");
+//        holder.num.setText(item.getYx());
+        holder.percent.setText(item.getYx()+"台");
 
         return convertView;
     }

@@ -19,9 +19,10 @@ public class MyApplication extends Application {
 		super.onCreate();
 		_instance = this;
 
-		NoHttp.initialize(this);
 		NoHttp.setDefaultConnectTimeout(120000);
 		NoHttp.setDefaultReadTimeout(120000);
+		NoHttp.initialize(this);
+
 
 		Logger.setTag("sld");
 		Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志

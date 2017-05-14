@@ -615,15 +615,6 @@ public class MessageActivity extends BaseActicity {
 			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
 			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
 			holder.sender.setText(no_reda_alldatas.get(position).getSender());
-			if (position == 0) {
-				view.setBackgroundResource(R.drawable.item2);
-			} else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}
-			}
 			return view;
 		}
 	}
@@ -736,7 +727,7 @@ public class MessageActivity extends BaseActicity {
 			Drawable tongzhi= getResources().getDrawable(R.drawable.ic_tongzhi);
 			shiwu.setBounds(0, 0, shiwu.getMinimumWidth(), shiwu.getMinimumHeight());
 			tongzhi.setBounds(0, 0, tongzhi.getMinimumWidth(), tongzhi.getMinimumHeight());
-			if (0==no_reda_alldatas.get(position).getMsgtype()){
+			if (0==yes_send_alldatas.get(position).getMsgtype()){
 				holder.type.setText("事务");
 				holder.type.setTextColor(Color.parseColor("#48cfae"));
 				holder.type.setCompoundDrawables(null,shiwu,null,null);
@@ -748,19 +739,10 @@ public class MessageActivity extends BaseActicity {
 			holder.system.setText(system_Name);
 			// holder.tv2.setText((CharSequence)
 			// no_reda_alldatas.get(position).getFactoryName());
-			holder.content.setText(no_reda_alldatas.get(position).getSubject());
-			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
-			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
-			holder.sender.setText(no_reda_alldatas.get(position).getSender());
-			if (position == 0) {
-				view.setBackgroundResource(R.drawable.item2);
-			} else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}
-			}
+			holder.content.setText(yes_send_alldatas.get(position).getSubject());
+			holder.level.setText(yes_send_alldatas.get(position).getMsglevel() + "");
+			holder.time.setText(yes_send_alldatas.get(position).getSendTime());
+			holder.sender.setText(yes_send_alldatas.get(position).getSender());
 			return view;
 		}
 	}
@@ -827,7 +809,7 @@ public class MessageActivity extends BaseActicity {
 			Drawable tongzhi= getResources().getDrawable(R.drawable.ic_tongzhi);
 			shiwu.setBounds(0, 0, shiwu.getMinimumWidth(), shiwu.getMinimumHeight());
 			tongzhi.setBounds(0, 0, tongzhi.getMinimumWidth(), tongzhi.getMinimumHeight());
-			if (0==no_reda_alldatas.get(position).getMsgtype()){
+			if (0==yes_reda_alldatas.get(position).getMsgtype()){
 				holder.type.setText("事务");
 				holder.type.setTextColor(Color.parseColor("#48cfae"));
 				holder.type.setCompoundDrawables(null,shiwu,null,null);
@@ -839,19 +821,10 @@ public class MessageActivity extends BaseActicity {
 			holder.system.setText(system_Name);
 			// holder.tv2.setText((CharSequence)
 			// no_reda_alldatas.get(position).getFactoryName());
-			holder.content.setText(no_reda_alldatas.get(position).getSubject());
-			holder.level.setText(no_reda_alldatas.get(position).getMsglevel() + "");
-			holder.time.setText(no_reda_alldatas.get(position).getSendTime());
-			holder.sender.setText(no_reda_alldatas.get(position).getSender());
-			if (position == 0) {
-				view.setBackgroundResource(R.drawable.item2);
-			} else {
-				if (position % 2 == 0) {
-					view.setBackgroundResource(R.drawable.item2);
-				} else {
-					view.setBackgroundResource(R.drawable.item);
-				}
-			}
+			holder.content.setText(yes_reda_alldatas.get(position).getSubject());
+			holder.level.setText(yes_reda_alldatas.get(position).getMsglevel() + "");
+			holder.time.setText(yes_reda_alldatas.get(position).getSendTime());
+			holder.sender.setText(yes_reda_alldatas.get(position).getSender());
 			return view;
 		}
 	}

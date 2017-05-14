@@ -65,7 +65,7 @@ public class DemoView extends ChartView {
 	protected int[] getPieDefaultSpadding()
 	{
 		int [] ltrb = new int[4];
-		ltrb[0] = DensityUtil.dip2px(getContext(), 20); //left
+		ltrb[0] = DensityUtil.dip2px(getContext(), 40); //left
 		ltrb[1] = DensityUtil.dip2px(getContext(), 20); //top
 		ltrb[2] = DensityUtil.dip2px(getContext(), 20); //right
 		ltrb[3] = DensityUtil.dip2px(getContext(), 20); //bottom

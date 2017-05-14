@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/checkbox_bg"
-            android:button="@null" />
+            android:button="@drawable/checkbox_bg"
+            android:checked="true"/>
 
         <TextView
             android:id="@+id/company"

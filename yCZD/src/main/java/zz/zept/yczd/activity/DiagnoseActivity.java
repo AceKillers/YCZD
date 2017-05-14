@@ -417,7 +417,7 @@ public class DiagnoseActivity extends BaseActicity {
 
 				public void onClick(View v) {
 					dismiss();
-					if(TextUtils.isEmpty(date)){
+					if(!TextUtils.isEmpty(date)){
 						if (tag == 1) {
 							et_start_time.setText(date);
 						} else {

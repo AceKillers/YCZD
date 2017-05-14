@@ -2,7 +2,6 @@ package zz.zept.yczd.activity;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -77,27 +76,15 @@ public class MainTabActivity extends TabActivity implements RadioGroup.OnChecked
         Configuration mConfiguration = getResources().getConfiguration();
         switch (i) {
             case R.id.rb_main:
-                if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                }
                 mTabHost.setCurrentTabByTag(TAB_NEWS);
                 break;
             case R.id.rb_time:
-                if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                }
                 mTabHost.setCurrentTabByTag(TAB_BBS);
                 break;
             case R.id.rb_doc:
-                if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                }
                 mTabHost.setCurrentTabByTag(TAB_DISCOVER);
                 break;
             case R.id.rb_analy:
-                if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                }
                 mTabHost.setCurrentTabByTag(TAB_MINE);
                 break;
         }

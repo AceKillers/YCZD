@@ -107,6 +107,7 @@ public class RanliaoActivity extends Activity {
         companyList = dbAction.searchCompany();
         company.setText(companyList.get(0).getFACTORYNAME());
         companyId = companyList.get(0).getCODE();
+        time.setText(date);
         initListener();
         getData1();
     }
@@ -147,7 +148,11 @@ public class RanliaoActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
-                        showData1();
+                        if (listRecods == null) {
+                            getData1();
+                        } else {
+                            showData1();
+                        }
                         break;
                     case R.id.rb2:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {

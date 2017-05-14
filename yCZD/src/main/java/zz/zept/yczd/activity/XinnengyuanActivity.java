@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -175,8 +176,10 @@ public class XinnengyuanActivity extends Activity {
     }
 
     private void showData2() {
+        WindowManager wm = this.getWindowManager();
+        int width = wm.getDefaultDisplay().getWidth();
         layoutParams = new LinearLayout.LayoutParams(
-                UItools.dip2px(this,240), UItools.dip2px(this,240));
+                width, UItools.dip2px(this,240));
         linearLayout.removeAllViews();
         if (dountChart01View != null) {
             linearLayout.addView(dountChart01View, layoutParams);

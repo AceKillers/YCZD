@@ -2,39 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#f5f5f5"
     android:orientation="vertical" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nva_bg">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:text=""
-            android:textSize="16dp" />
+            android:layout_centerInParent="true"
+            android:text="收件人"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_back_send_message_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/fanhui" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text=""
-            android:textSize="16dp" />
-    </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_back" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
