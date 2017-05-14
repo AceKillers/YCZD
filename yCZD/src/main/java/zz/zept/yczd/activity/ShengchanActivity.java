@@ -344,7 +344,7 @@ public class ShengchanActivity extends Activity {
                                 item.setCompany(listRecods.get(i).getName());
                                 item.setDw("万kWh");
                                 item.setNum(listRecods.get(i).getFdl_d());
-                                item.setTime(date);
+                                item.setTime(time.getText().toString());
                                 shengchanLists.add(item);
                             }
                             shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
@@ -681,7 +681,7 @@ public class ShengchanActivity extends Activity {
             item.setCompany(listRecods4.get(i).getDw());
             item.setDw("%");
             item.setNum(listRecods4.get(i).getFuhe());
-            item.setTime(date);
+            item.setTime(time.getText().toString());
             shengchanLists.add(item);
 
         }
