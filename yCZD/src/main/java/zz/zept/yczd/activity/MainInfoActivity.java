@@ -32,7 +32,6 @@ import zz.zept.yczd.pager.ThreePager;
 import zz.zept.yczd.res.MyRes;
 import zz.zept.yczd.utils.CallServer;
 import zz.zept.yczd.utils.HttpResponseListener;
-import zz.zept.yczd.utils.Utils;
 import zz.zept.yczd.view.TipsToast;
 
 /**
@@ -172,7 +171,6 @@ public class MainInfoActivity extends Activity {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 String json = response.get();
-                Utils.closeWaiting();
                 Log.e("json", json);
                 msgNum.setText(json.replaceAll("\"",""));
                 if (msgNum.getText().toString().equals("0")){
@@ -185,12 +183,16 @@ public class MainInfoActivity extends Activity {
             @Override
             public void onFailed(int what, Response<String> response) {
                 // TODO Auto-generated method stub
-                Utils.closeWaiting();
                 TipsToast.show(MainInfoActivity.this, "服务器繁忙,稍后再试");
             }
         };
-        Utils.showWaiting(MainInfoActivity.this);
         callServer.add(12312, request, callback);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 
     @Override

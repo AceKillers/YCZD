@@ -76,7 +76,7 @@ public class SendMessageActivity extends BaseActicity {
 					public void onSucceed(int what, Response<String> response) {
 						super.onSucceed(what, response);
 						ToastUtils.showToast(SendMessageActivity.this, "发送成功");
-						sendNotification(message_title,message_content);
+//						sendNotification(message_title,message_content);
 						Intent intent = new Intent(SendMessageActivity.this, MessageActivity.class);
 						startActivity(intent);
 						finish();
