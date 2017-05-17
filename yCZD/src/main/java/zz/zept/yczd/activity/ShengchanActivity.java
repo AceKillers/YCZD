@@ -175,7 +175,11 @@ public class ShengchanActivity extends Activity {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
                         company.setVisibility(View.GONE);
-                        showData1();
+                        if (listRecods == null) {
+                            getData1();
+                        } else {
+                            showData1();
+                        }
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb2:
@@ -183,7 +187,11 @@ public class ShengchanActivity extends Activity {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
                         company.setVisibility(View.GONE);
-                        showData2();
+                        if (listRecods == null) {
+                            getData1();
+                        } else {
+                            showData2();
+                        }
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb3:
@@ -191,7 +199,11 @@ public class ShengchanActivity extends Activity {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
                         company.setVisibility(View.GONE);
-                        showData3();
+                        if (listRecods == null) {
+                            getData1();
+                        } else {
+                            showData3();
+                        }
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb4:
@@ -199,7 +211,11 @@ public class ShengchanActivity extends Activity {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
                         company.setVisibility(View.GONE);
-                        showData4();
+                        if (listRecods == null) {
+                            getData1();
+                        } else {
+                            showData4();
+                        }
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb5:
@@ -266,19 +282,18 @@ public class ShengchanActivity extends Activity {
                         listRecods = new Gson().fromJson(jsonObject.get("data").toString(), new TypeToken<ArrayList<ShengchanInfo1>>() {
                         }.getType());
                         if (listRecods != null && listRecods.size() > 0) {
-                            for (int i = 0; i < listRecods.size(); i++) {
-                                ShengchanList item = new ShengchanList();
-                                item.setCompany(listRecods.get(i).getName());
-                                item.setDw("万kWh");
-                                item.setNum1(listRecods.get(i).getFdl_d());
-                                item.setNum2(listRecods.get(i).getFdl_m());
-                                item.setNum3(listRecods.get(i).getFdl_y());
-                                item.setTime(time.getText().toString());
-                                shengchanLists.add(item);
+                            if (rb1.isChecked()) {
+                                showData1();
                             }
-                            shengchanAdapter1 = new ShengchanAdapter1(ShengchanActivity.this, shengchanLists);
-                            listView.setAdapter(shengchanAdapter1);
-                            layout.addView(listView, layoutParams);
+                            if (rb2.isChecked()) {
+                                showData2();
+                            }
+                            if (rb3.isChecked()) {
+                                showData3();
+                            }
+                            if (rb4.isChecked()) {
+                                showData4();
+                            }
                         } else {
                             ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
                         }
@@ -308,7 +323,8 @@ public class ShengchanActivity extends Activity {
             item.setTime(time.getText().toString());
             shengchanLists.add(item);
         }
-        shengchanAdapter1.notifyDataSetChanged();
+        shengchanAdapter1 = new ShengchanAdapter1(ShengchanActivity.this, shengchanLists);
+        listView.setAdapter(shengchanAdapter1);
     }
 
     private void showData2() {
@@ -323,7 +339,8 @@ public class ShengchanActivity extends Activity {
             item.setTime(time.getText().toString());
             shengchanLists.add(item);
         }
-        shengchanAdapter1.notifyDataSetChanged();
+        shengchanAdapter1 = new ShengchanAdapter1(ShengchanActivity.this, shengchanLists);
+        listView.setAdapter(shengchanAdapter1);
     }
 
     private void showData3() {
@@ -338,7 +355,8 @@ public class ShengchanActivity extends Activity {
             item.setTime(time.getText().toString());
             shengchanLists.add(item);
         }
-        shengchanAdapter1.notifyDataSetChanged();
+        shengchanAdapter1 = new ShengchanAdapter1(ShengchanActivity.this, shengchanLists);
+        listView.setAdapter(shengchanAdapter1);
     }
 
     private void showData4() {
