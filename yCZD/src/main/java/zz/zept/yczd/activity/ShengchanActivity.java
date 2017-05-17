@@ -35,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.zept.yczd.R;
 import zz.zept.yczd.adapter.ShengchanAdapter;
+import zz.zept.yczd.adapter.ShengchanAdapter1;
 import zz.zept.yczd.bean.Company;
 import zz.zept.yczd.bean.ShengchanInfo1;
 import zz.zept.yczd.bean.ShengchanInfo2;
@@ -94,9 +95,8 @@ public class ShengchanActivity extends Activity {
     private ArrayList<ShishiInfo1> listRecods4;
     private List<ShengchanList> shengchanLists = new ArrayList<>();
     private PopWindow popWindow;
-    private List<String> timeList = new ArrayList<>();
     private ShengchanAdapter shengchanAdapter;
-    private int dataType;
+    private ShengchanAdapter1 shengchanAdapter1;
     private List<Company> companyList = new ArrayList<>();
     private CompanyDBAction dbAction;
     private String companyId;
@@ -117,49 +117,27 @@ public class ShengchanActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
-                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
-                    popWindow = new PopWindow(this, timeList, company);
-                    popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            popWindow.dissmiss();
-                            company.setText(timeList.get(i));
-                            dataType = i;
-                            switch (i) {
-                                case 0:
-                                    dayData();
-                                    break;
-                                case 1:
-                                    monthData();
-                                    break;
-                                case 2:
-                                    yearData();
-                                    break;
-                            }
+                final CompanyPopWindow companyPopWindow = new CompanyPopWindow(this, companyList, company);
+                companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        layout.removeAllViews();
+                        companyId = companyList.get(i).getCODE();
+                        company.setText(companyList.get(i).getFACTORYNAME());
+                        companyPopWindow.dissmiss();
+                        if (rb5.isChecked()) {
+                            getData2();
                         }
-                    });
-                } else {
-                    final CompanyPopWindow companyPopWindow = new CompanyPopWindow(this, companyList, company);
-                    companyPopWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            layout.removeAllViews();
-                            companyId = companyList.get(i).getCODE();
-                            company.setText(companyList.get(i).getFACTORYNAME());
-                            companyPopWindow.dissmiss();
-                            if (rb5.isChecked()) {
-                                getData2();
-                            }
-                            if (rb6.isChecked()) {
-                                getData3();
-                            }
-                            if (rb7.isChecked()) {
-                                getData3();
-                            }
+                        if (rb6.isChecked()) {
+                            getData3();
+                        }
+                        if (rb7.isChecked()) {
+                            getData3();
+                        }
 
-                        }
-                    });
-                }
+                    }
+                });
+
                 break;
             case R.id.back:
                 finish();
@@ -178,12 +156,9 @@ public class ShengchanActivity extends Activity {
         listView = new ListView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        timeList.add("当日");
-        timeList.add("月累");
-        timeList.add("年累");
         dbAction = CompanyDBAction.getInstance(this);
         companyList = dbAction.searchCompany();
-        company.setText("当日");
+        company.setText(companyList.get(0).getFACTORYNAME());
         companyId = companyList.get(0).getCODE();
     }
 
@@ -199,80 +174,32 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        company.setVisibility(View.VISIBLE);
-                        company.setText("当日");
-                        dataType = 0;
-                        switch (dataType) {
-                            case 0:
-                                dayData();
-                                break;
-                            case 1:
-                                monthData();
-                                break;
-                            case 2:
-                                yearData();
-                                break;
-                        }
+                        company.setVisibility(View.GONE);
+                        showData1();
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb2:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        company.setVisibility(View.VISIBLE);
-                        company.setText("当日");
-                        dataType = 0;
-                        switch (dataType) {
-                            case 0:
-                                dayData();
-                                break;
-                            case 1:
-                                monthData();
-                                break;
-                            case 2:
-                                yearData();
-                                break;
-                        }
+                        company.setVisibility(View.GONE);
+                        showData2();
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb3:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        company.setVisibility(View.VISIBLE);
-                        company.setText("当日");
-                        dataType = 0;
-                        switch (dataType) {
-                            case 0:
-                                dayData();
-                                break;
-                            case 1:
-                                monthData();
-                                break;
-                            case 2:
-                                yearData();
-                                break;
-                        }
+                        company.setVisibility(View.GONE);
+                        showData3();
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb4:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                         }
-                        company.setVisibility(View.VISIBLE);
-                        company.setText("当日");
-                        dataType = 0;
-                        switch (dataType) {
-                            case 0:
-                                dayData();
-                                break;
-                            case 1:
-                                monthData();
-                                break;
-                            case 2:
-                                yearData();
-                                break;
-                        }
+                        company.setVisibility(View.GONE);
+                        showData4();
                         layout.addView(listView, layoutParams);
                         break;
                     case R.id.rb5:
@@ -343,12 +270,14 @@ public class ShengchanActivity extends Activity {
                                 ShengchanList item = new ShengchanList();
                                 item.setCompany(listRecods.get(i).getName());
                                 item.setDw("万kWh");
-                                item.setNum(listRecods.get(i).getFdl_d());
+                                item.setNum1(listRecods.get(i).getFdl_d());
+                                item.setNum2(listRecods.get(i).getFdl_m());
+                                item.setNum3(listRecods.get(i).getFdl_y());
                                 item.setTime(time.getText().toString());
                                 shengchanLists.add(item);
                             }
-                            shengchanAdapter = new ShengchanAdapter(ShengchanActivity.this, shengchanLists);
-                            listView.setAdapter(shengchanAdapter);
+                            shengchanAdapter1 = new ShengchanAdapter1(ShengchanActivity.this, shengchanLists);
+                            listView.setAdapter(shengchanAdapter1);
                             layout.addView(listView, layoutParams);
                         } else {
                             ToastUtils.showToast(ShengchanActivity.this, "查询不到数据");
@@ -367,148 +296,64 @@ public class ShengchanActivity extends Activity {
         callServer.add(12312, request, callback);
     }
 
-    private void dayData() {
-        if (listRecods != null && listRecods.size() > 0) {
-            shengchanLists.clear();
-            if (rb1.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("万kWh");
-                    item.setNum(listRecods.get(i).getFdl_d());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb2.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("%");
-                    item.setNum(listRecods.get(i).getYdl_d());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb3.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("g/kWh");
-                    item.setNum(listRecods.get(i).getMh_d());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb4.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("GJ");
-                    item.setNum(listRecods.get(i).getGr_d());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            shengchanAdapter.notifyDataSetChanged();
+    private void showData1() {
+        shengchanLists.clear();
+        for (int i = 0; i < listRecods.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods.get(i).getName());
+            item.setDw("万kWh");
+            item.setNum1(listRecods.get(i).getFdl_d());
+            item.setNum2(listRecods.get(i).getFdl_m());
+            item.setNum3(listRecods.get(i).getFdl_y());
+            item.setTime(time.getText().toString());
+            shengchanLists.add(item);
         }
-
+        shengchanAdapter1.notifyDataSetChanged();
     }
 
-    private void monthData() {
-        if (listRecods != null && listRecods.size() > 0) {
-            shengchanLists.clear();
-            if (rb1.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("万kWh");
-                    item.setNum(listRecods.get(i).getFdl_m());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb2.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("%");
-                    item.setNum(listRecods.get(i).getYdl_m());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb3.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("g/kWh");
-                    item.setNum(listRecods.get(i).getMh_m());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb4.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("GJ");
-                    item.setNum(listRecods.get(i).getGr_m());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            shengchanAdapter.notifyDataSetChanged();
+    private void showData2() {
+        shengchanLists.clear();
+        for (int i = 0; i < listRecods.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods.get(i).getName());
+            item.setDw("%");
+            item.setNum1(listRecods.get(i).getYdl_d());
+            item.setNum2(listRecods.get(i).getYdl_m());
+            item.setNum3(listRecods.get(i).getYdl_y());
+            item.setTime(time.getText().toString());
+            shengchanLists.add(item);
         }
-
+        shengchanAdapter1.notifyDataSetChanged();
     }
 
-    private void yearData() {
-        if (listRecods != null && listRecods.size() > 0) {
-            shengchanLists.clear();
-            if (rb1.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("万kWh");
-                    item.setNum(listRecods.get(i).getFdl_y());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb2.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("%");
-                    item.setNum(listRecods.get(i).getYdl_y());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb3.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("g/kWh");
-                    item.setNum(listRecods.get(i).getMh_y());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            if (rb4.isChecked()) {
-                for (int i = 0; i < listRecods.size(); i++) {
-                    ShengchanList item = new ShengchanList();
-                    item.setCompany(listRecods.get(i).getName());
-                    item.setDw("GJ");
-                    item.setNum(listRecods.get(i).getGr_y());
-                    item.setTime(time.getText().toString());
-                    shengchanLists.add(item);
-                }
-            }
-            shengchanAdapter.notifyDataSetChanged();
+    private void showData3() {
+        shengchanLists.clear();
+        for (int i = 0; i < listRecods.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods.get(i).getName());
+            item.setDw("g/kWh");
+            item.setNum1(listRecods.get(i).getMh_d());
+            item.setNum2(listRecods.get(i).getMh_m());
+            item.setNum3(listRecods.get(i).getMh_y());
+            item.setTime(time.getText().toString());
+            shengchanLists.add(item);
         }
+        shengchanAdapter1.notifyDataSetChanged();
+    }
 
+    private void showData4() {
+        shengchanLists.clear();
+        for (int i = 0; i < listRecods.size(); i++) {
+            ShengchanList item = new ShengchanList();
+            item.setCompany(listRecods.get(i).getName());
+            item.setDw("GJ");
+            item.setNum1(listRecods.get(i).getGr_d());
+            item.setNum2(listRecods.get(i).getGr_m());
+            item.setNum3(listRecods.get(i).getGr_y());
+            item.setTime(time.getText().toString());
+            shengchanLists.add(item);
+        }
+        shengchanAdapter1.notifyDataSetChanged();
     }
 
     private void getData2() {

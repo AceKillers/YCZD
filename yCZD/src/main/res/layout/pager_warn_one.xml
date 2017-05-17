@@ -45,55 +45,36 @@
     <LinearLayout
         android:id="@+id/ll_chang_read"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:orientation="vertical"
-        android:visibility="gone" >
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal" >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="111"
-                android:visibility="invisible" />
+        <Button
+            android:id="@+id/btn_all"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#b3bbc6"
+            android:text="全部标记已读"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btn_all"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:background="#fff"
-                android:text="全部标记已读"
-                android:textColor="#369" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="111"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/btn_read"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:background="#fff"
-                android:text="标记为已读"
-                android:textColor="#369" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="111"
-                android:visibility="invisible" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_read"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_send"
+            android:text="标记为已读"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

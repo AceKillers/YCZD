@@ -18,7 +18,7 @@
     <dimen name="tv_gjckwd_left">85dp</dimen>
     <dimen name="tv_gjrkwd_left">100dp</dimen>
     <dimen name="tv_dypqwd1_right">18dp</dimen>
-    <dimen name="tv_zqyl_left">140dp</dimen>
+    <dimen name="tv_zqyl_left">160dp</dimen>
     <dimen name="tv_zryl_top">10dp</dimen>
     <dimen name="tv_zrqw_left">30dp</dimen>
     <dimen name="tv_dypqwd2_right">70dp</dimen>
