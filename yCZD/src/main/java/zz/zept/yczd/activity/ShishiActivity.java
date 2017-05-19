@@ -82,7 +82,6 @@ public class ShishiActivity extends Activity {
     private LinearLayout.LayoutParams layoutParams;
     private List<Company> companyList = new ArrayList<>();
     private CompanyDBAction dbAction;
-    private CompanyPopWindow popWindow;
     private String companyId;
     private List<ShishiInfo> listRecods;
     private List<ShishiInfo1> listRecods1;
@@ -91,6 +90,7 @@ public class ShishiActivity extends Activity {
     private String expr;
     private long endTime = System.currentTimeMillis();
     private String date = "";
+    private Company heNan = new Company();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +102,12 @@ public class ShishiActivity extends Activity {
         dbAction = CompanyDBAction.getInstance(this);
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(new Date());
+        heNan.setFACTORYNAME("河南公司");
+        heNan.setCODE("L");
         companyList = dbAction.searchCompany();
         company.setText(companyList.get(0).getFACTORYNAME());
         companyId = companyList.get(0).getCODE();
+        companyList.add(heNan);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         initListener();
@@ -115,7 +118,7 @@ public class ShishiActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.company:
-                popWindow = new CompanyPopWindow(this, companyList, company);
+                final CompanyPopWindow popWindow = new CompanyPopWindow(this, companyList, company);
                 popWindow.setOnItemClick(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -145,44 +148,79 @@ public class ShishiActivity extends Activity {
                 layout.removeAllViews();
                 switch (i) {
                     case R.id.rb1:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                     case R.id.rb2:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                     case R.id.rb3:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData3();
                         break;
                     case R.id.rb4:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData3();
                         break;
                     case R.id.rb5:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData3();
                         break;
                     case R.id.rb6:
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData3();
                         break;
                     case R.id.rb7:
+                        if (hasHeNan()){
+                            companyList.remove(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                     case R.id.rb8:
+                        if (hasHeNan()){
+                            companyList.remove(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                     case R.id.rb9:
+                        if (hasHeNan()){
+                            companyList.remove(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         getData2();
                         break;
                 }
             }
         });
+    }
+
+    private boolean hasHeNan(){
+        if (companyList.get(companyList.size()-1).getCODE().equals("L")){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     private void getData2() {
@@ -333,7 +371,11 @@ public class ShishiActivity extends Activity {
         List<String> label = new ArrayList<>();
         String unit = "";
         for (int i = 0; i < listRecods.size(); i++) {
-            data.add(Double.parseDouble(listRecods.get(i).getpValue()));
+            if (rb1.isChecked()) {
+                data.add(Double.parseDouble(listRecods.get(i).getpValue())*100);
+            }else {
+                data.add(Double.parseDouble(listRecods.get(i).getpValue()));
+            }
             if (i == 0) {
                 label.add(listRecods.get(i).getLocalDate());
             } else {
@@ -372,6 +414,8 @@ public class ShishiActivity extends Activity {
                 expr = "if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15'/210 else if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' < 10 then 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'/210 else ('JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'+ 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15')/420";
             } else if ("郑州燃气公司".equals(company.getText().toString())) {
                 expr = "if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01'/390 else if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' < 10 then 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'/390 else ('JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'+ 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01')/780";
+            } else if ("河南公司".equals(company.getText().toString())) {
+                expr = "((if 'PDSFD_1000_01_FDJ_10CGB01-MW' <10 then if 'PDSFD_1000_02_FDJ_20CGB01-MW' <10 then 0 else 'PDSFD_1000_02_FDJ_20CGB01-MW' else if 'PDSFD_1000_02_FDJ_20CGB01-MW' < 10 then 'PDSFD_1000_01_FDJ_10CGB01-MW' else 'PDSFD_1000_01_FDJ_10CGB01-MW'+ 'PDSFD_1000_02_FDJ_20CGB01-MW')+(if 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' <10 then if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' <10 then 0 else 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' else if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' < 10 then 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' else 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154'+ 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154')+(if 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' <10 then if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' <10 then 0 else 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' else if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' < 10 then 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' else 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1'+ 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1')+(if 'JT_PDRD_210_06_0100001_60S1FW1' <10 then if 'JT_PDRD_210_07_0100001_70S1FW1' <10 then 0 else 'JT_PDRD_210_07_0100001_70S1FW1' else if 'JT_PDRD_210_07_0100001_70S1FW1' < 10 then 'JT_PDRD_210_06_0100001_60S1FW1' else 'JT_PDRD_210_06_0100001_60S1FW1'+ 'JT_PDRD_210_07_0100001_70S1FW1')+(if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' else if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' < 10 then 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' else 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'+ 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15')+(if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' else if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' < 10 then 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' else 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'+ 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01'))/((if 'PDSFD_1000_01_FDJ_10CGB01-MW' <10 then 0 else 10.30)+(if 'PDSFD_1000_02_FDJ_20CGB01-MW' <10 then 0 else 10.30)+(if 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' <10 then 0 else 6.30)+(if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' <10 then 0 else 6.30)+(if 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' <10 then 0 else 3.30)+(if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' <10 then 0 else 3.30)+(if 'JT_PDRD_210_06_0100001_60S1FW1' <10 then 0 else 2.10)+(if 'JT_PDRD_210_07_0100001_70S1FW1' <10 then 0 else 2.10)+(if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then 0 else 2.10)+(if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 2.10)+(if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then 0 else 3.90)+(if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 3.90))";
             }
         }
         if (rb2.isChecked()) {
@@ -387,6 +431,8 @@ public class ShishiActivity extends Activity {
                 expr = "if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' else if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' < 10 then 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' else 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'+ 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15'";
             } else if ("郑州燃机".equals(company.getText().toString())) {
                 expr = "if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' else if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' < 10 then 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' else 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'+ 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01'";
+            } else if ("河南公司".equals(company.getText().toString())) {
+                expr = "(if 'PDSFD_1000_01_FDJ_10CGB01-MW' <10 then if 'PDSFD_1000_02_FDJ_20CGB01-MW' <10 then 0 else 'PDSFD_1000_02_FDJ_20CGB01-MW' else if 'PDSFD_1000_02_FDJ_20CGB01-MW' < 10 then 'PDSFD_1000_01_FDJ_10CGB01-MW' else 'PDSFD_1000_01_FDJ_10CGB01-MW'+ 'PDSFD_1000_02_FDJ_20CGB01-MW')+(if 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' <10 then if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' <10 then 0 else 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' else if 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154' < 10 then 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154' else 'JT_KFFD_630_01_0100001_1DCSOPC_AI02154'+ 'JT_KFFD_630_02_0100001_2DCSOPC_AI02154')+(if 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' <10 then if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' <10 then 0 else 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' else if 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1' < 10 then 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1' else 'JT_YXFD_330_06_0100001_SIS.U06DCSAI.GENP1'+ 'JT_YXFD_330_07_0100001_SIS.U07DCSAI.GENP1')+(if 'JT_PDRD_210_06_0100001_60S1FW1' <10 then if 'JT_PDRD_210_07_0100001_70S1FW1' <10 then 0 else 'JT_PDRD_210_07_0100001_70S1FW1' else if 'JT_PDRD_210_07_0100001_70S1FW1' < 10 then 'JT_PDRD_210_06_0100001_60S1FW1' else 'JT_PDRD_210_06_0100001_60S1FW1'+ 'JT_PDRD_210_07_0100001_70S1FW1')+(if 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' <10 then if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' <10 then 0 else 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' else if 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15' < 10 then 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15' else 'JT_NYRD_210_01_0100001_W3.UNIT1.SE1_F_A15'+ 'JT_NYRD_210_02_0100001_W3.UNIT2.SE1_F_A15')+(if 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' <10 then if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' <10 then 0 else 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' else if 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01' < 10 then 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01' else 'JT_ZZRJ_390_01_0100001_10MBY10CE901&XQ01'+ 'JT_ZZRJ_390_02_0100001_20MBY10CE901&XQ01')";
             }
         }
         if (rb7.isChecked()) {

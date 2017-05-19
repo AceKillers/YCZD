@@ -100,6 +100,7 @@ public class ShengchanActivity extends Activity {
     private List<Company> companyList = new ArrayList<>();
     private CompanyDBAction dbAction;
     private String companyId;
+    private Company heNan = new Company();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +150,14 @@ public class ShengchanActivity extends Activity {
         }
     }
 
+    private boolean hasHeNan(){
+        if (companyList.get(companyList.size()-1).getCODE().equals("L")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     private void initData() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = sDateFormat.format(ChartUtil.getYesterday(new Date()));
@@ -156,10 +165,13 @@ public class ShengchanActivity extends Activity {
         listView = new ListView(this);
         layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        heNan.setFACTORYNAME("河南公司");
+        heNan.setCODE("L");
         dbAction = CompanyDBAction.getInstance(this);
         companyList = dbAction.searchCompany();
         company.setText(companyList.get(0).getFACTORYNAME());
         companyId = companyList.get(0).getCODE();
+        companyList.add(heNan);
     }
 
     private void initListener() {
@@ -222,6 +234,9 @@ public class ShengchanActivity extends Activity {
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         }
+                        if (!hasHeNan()){
+                            companyList.add(heNan);
+                        }
                         company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
                         getData2();
@@ -229,6 +244,9 @@ public class ShengchanActivity extends Activity {
                     case R.id.rb6:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
+                        if (hasHeNan()){
+                            companyList.remove(heNan);
                         }
                         company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
@@ -241,6 +259,9 @@ public class ShengchanActivity extends Activity {
                     case R.id.rb7:
                         if (mConfiguration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
+                        if (hasHeNan()){
+                            companyList.remove(heNan);
                         }
                         company.setVisibility(View.VISIBLE);
                         company.setText(companyList.get(0).getFACTORYNAME());
